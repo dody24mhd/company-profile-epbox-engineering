@@ -33,9 +33,9 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Forgot Your Password?</h1>
                                         <p class="text-gray-600">No problem. Just let us know your email address and we will email you a password reset link.</p>
-                                    </div>
+    </div>
 
-                                    <!-- Session Status -->
+    <!-- Session Status -->
                                     @if (session('status'))
                                     <div class="alert alert-success" role="alert">
                                         {{ session('status') }}
@@ -43,7 +43,7 @@
                                     @endif
 
                                     <form method="POST" action="{{ route('password.email') }}" class="user">
-                                        @csrf
+        @csrf
 
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror"
@@ -54,7 +54,7 @@
                                                 {{ $message }}
                                             </div>
                                             @enderror
-                                        </div>
+        </div>
 
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Email Password Reset Link
@@ -63,8 +63,8 @@
                                         <hr>
                                         <div class="text-center">
                                             <a class="small" href="{{ route('login') }}">Back to Login</a>
-                                        </div>
-                                    </form>
+        </div>
+    </form>
                                 </div>
                             </div>
                         </div>
