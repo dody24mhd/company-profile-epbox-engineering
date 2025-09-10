@@ -4,7 +4,10 @@
 
 @section('content')
 <div class="d-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 text-gray-800">Contacts / RFQ</h1>
+    <h1 class="h3 text-white">Contacts / RFQ</h1>
+    <div class="d-flex align-items-center">
+        <a href="{{ route('admin.contacts.index') }}" class="btn btn-sm btn-outline-primary">Refresh</a>
+    </div>
     </div>
 
     <div class="card shadow">
@@ -16,6 +19,7 @@
                         <th>Email</th>
                         <th>Message</th>
                         <th>Received</th>
+                        <th style="width: 120px;">Actions</th>
                         <th style="width: 120px;">Actions</th>
                     </tr>
                 </thead>

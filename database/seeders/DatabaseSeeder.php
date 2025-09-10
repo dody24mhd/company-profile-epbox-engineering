@@ -26,5 +26,15 @@ class DatabaseSeeder extends Seeder
                 'is_super_admin' => true,
             ]
         );
+
+        // Seed categories first
+        $this->call([
+            CategorySeeder::class,
+        ]);
+        
+        // Then migrate existing blog data
+        $this->call([
+            BlogMigrationSeeder::class,
+        ]);
     }
 }

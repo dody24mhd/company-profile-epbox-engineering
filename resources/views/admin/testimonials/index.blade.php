@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="d-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 text-gray-800">Testimonials</h1>
+    <h1 class="h3 text-white">Testimonials</h1>
     <a href="{{ route('admin.testimonials.create') }}" class="btn btn-primary" data-toggle="tooltip" title="Create new testimonial"><i class="fas fa-plus mr-1"></i> New Testimonial</a>
     </div>
 

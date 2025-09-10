@@ -1,7 +1,7 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navy-sidebar" id="accordionSidebar">
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
-        <div class="sidebar-brand-text mx-3">EPBOX ENGINEERING</div>
+        <img src="{{ asset('img/card.png') }}" alt="EPBOX ENGINEERING" class="sidebar-brand-img">
     </a>
 
     <!-- Divider -->
@@ -64,4 +64,14 @@
             <span>Contact/RFQ</span>
         </a>
     </li>
+
+    <!-- Nav Item - Audits (Super Admin only) -->
+    @can('manage-admins')
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.audits.index') }}">
+            <i class="fas fa-fw fa-clipboard-list"></i>
+            <span>Audit Logs</span>
+        </a>
+    </li>
+    @endcan
 </ul>

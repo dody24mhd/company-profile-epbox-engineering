@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Epbox Engineering | Panel Manufacturer & Control System Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --navy: #0F1C3F;
+            --sky-blue: #1E90FF;
+            --dark-navy: #0A1128;
+            --gradient: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy) 50%, var(--sky-blue) 100%);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            background: var(--dark-navy);
+            line-height: 1.6;
+        }
+        
+        .gradient-bg {
+            background: var(--gradient);
+        }
+        
+        .navbar {
+            background: rgba(15, 28, 63, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(30, 144, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(15, 28, 63, 0.98);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1E90FF, #00BFFF);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::before {
+            width: 80%;
+        }
+        
+        .nav-link:hover {
+            background: rgba(30, 144, 255, 0.1);
+            color: #00BFFF !important;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link i {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .nav-link:hover i {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .nav-link.active {
+            background: rgba(30, 144, 255, 0.2);
+            color: #00BFFF !important;
+        }
+        
+        .nav-link.active::before {
+            width: 80%;
+        }
+        
+        .logo-text {
+            background: linear-gradient(45deg, #1E90FF, #00BFFF, #87CEEB);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .mobile-menu-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .mobile-menu-btn.active {
+            transform: rotate(90deg);
+        }
+        
+        .mobile-menu {
+            background: rgba(15, 28, 63, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            border-radius: 12px;
+            margin-top: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+
+        
+        .mobile-menu a {
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(30, 144, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mobile-menu a::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(30, 144, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .mobile-menu a:hover::before {
+            left: 100%;
+        }
+        
+        .mobile-menu a:hover {
+            background: rgba(30, 144, 255, 0.1);
+            padding-left: 30px;
+        }
+        
+        /* Interactive Elements */
+        .fade-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(.4,2,.3,1), transform 0.8s cubic-bezier(.4,2,.3,1);
+        }
+        
+        .fade-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            animation: zoomEffect 8s ease-in-out infinite;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        @keyframes zoomEffect {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .hero-slide:nth-child(1) {
+            background: linear-gradient(rgba(15, 28, 63, 0.7), rgba(15, 28, 63, 0.9)), url('https://images.squarespace-cdn.com/content/v1/63fe1c005e900952091f678b/0d2cbf84-8ff6-4699-af5e-8a3bb822fd79/Small+control+panels+variety.jpg') no-repeat center center/cover;
+        }
+        
+        .hero-slide:nth-child(2) {
+            background: linear-gradient(rgba(15, 28, 63, 0.7), rgba(15, 28, 63, 0.9)), url('https://www.lloydmorris.co.uk/wp-content/uploads/2023/01/ControlPanel-image1.jpg') no-repeat center center/cover;
+        }
+        
+        .hero-slide:nth-child(3) {
+            background: linear-gradient(rgba(15, 28, 63, 0.7), rgba(15, 28, 63, 0.9)), url('https://image.altponelectricalsystem.com/s3/productimages/webp/co250359/p1070059/w600-h600/658ae65f-e85b-45fc-a814-d4234d245f72.jpeg') no-repeat center center/cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .slider-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .slider-dot.active {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.2);
+        }
+        
+        .slider-dot:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.1);
+        }
+        
+        /* About Us Specific Styles */
+        .about-hero {
+            background: linear-gradient(135deg, #0F1C3F 0%, #1E90FF 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E') repeat;
+            opacity: 0.5;
+        }
+        
+        .about-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .about-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(30, 144, 255, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .team-member {
+            background: linear-gradient(135deg, #1E90FF, #0F1C3F);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(30, 144, 255, 0.4);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #1E90FF;
+            border-radius: 50%;
+            border: 3px solid #0F1C3F;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 20px);
+            background: #1E90FF;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .certification-card {
+            background: linear-gradient(135deg, rgba(30, 144, 255, 0.1), rgba(15, 28, 63, 0.1));
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .certification-card:hover {
+            background: linear-gradient(135deg, rgba(30, 144, 255, 0.2), rgba(15, 28, 63, 0.2));
+            border-color: rgba(30, 144, 255, 0.6);
+            transform: translateY(-5px);
+        }
+        
+        .floating-chat {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            background: rgba(15, 28, 63, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, #1E90FF, #0F1C3F);
+            padding: 15px 20px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        .chat-body {
+            padding: 20px;
+        }
+        
+        .chat-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .chat-input:focus {
+            outline: none;
+            border-color: #1E90FF;
+            box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+        }
+        
+        .chat-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-btn.primary {
+            background: #1E90FF;
+            color: white;
+        }
+        
+        .chat-btn.primary:hover {
+            background: #187bcd;
+        }
+        
+        .chat-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .chat-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Interactive Elements */
+        .interactive-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+        }
+        
+        .interactive-bg div {
+            position: absolute;
+            border-radius: 50%;
+            background: #1E90FF;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .about-image-gallery {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        
+        .about-image-gallery img {
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image-gallery:hover img {
+            transform: scale(1.1);
+        }
+        
+        .about-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .about-image-gallery:hover .about-image-overlay {
+            opacity: 1;
+        }
+        
+        .about-stats {
+            background: linear-gradient(135deg, rgba(30, 144, 255, 0.1), rgba(15, 28, 63, 0.1));
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .about-stats:hover {
+            background: linear-gradient(135deg, rgba(30, 144, 255, 0.2), rgba(15, 28, 63, 0.2));
+            transform: translateY(-5px);
+        }
+        
+        .about-counter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #1E90FF;
+            transition: all 0.3s ease;
+        }
+        
+        .about-counter:hover {
+            transform: scale(1.1);
+        }
+        /* Animated Gradient Background */
+        .animated-gradient-bg {
+            background: linear-gradient(270deg, #1E90FF, #0F1C3F, #1E90FF, #0A1128);
+            background-size: 600% 600%;
+            animation: gradientMove 12s ease-in-out infinite;
+        }
+        @keyframes gradientMove {
+            0% {background-position:0% 50%}
+            50% {background-position:100% 50%}
+            100% {background-position:0% 50%}
+        }
+        /* Floating Gradient Orbs */
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(16px);
+            opacity: 0.18;
+            pointer-events: none;
+            animation: orbFloat 10s ease-in-out infinite alternate;
+        }
+        .floating-orb.orb1 { width: 180px; height: 180px; top: 10%; left: 5%; background: radial-gradient(circle, #1E90FF 0%, #0F1C3F 100%); animation-delay: 0s; }
+        .floating-orb.orb2 { width: 120px; height: 120px; bottom: 10%; right: 10%; background: radial-gradient(circle, #1E90FF 0%, #0A1128 100%); animation-delay: 2s; }
+        .floating-orb.orb3 { width: 100px; height: 100px; top: 60%; left: 70%; background: radial-gradient(circle, #1E90FF 0%, #1E90FF 100%); animation-delay: 4s; }
+        @keyframes orbFloat {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.1); }
+        }
+        /* Animated Glowing Shadow on Team Cards */
+        .about-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 32px 0 rgba(30,144,255,0.10);
+        }
+        .about-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(30, 144, 255, 0.6);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 32px 0 rgba(30,144,255,0.18);
+        }
+        /* Animated Gradient Background for CTA Only */
+        .cta-animated-gradient {
+            background: linear-gradient(270deg, #1E90FF, #0F1C3F, #1E90FF, #0A1128);
+            background-size: 600% 600%;
+            animation: ctaGradientMove 12s ease-in-out infinite;
+        }
+        @keyframes ctaGradientMove {
+            0% {background-position:0% 50%}
+            50% {background-position:100% 50%}
+            100% {background-position:0% 50%}
+        }
+        /* Fade-in Section Animation */
+        .fade-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(.4,2,.3,1), transform 0.8s cubic-bezier(.4,2,.3,1);
+        }
+        .fade-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Chat Popup Styles */
+        .chat-box {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1E90FF, #0F1C3F);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(30, 144, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .chat-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(30, 144, 255, 0.4);
+        }
+
+        .chat-box i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .chat-popup {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            background: rgba(15, 28, 63, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: none;
+            border: 1px solid rgba(30, 144, 255, 0.3);
+        }
+
+        .chat-popup.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #1E90FF, #0F1C3F);
+            padding: 15px 20px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            color: white;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .chat-body { padding: 20px; }
+
+        .chat-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .chat-input::placeholder { color: rgba(255, 255, 255, 0.6); }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #1E90FF;
+            box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+        }
+
+        .chat-actions { display: flex; gap: 10px; }
+
+        .chat-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chat-btn.primary { background: #1E90FF; color: white; }
+        .chat-btn.primary:hover { background: #187bcd; }
+        .chat-btn.secondary { background: rgba(255, 255, 255, 0.1); color: white; }
+        .chat-btn.secondary:hover { background: rgba(255, 255, 255, 0.2); }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50 py-4 px-6" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold logo-text">
+                    <span class="text-blue-400">EP</span>BOX ENGINEERING
+                </span>
+            </div>
+            <div class="hidden md:flex space-x-2">
+                <a href="index.html#home" class="nav-link text-white">
+                    <i class="fas fa-home"></i>Home
+                </a>
+                <a href="about.html" class="nav-link text-white active">
+                    <i class="fas fa-users"></i>About Us
+                </a>
+                <a href="services.html" class="nav-link text-white">
+                    <i class="fas fa-cogs"></i>Services
+                </a>
+                <a href="industries.html" class="nav-link text-white">
+                    <i class="fas fa-industry"></i>Industries
+                </a>
+                <a href="project.html" class="nav-link text-white">
+                    <i class="fas fa-project-diagram"></i>Projects
+                </a>
+                <a href="blog.html" class="nav-link text-white">
+                    <i class="fas fa-blog"></i>Blog
+                </a>
+                <div class="relative">
+                    <button class="nav-link text-white" id="navDownloadsBtn" onclick="toggleNavDownloadsMenu(event)">
+                        <i class="fas fa-download"></i>Downloads <i class="fas fa-caret-down ml-1"></i>
+                    </button>
+                    <div id="navDownloadsMenu" class="hidden absolute right-0 mt-2 w-60 origin-top-right rounded-lg bg-gray-900/95 border border-white/10 shadow-lg z-50">
+                        <a href="docs/company-profile.pdf" download class="flex items-center gap-2 px-4 py-2 text-sm text-gray-200 hover:bg-white/10">
+                            <i class="fas fa-file-pdf text-blue-400"></i>Company Profile
+                        </a>
+                        <a href="docs/service-brochure.pdf" download class="flex items-center gap-2 px-4 py-2 text-sm text-gray-200 hover:bg-white/10">
+                            <i class="fas fa-file-alt text-blue-400"></i>Service Brochure
+                        </a>
+                        <a href="docs/product-catalog.pdf" download class="flex items-center gap-2 px-4 py-2 text-sm text-gray-200 hover:bg-white/10">
+                            <i class="fas fa-book text-blue-400"></i>Product Catalog
+                        </a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-link text-white">
+                    <i class="fas fa-envelope"></i>Contact
+                </a>
+            </div>
+            <button class="md:hidden mobile-menu-btn text-white text-2xl" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden mobile-menu" id="mobile-menu">
+            <a href="index.html#home" class="block text-white">
+                <i class="fas fa-home mr-3"></i>Home
+            </a>
+            <a href="about.html" class="block text-blue-300 font-semibold">
+                <i class="fas fa-users mr-3"></i>About Us
+            </a>
+            <a href="services.html" class="block text-white">
+                <i class="fas fa-cogs mr-3"></i>Services
+            </a>
+            <a href="industries.html" class="block text-white">
+                <i class="fas fa-industry mr-3"></i>Industries
+            </a>
+            <a href="project.html" class="block text-white">
+                <i class="fas fa-project-diagram mr-3"></i>Projects
+            </a>
+            <a href="blog.html" class="block text-white">
+                <i class="fas fa-blog mr-3"></i>Blog
+            </a>
+            <a href="#downloads" class="block text-white">
+                <i class="fas fa-download mr-3"></i>Downloads
+            </a>
+            <a href="contact.html" class="block text-white">
+                <i class="fas fa-envelope mr-3"></i>Contact
+            </a>
+        </div>
+    </nav>
+
+    <!-- About Hero Section -->
+    <section class="about-hero pt-32 pb-20 px-6 relative fade-section">
+        <div class="interactive-bg">
+            <div class="w-16 h-16 top-20 left-10 animate-pulse"></div>
+            <div class="w-24 h-24 top-1/2 right-20 animate-pulse delay-1000"></div>
+            <div class="w-12 h-12 bottom-20 left-1/4 animate-pulse delay-500"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                     <span class="text-blue-300">EPBOX ENGINEERING</span>
+                </h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Leading manufacturer of electrical control panels and control panel systems, delivering innovative solutions for industrial automation and control applications worldwide.
+                </p>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                                 <div class="about-stats p-6 rounded-lg text-center">
+                     <div class="about-counter" data-target="7">0</div>
+                     <p class="text-gray-300 font-medium">Years Experience</p>
+                 </div>
+                <div class="about-stats p-6 rounded-lg text-center">
+                    <div class="about-counter" data-target="150">0</div>
+                    <p class="text-gray-300 font-medium">Projects Completed</p>
+                </div>
+                <div class="about-stats p-6 rounded-lg text-center">
+                    <div class="about-counter" data-target="40">0</div>
+                    <p class="text-gray-300 font-medium">Countries Served</p>
+                </div>
+                <div class="about-stats p-6 rounded-lg text-center">
+                    <div class="about-counter" data-target="100">0</div>
+                    <p class="text-gray-300 font-medium">Client Satisfaction %</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Story Section -->
+    <section class="py-20 px-6 bg-gray-900 relative overflow-hidden fade-section">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-20 h-20 bg-blue-500 rounded-full blur-xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-10 w-32 h-32 bg-blue-400 rounded-full blur-xl animate-pulse delay-1000"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-300">Our Story</h2>
+                    <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+                        Founded in 2017, Epbox Engineering began as a small team of passionate electrical engineers with a vision to revolutionize industrial control systems. What started as a local workshop has grown into a global leader in control panel manufacturing and system integration.
+                    </p>
+                    <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+                        Our journey has been marked by continuous innovation, unwavering commitment to quality, and deep understanding of industrial automation needs. Today, we serve clients across 40+ countries, delivering cutting-edge control panel solutions that drive efficiency and safety.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#mission" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 text-center transform hover:scale-105">
+                            Our Mission
+                        </a>
+                        <a href="#team" class="bg-transparent border-2 border-blue-600 hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 text-center transform hover:scale-105">
+                            Meet Our Team
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="about-image-gallery relative">
+                    <!-- Blue Lighting Gradient -->
+                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-96 h-96 md:w-[420px] md:h-[420px] bg-[radial-gradient(circle,rgba(59,130,246,0.35)_0%,rgba(59,130,246,0.12)_60%,transparent_100%)] blur-2xl z-0"></div>
+                    <img src="control panel image/sunview.jpg" 
+                         alt="Sunview Control Panel" 
+                         class="w-full h-96 object-cover rounded-lg shadow-2xl relative z-10">
+                    <div class="about-image-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Values Section -->
+    <section id="mission" class="py-20 px-6 gradient-bg relative overflow-hidden fade-section">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Our Mission & Values</h2>
+                <div class="w-32 h-1 bg-white mx-auto mb-6"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="about-card p-8 rounded-lg text-center">
+                    <div class="text-blue-400 text-5xl mb-6">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Innovation</h3>
+                    <p class="text-gray-300">
+                        Continuously developing cutting-edge control panel technologies and solutions to meet evolving industry demands and stay ahead of market trends.
+                    </p>
+                </div>
+                
+                <div class="about-card p-8 rounded-lg text-center">
+                    <div class="text-blue-400 text-5xl mb-6">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Quality</h3>
+                    <p class="text-gray-300">
+                        Maintaining the highest standards in manufacturing and testing to ensure reliable, safe, and durable control panels that exceed industry standards.
+                    </p>
+                </div>
+                
+                <div class="about-card p-8 rounded-lg text-center">
+                    <div class="text-blue-400 text-5xl mb-6">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Customer Focus</h3>
+                    <p class="text-gray-300">
+                        Building long-term partnerships through exceptional service, technical expertise, and customized solutions that address specific client needs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-20 px-6 bg-gray-900 relative overflow-hidden fade-section">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-300">Our Journey</h2>
+                <div class="w-32 h-1 bg-blue-500 mx-auto mb-6"></div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-300">2017 - Foundation</h3>
+                        <p class="text-gray-300">Epbox Engineering was founded with a vision to revolutionize industrial control systems through innovative panel manufacturing.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-300">2019 - Technology Center</h3>
+                        <p class="text-gray-300">Opened our state-of-the-art technology center for advanced control panel development and testing.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-300">2021 - Global Expansion</h3>
+                        <p class="text-gray-300">Expanded operations to serve international markets, establishing partnerships across multiple continents.</p>
+                    </div>
+                </div>
+                <div class="space-y-8">
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-300">2022 - Digital Transformation</h3>
+                        <p class="text-gray-300">Implemented IoT integration and smart manufacturing processes for enhanced efficiency and quality control.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-300">2024 - ISO Certification</h3>
+                        <p class="text-gray-300">Achieved ISO 9001:2015 certification, establishing our commitment to quality management and continuous improvement.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-300">2024 - Industry Leadership</h3>
+                        <p class="text-gray-300">Recognized as a leading manufacturer with 150+ successful projects and 40+ countries served worldwide.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="py-20 px-6 bg-gray-900 relative overflow-hidden fade-section">
+        <!-- Floating Orbs -->
+        <div class="floating-orb orb1"></div>
+        <div class="floating-orb orb2"></div>
+        <div class="floating-orb orb3"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-300">Certifications & Standards</h2>
+                <div class="w-32 h-1 bg-blue-500 mx-auto mb-6"></div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="certification-card p-8 rounded-lg text-center">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">ISO 9001:2015</h3>
+                    <p class="text-gray-300">
+                        Quality Management System certification ensuring consistent high-quality products and services.
+                    </p>
+                </div>
+                <div class="certification-card p-8 rounded-lg text-center">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Safety Standards</h3>
+                    <p class="text-gray-300">
+                        Compliance with international safety standards for industrial control panels and electrical equipment.
+                    </p>
+                </div>
+                <div class="certification-card p-8 rounded-lg text-center">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Global Compliance</h3>
+                    <p class="text-gray-300">
+                        Meeting regulatory requirements across multiple countries and industry-specific standards.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6 cta-animated-gradient relative overflow-hidden fade-section">
+        <div class="max-w-7xl mx-auto relative z-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Work With Us?</h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                Let's discuss your control panel requirements and how we can help bring your industrial automation vision to life.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
+                    Get Free Quote
+                </a>
+                <a href="project.html" class="bg-transparent border-2 border-blue-600 hover:bg-blue-900 text-white px-8 py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
+                    View Our Projects
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CEO Section -->
+    <section id="team" class="py-20 px-6 gradient-bg relative overflow-hidden fade-section">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Our Leadership</h2>
+                <div class="w-32 h-1 bg-white mx-auto mb-6"></div>
+            </div>
+            <!-- CEO Section -->
+            <div class="mb-20">
+                <div class="about-card p-12 rounded-lg text-center max-w-4xl mx-auto">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Erping Lee" class="w-40 h-40 object-cover rounded-full mx-auto mb-8 border-4 border-blue-400 shadow-lg">
+                    <h3 class="text-3xl font-bold mb-4 text-blue-300">Erping Lee</h3>
+                    <p class="text-blue-400 text-xl mb-6">CEO & Founder</p>
+                    <p class="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
+                        Visionary leader with a passion for industrial automation and control systems. Founded Epbox Engineering and leads the company with innovation and integrity.
+                    </p>
+                    <div class="flex justify-center space-x-6 mt-8">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-400">7</div>
+                            <div class="text-sm text-gray-400">Years Leadership</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-400">150+</div>
+                            <div class="text-sm text-gray-400">Projects Led</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-400">40+</div>
+                            <div class="text-sm text-gray-400">Countries Served</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Department Teams -->
+            <div class="text-center mb-16">
+                <h3 class="text-2xl md:text-3xl font-bold mb-6">Our Department Teams</h3>
+                <div class="w-24 h-1 bg-blue-400 mx-auto mb-6"></div>
+            </div>
+            <!-- Marketing, Finance, and IT in 4 Columns -->
+            <div class="mb-16">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Anggi Simanjuntak (Marketing) -->
+                    <div class="about-card p-6 rounded-lg text-center">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Anggi Simanjuntak" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
+                        <h5 class="text-lg font-semibold mb-2">Anggi Simanjuntak</h5>
+                        <p class="text-blue-400 mb-3">Marketing Specialist</p>
+                        <p class="text-gray-300 text-sm">
+                            Creative marketing professional with expertise in industrial B2B marketing and brand development.
+                        </p>
+                    </div>
+                    <!-- Irene Tesalonika (Marketing) -->
+                    <div class="about-card p-6 rounded-lg text-center">
+                        <img src="https://randomuser.me/api/portraits/women/66.jpg" alt="Irene Tesalonika" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
+                        <h5 class="text-lg font-semibold mb-2">Irene Tesalonika</h5>
+                        <p class="text-blue-400 mb-3">Marketing Specialist</p>
+                        <p class="text-gray-300 text-sm">
+                            Digital marketing and communications expert, focused on lead generation and client engagement.
+                        </p>
+                    </div>
+                    <!-- Lisa Chen (Finance) -->
+                    <div class="about-card p-6 rounded-lg text-center">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Lisa Chen" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
+                        <h5 class="text-lg font-semibold mb-2">Lisa Chen</h5>
+                        <p class="text-blue-400 mb-3">Finance Manager</p>
+                        <p class="text-gray-300 text-sm">
+                            Certified accountant with 10+ years experience in financial planning and business strategy.
+                        </p>
+                    </div>
+                    <!-- Muhammad Dody (IT) -->
+                    <div class="about-card p-6 rounded-lg text-center">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Muhammad Dody" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
+                        <h5 class="text-lg font-semibold mb-2">Muhammad Dody</h5>
+                        <p class="text-blue-400 mb-3">IT Specialist</p>
+                        <p class="text-gray-300 text-sm">
+                            IT infrastructure and digital security specialist, ensuring robust and reliable company systems.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Engineering Team -->
+            <div class="mb-16">
+                <h4 class="text-xl font-semibold mb-8 text-center text-blue-300">
+                    <i class="fas fa-cogs mr-3"></i>Engineering Team
+                </h4>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="about-card p-6 rounded-lg text-center">
+                        <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Junned" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
+                        <h5 class="text-lg font-semibold mb-2">Junned</h5>
+                        <p class="text-blue-400 mb-3">Engineer</p>
+                        <p class="text-gray-300 text-sm">
+                            Specialist in control system design and industrial automation solutions.
+                        </p>
+                    </div>
+                    <div class="about-card p-6 rounded-lg text-center">
+                        <img src="https://randomuser.me/api/portraits/men/28.jpg" alt="Richard" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
+                        <h5 class="text-lg font-semibold mb-2">Richard</h5>
+                        <p class="text-blue-400 mb-3">Engineer</p>
+                        <p class="text-gray-300 text-sm">
+                            Experienced in PLC programming and industrial automation systems.
+                        </p>
+                    </div>
+                    <div class="about-card p-6 rounded-lg text-center">
+                        <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Galih" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
+                        <h5 class="text-lg font-semibold mb-2">Galih</h5>
+                        <p class="text-blue-400 mb-3">Engineer</p>
+                        <p class="text-gray-300 text-sm">
+                            Focused on SCADA integration and real-time monitoring solutions.
+                        </p>
+                    </div>
+                    <div class="about-card p-6 rounded-lg text-center">
+                        <img src="https://randomuser.me/api/portraits/men/68.jpg" alt="Ryan" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
+                        <h5 class="text-lg font-semibold mb-2">Ryan</h5>
+                        <p class="text-blue-400 mb-3">Engineer</p>
+                        <p class="text-gray-300 text-sm">
+                            Expert in IoT integration and smart manufacturing technologies.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Production Team -->
+            <div class="mb-16">
+                <h4 class="text-xl font-semibold mb-8 text-center text-blue-300">
+                    <i class="fas fa-industry mr-3"></i>Production Team
+                </h4>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="about-card p-6 rounded-lg text-center">
+                        <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Hafidz" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
+                        <h5 class="text-lg font-semibold mb-2">Hafidz</h5>
+                        <p class="text-blue-400 mb-3">Production Staff</p>
+                        <p class="text-gray-300 text-sm">
+                            Skilled in control panel assembly and production processes.
+                        </p>
+                    </div>
+                    <div class="about-card p-6 rounded-lg text-center">
+                        <img src="https://randomuser.me/api/portraits/men/53.jpg" alt="Yudha" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
+                        <h5 class="text-lg font-semibold mb-2">Yudha</h5>
+                        <p class="text-blue-400 mb-3">Production Staff</p>
+                        <p class="text-gray-300 text-sm">
+                            Experienced in quality control and production line management.
+                        </p>
+                    </div>
+                    <div class="about-card p-6 rounded-lg text-center">
+                        <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Bang Lea" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
+                        <h5 class="text-lg font-semibold mb-2">Bang Lea</h5>
+                        <p class="text-blue-400 mb-3">Leader Production</p>
+                        <p class="text-gray-300 text-sm">
+                            Leader of the production team, ensuring high standards and efficient workflow.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-6 text-gray-400">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4"><span class="text-blue-400">EP</span>BOX ENGINEERING</h3>
+                    <p class="mb-4">
+                        Specialized manufacturer of control panels and control panel systems for industrial applications.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-400">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#services" class="hover:text-blue-400 transition">Control Panel Manufacturing</a></li>
+                        <li><a href="index.html#services" class="hover:text-blue-400 transition">Control Panel Systems Design</a></li>
+                        <li><a href="index.html#services" class="hover:text-blue-400 transition">Panel Integration & SCADA</a></li>
+                        <li><a href="index.html#services" class="hover:text-blue-400 transition">Panel Installation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-blue-400 transition">About Us</a></li>
+                        <li><a href="project.html" class="hover:text-blue-400 transition">Projects</a></li>
+                        <li><a href="blog.html" class="hover:text-blue-400 transition">Blog</a></li>
+                        <li><a href="index.html#downloads" class="hover:text-blue-400 transition">Downloads</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800">
+                <p class="text-center">
+                    © 2023 Epbox Engineering. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Box -->
+    <div class="chat-box" onclick="toggleChat()">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chat Popup -->
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <h3><i class="fas fa-headset mr-2"></i>Chat with EPBox Engineering</h3>
+            <button class="close-chat" onclick="toggleChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-body">
+            <p class="text-gray-300 text-sm mb-4">How can we help you today?</p>
+            <input type="text" class="chat-input" placeholder="Type your message here..." id="chatMessage">
+            <div class="chat-actions">
+                <button class="chat-btn primary" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane mr-2"></i>Send
+                </button>
+                <button class="chat-btn secondary" onclick="scrollToContact()">
+                    <i class="fas fa-phone mr-2"></i>Call Us
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuToggle = document.getElementById('menu-toggle');
+            mobileMenu.classList.toggle('hidden');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Navbar Downloads dropdown (match index)
+        function toggleNavDownloadsMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('navDownloadsMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+        document.addEventListener('click', function(event) {
+            const btn = document.getElementById('navDownloadsBtn');
+            const menu = document.getElementById('navDownloadsMenu');
+            if (btn && menu && !btn.contains(event.target) && !menu.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.about-counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+
+        // Intersection Observer for counter animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.about-counter').forEach(counter => {
+            observer.observe(counter);
+        });
+
+        // Fade-in Section Animation
+        document.querySelectorAll('.fade-section').forEach(section => {
+            section.classList.remove('visible');
+        });
+        const fadeObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.fade-section').forEach(section => {
+            fadeObserver.observe(section);
+        });
+
+        // Chat box function
+        function scrollToContact() {
+            const contactSection = document.querySelector('#contact');
+            if (contactSection) {
+                window.scrollTo({ top: contactSection.offsetTop - 80, behavior: 'smooth' });
+            }
+        }
+
+        // Toggle chat popup
+        function toggleChat() {
+            const popup = document.getElementById('chatPopup');
+            popup.classList.toggle('show');
+        }
+
+        // Send message function
+        function sendMessage() {
+            const message = document.getElementById('chatMessage').value;
+            if (message.trim()) {
+                alert('Thank you for your message! We will get back to you soon.');
+                document.getElementById('chatMessage').value = '';
+                toggleChat();
+            }
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function(event) {
+            const popup = document.getElementById('chatPopup');
+            const chatBox = document.querySelector('.chat-box');
+            if (popup && chatBox && !popup.contains(event.target) && !chatBox.contains(event.target)) {
+                popup.classList.remove('show');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add hover effects to interactive elements
+        document.querySelectorAll('.about-card, .certification-card, .about-stats').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
+

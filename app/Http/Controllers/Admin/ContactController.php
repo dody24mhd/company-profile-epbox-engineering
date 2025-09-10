@@ -10,7 +10,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::latest()->paginate(15);
         return view('admin.contacts.index', compact('contacts'));
     }
 
@@ -28,7 +28,7 @@ class ContactController extends Controller
         ]);
 
         Contact::create($validated);
-        return redirect()->route('admin.contacts.index');
+        return redirect()->route('admin.contacts.index')->with('success','Contact created successfully.');
     }
 
     public function edit(Contact $contact)
@@ -43,14 +43,15 @@ class ContactController extends Controller
             'email' => 'required|email',
             'message' => 'required|string',
         ]);
-
         $contact->update($validated);
-        return redirect()->route('admin.contacts.index');
+        return redirect()->route('admin.contacts.index')->with('success','Contact updated successfully.');
     }
 
     public function destroy(Contact $contact)
     {
         $contact->delete();
-        return redirect()->route('admin.contacts.index');
+        return redirect()->route('admin.contacts.index')->with('success','Contact deleted.');
     }
+
+    // export/mark-read features are deferred until frontend ready
 }

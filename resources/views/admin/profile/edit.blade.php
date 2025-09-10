@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Edit Profile</h1>
+    <h1 class="h3 mb-0 text-white">Edit Profile</h1>
     <a href="{{ route('profile.show') }}" class="btn btn-outline-secondary btn-sm">
         <i class="fas fa-user mr-1"></i> View Profile
     </a>

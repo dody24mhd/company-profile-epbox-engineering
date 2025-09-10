@@ -33,6 +33,14 @@ class UserController extends Controller
         return redirect()->route('admin.admins.index')->with('success', 'Admin created');
     }
 
+    public function edit(User $user)
+    {
+        if ($user->is_super_admin) {
+            abort(403);
+        }
+        return view('admin.admins.edit', compact('user'));
+    }
+
     public function destroy(User $user)
     {
         if ($user->is_super_admin) {
@@ -40,5 +48,27 @@ class UserController extends Controller
         }
         $user->delete();
         return redirect()->route('admin.admins.index')->with('success', 'Admin deleted');
+    }
+
+    public function update(Request $request, User $user)
+    {
+        if ($user->is_super_admin) {
+            abort(403);
+        }
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8',
+        ]);
+
+        $data = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+        ];
+        if (!empty($validated['password'])) {
+            $data['password'] = bcrypt($validated['password']);
+        }
+        $user->update($data);
+        return redirect()->route('admin.admins.index')->with('success','Admin updated');
     }
 }

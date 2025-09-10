@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="d-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 text-gray-800">Blogs</h1>
+    <h1 class="h3 text-white">Blogs</h1>
     <a href="{{ route('admin.blogs.create') }}" class="btn btn-primary" data-toggle="tooltip" title="Create new blog"><i class="fas fa-plus mr-1"></i> New Blog</a>
 </div>
 

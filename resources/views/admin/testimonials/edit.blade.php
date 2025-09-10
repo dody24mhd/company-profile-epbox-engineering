@@ -3,7 +3,7 @@
 @section('title', 'Edit Testimonial')
 
 @section('content')
-<h1 class="h4 text-gray-800 mb-4">Edit Testimonial</h1>
+<h1 class="h4 text-white mb-4">Edit Testimonial</h1>
 
 <div class="card shadow">
     <div class="card-body">

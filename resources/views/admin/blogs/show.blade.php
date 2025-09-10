@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="d-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 text-gray-800">Preview: {{ $blog->title }}</h1>
+    <h1 class="h3 text-white">Preview: {{ $blog->title }}</h1>
     <div>
         <a href="{{ route('admin.blogs.edit', $blog) }}" class="btn btn-warning"><i class="fas fa-edit mr-1"></i> Edit</a>
         <a href="{{ route('admin.blogs.index') }}" class="btn btn-secondary">Back</a>

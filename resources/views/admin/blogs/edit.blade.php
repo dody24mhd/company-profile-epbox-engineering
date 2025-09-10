@@ -3,7 +3,7 @@
 @section('title', 'Edit Blog')
 
 @section('content')
-<h1 class="h4 text-gray-800 mb-4">Edit Blog</h1>
+<h1 class="h4 text-white mb-4">Edit Blog</h1>
 
 <div class="card shadow">
     <div class="card-body">
@@ -61,7 +61,7 @@
     </div>
 </div>
 @push('scripts')
-<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/super-build/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
 <script>
     (function() {
         const el = document.getElementById('editor-description');
@@ -139,6 +139,12 @@
                 contentToolbar: [
                     'tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'
                 ]
+            }
+        }).then(function(editor){
+            const form = el.closest('form');
+            if (form) {
+                editor.model.document.on('change:data', function(){ el.value = editor.getData(); });
+                form.addEventListener('submit', function(){ el.value = editor.getData(); });
             }
         }).catch(console.error);
     })();

@@ -8,6 +8,7 @@
     <!-- Linking the CSS files -->
     <link href="{{ asset('vendor/fontawesome-free/css/svg-with-js.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin-custom.css') }}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -20,9 +21,13 @@
                 @include('layouts.topbar')
 
                 <div class="container-fluid">
+                    @include('components.alerts')
                     @yield('content')
                 </div>
             </div>
+            <footer class="admin-footer py-3 mt-auto">
+                <div>All rights reserved © Beyond Boundaries, We Command Control | 2025</div>
+            </footer>
         </div>
     </div>
 
@@ -46,11 +51,13 @@
                 var toggleBtnDesktop = document.getElementById('sidebarToggle');
                 var sidebarEl = document.getElementById('accordionSidebar');
                 var wrapperEl = document.getElementById('wrapper');
+
                 function hideSidebar() {
                     if (!sidebarEl) return;
                     sidebarEl.classList.add('d-none');
                     if (wrapperEl) wrapperEl.classList.add('sidebar-hidden-mobile');
                 }
+
                 function showSidebar() {
                     if (!sidebarEl) return;
                     sidebarEl.classList.remove('d-none');
@@ -61,7 +68,11 @@
                     toggleBtn.addEventListener('click', function() {
                         // Toggle visibility by utility class on mobile
                         if (window.innerWidth < 992) {
-                            if (sidebarEl.classList.contains('d-none')) { showSidebar(); } else { hideSidebar(); }
+                            if (sidebarEl.classList.contains('d-none')) {
+                                showSidebar();
+                            } else {
+                                hideSidebar();
+                            }
                         }
                     });
 
@@ -76,7 +87,11 @@
                 // Desktop toggle to collapse/expand as well
                 if (toggleBtnDesktop && sidebarEl) {
                     toggleBtnDesktop.addEventListener('click', function() {
-                        if (sidebarEl.classList.contains('d-none')) { showSidebar(); } else { hideSidebar(); }
+                        if (sidebarEl.classList.contains('d-none')) {
+                            showSidebar();
+                        } else {
+                            hideSidebar();
+                        }
                     });
                 }
             })();

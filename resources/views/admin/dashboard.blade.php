@@ -5,7 +5,7 @@
 @section('content')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">EPBOX ENGINEERING Dashboard</h1>
+    <h1 class="h3 mb-0 text-white">EPBOX ENGINEERING Dashboard</h1>
     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 </div>
 
@@ -246,33 +246,64 @@
 
 <!-- Content Row -->
 <div class="row">
-    <!-- Area Chart -->
+    <!-- Contacts Overview -->
     <div class="col-xl-8 col-lg-7">
         <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Overview</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Contacts Overview</h6>
+                <a href="{{ route('admin.contacts.index') }}" class="small">View all</a>
             </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Message</th>
+                                <th>Received</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($recentContacts as $c)
+                            <tr>
+                                <td>{{ $c->name }}</td>
+                                <td>{{ $c->email }}</td>
+                                <td class="text-truncate" style="max-width: 320px;">{{ $c->message }}</td>
+                                <td>{{ $c->created_at->diffForHumans() }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="4" class="text-center text-muted">No contacts yet</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Pie Chart -->
+    <!-- Quick Stats -->
     <div class="col-xl-4 col-lg-5">
         <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Composition</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Quick Stats</h6>
             </div>
-            <!-- Card Body -->
             <div class="card-body">
-                <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
+                <div class="d-flex flex-column gap-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span class="text-muted">Total Contacts</span>
+                        <span class="font-weight-bold">{{ \App\Models\Contact::count() }}</span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span class="text-muted">Last 7 days</span>
+                        <span class="font-weight-bold">{{ \App\Models\Contact::where('created_at','>=',now()->subDays(7))->count() }}</span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span class="text-muted">Last 30 days</span>
+                        <span class="font-weight-bold">{{ \App\Models\Contact::where('created_at','>=',now()->subDays(30))->count() }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -281,7 +312,5 @@
 
 @push('scripts')
 <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-<script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
-<script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
 @endpush
 @endsection

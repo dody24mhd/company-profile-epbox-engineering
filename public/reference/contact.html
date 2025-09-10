@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Epbox Engineering | Easy Contact & Request Quotation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --navy: #0F1C3F;
+            --sky-blue: #1E90FF;
+            --dark-navy: #0A1128;
+            --gradient: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy) 50%, var(--sky-blue) 100%);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            background: var(--dark-navy);
+            line-height: 1.6;
+        }
+        
+        .gradient-bg {
+            background: var(--gradient);
+        }
+        
+        .navbar {
+            background: rgba(15, 28, 63, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .fade-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(.4,2,.3,1), transform 0.8s cubic-bezier(.4,2,.3,1);
+        }
+        
+        .fade-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 32px 0 rgba(30,144,255,0.10);
+        }
+        
+        .contact-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(30, 144, 255, 0.6);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 32px 0 rgba(30,144,255,0.18);
+        }
+        
+        .contact-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover .contact-icon {
+            transform: scale(1.1) rotate(5deg);
+            color: #1E90FF;
+        }
+        
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(30, 144, 255, 0.8);
+            box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
+        }
+        
+        .cta-animated-gradient {
+            background: linear-gradient(270deg, #1E90FF, #0F1C3F, #1E90FF, #0A1128);
+            background-size: 600% 600%;
+            animation: ctaGradientMove 12s ease-in-out infinite;
+        }
+        
+        @keyframes ctaGradientMove {
+            0% {background-position:0% 50%}
+            50% {background-position:100% 50%}
+            100% {background-position:0% 50%}
+        }
+        
+        /* Interactive Background Elements */
+        .interactive-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        /* Chat Popup Styles */
+        .chat-box {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1E90FF, #0F1C3F);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(30, 144, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .chat-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(30, 144, 255, 0.4);
+        }
+        
+        .chat-box i {
+            color: white;
+            font-size: 24px;
+        }
+        
+        .chat-popup {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            background: rgba(15, 28, 63, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: none;
+            border: 1px solid rgba(30, 144, 255, 0.3);
+        }
+        
+        .chat-popup.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, #1E90FF, #0F1C3F);
+            padding: 15px 20px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header h3 {
+            color: white;
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        .chat-body {
+            padding: 20px;
+        }
+        
+        .chat-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .chat-input:focus {
+            outline: none;
+            border-color: #1E90FF;
+            box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+        }
+        
+        .chat-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-btn.primary {
+            background: #1E90FF;
+            color: white;
+        }
+        
+        .chat-btn.primary:hover {
+            background: #187bcd;
+        }
+        
+        .chat-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .chat-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .interactive-bg > div {
+            position: absolute;
+            background: radial-gradient(circle, rgba(30, 144, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        /* Floating Gradient Orbs */
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(16px);
+            opacity: 0.18;
+            pointer-events: none;
+            animation: orbFloat 10s ease-in-out infinite alternate;
+        }
+        
+        .floating-orb.orb1 { 
+            width: 180px; 
+            height: 180px; 
+            top: 10%; 
+            left: 5%; 
+            background: radial-gradient(circle, #1E90FF 0%, #0F1C3F 100%); 
+            animation-delay: 0s; 
+        }
+        
+        .floating-orb.orb2 { 
+            width: 120px; 
+            height: 120px; 
+            top: 60%; 
+            right: 10%; 
+            background: radial-gradient(circle, #0F1C3F 0%, #1E90FF 100%); 
+            animation-delay: 2s; 
+        }
+        
+        .floating-orb.orb3 { 
+            width: 100px; 
+            height: 100px; 
+            bottom: 20%; 
+            left: 20%; 
+            background: radial-gradient(circle, #1E90FF 0%, #0A1128 100%); 
+            animation-delay: 4s; 
+        }
+        
+        @keyframes orbFloat {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(360deg); }
+        }
+        
+        /* Map Container */
+        .map-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        /* Success Message Animation */
+        .success-message {
+            display: none;
+            animation: slideInUp 0.5s ease-out;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50 py-4 px-6 shadow-lg" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold text-white"><span class="text-blue-400">EP</span>BOX ENGINEERING</span>
+            </div>
+            <div class="hidden md:flex space-x-2">
+                <a href="index.html#home" class="nav-link text-white"><i class="fas fa-home"></i>Home</a>
+                <a href="about.html" class="nav-link text-white"><i class="fas fa-users"></i>About Us</a>
+                <a href="services.html" class="nav-link text-white"><i class="fas fa-cogs"></i>Services</a>
+                <a href="industries.html" class="nav-link text-white"><i class="fas fa-industry"></i>Industries</a>
+                <a href="project.html" class="nav-link text-white"><i class="fas fa-project-diagram"></i>Projects</a>
+                <a href="blog.html" class="nav-link text-white"><i class="fas fa-blog"></i>Blog</a>
+                <div class="relative">
+                    <button class="nav-link text-white" id="navDownloadsBtn" onclick="toggleNavDownloadsMenu(event)"><i class="fas fa-download"></i>Downloads <i class="fas fa-caret-down ml-1"></i></button>
+                    <div id="navDownloadsMenu" class="hidden absolute right-0 mt-2 w-60 origin-top-right rounded-lg bg-gray-900/95 border border-white/10 shadow-lg z-50">
+                        <a href="docs/company-profile.pdf" download class="flex items-center gap-2 px-4 py-2 text-sm text-gray-200 hover:bg-white/10"><i class="fas fa-file-pdf text-blue-400"></i>Company Profile</a>
+                        <a href="docs/service-brochure.pdf" download class="flex items-center gap-2 px-4 py-2 text-sm text-gray-200 hover:bg-white/10"><i class="fas fa-file-alt text-blue-400"></i>Service Brochure</a>
+                        <a href="docs/product-catalog.pdf" download class="flex items-center gap-2 px-4 py-2 text-sm text-gray-200 hover:bg-white/10"><i class="fas fa-book text-blue-400"></i>Product Catalog</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-link text-white"><i class="fas fa-envelope"></i>Contact</a>
+            </div>
+            <button class="md:hidden text-white text-2xl" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-gray-900 w-full mt-4 py-2 rounded-lg" id="mobile-menu">
+            <a href="index.html" class="block px-4 py-2 text-white hover:bg-blue-800">Home</a>
+            <a href="about.html" class="block px-4 py-2 text-white hover:bg-blue-800">About Us</a>
+            <a href="services.html" class="block px-4 py-2 text-white hover:bg-blue-800">Services</a>
+            <a href="industries.html" class="block px-4 py-2 text-white hover:bg-blue-800">Industries</a>
+            <a href="project.html" class="block px-4 py-2 text-white hover:bg-blue-800">Projects</a>
+            <a href="blog.html" class="block px-4 py-2 text-white hover:bg-blue-800">Blog</a>
+            <a href="#downloads" class="block px-4 py-2 text-white hover:bg-blue-800">Downloads</a>
+            <a href="contact.html" class="block px-4 py-2 text-blue-300 font-semibold">Contact</a>
+        </div>
+    </nav>
+    <style>
+        .nav-link { position: relative; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; }
+        .nav-link::before { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: linear-gradient(90deg, #1E90FF, #00BFFF); transition: all 0.3s ease; transform: translateX(-50%); }
+        .nav-link:hover::before { width: 80%; }
+        .nav-link:hover { background: rgba(30,144,255,0.1); color: #00BFFF !important; transform: translateY(-2px); }
+    </style>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 gradient-bg relative overflow-hidden fade-section">
+        <div class="interactive-bg">
+            <div class="w-16 h-16 top-20 left-10 animate-pulse"></div>
+            <div class="w-24 h-24 top-1/2 right-20 animate-pulse delay-1000"></div>
+            <div class="w-12 h-12 bottom-20 left-1/4 animate-pulse delay-500"></div>
+        </div>
+        <div class="max-w-7xl mx-auto relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                Easy to <span class="text-blue-300">Contact</span> & Request Quotation
+            </h1>
+            <div class="w-32 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mb-6"></div>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                Get in touch with our expert team for personalized control panel solutions, technical consultations, and competitive quotations. We're here to help bring your industrial automation projects to life.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact-form" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold transition shadow-lg">
+                    <i class="fas fa-paper-plane mr-2"></i>Send Message
+                </a>
+                <a href="#contact-info" class="bg-transparent border-2 border-blue-500 hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition">
+                    <i class="fas fa-phone mr-2"></i>Call Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section id="contact-info" class="py-20 px-6 bg-gray-900 relative overflow-hidden fade-section">
+        <div class="floating-orb orb1"></div>
+        <div class="floating-orb orb2"></div>
+        <div class="floating-orb orb3"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Get In Touch</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mb-4"></div>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                    Multiple ways to reach our expert team for your control panel and automation needs
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <!-- Phone Contact -->
+                <div class="contact-card p-6 rounded-lg text-center">
+                    <div class="contact-icon text-4xl text-blue-400 mb-4">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Phone</h3>
+                    <p class="text-gray-300 mb-3">Call us directly for immediate assistance</p>
+                    <a href="tel:+6281234567890" class="text-blue-400 hover:text-blue-300 font-semibold">
+                        +62 812-3456-7890
+                    </a>
+                </div>
+                
+                <!-- Email Contact -->
+                <div class="contact-card p-6 rounded-lg text-center">
+                    <div class="contact-icon text-4xl text-blue-400 mb-4">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Email</h3>
+                    <p class="text-gray-300 mb-3">Send us a detailed message</p>
+                    <a href="mailto:info@epboxengineering.com" class="text-blue-400 hover:text-blue-300 font-semibold">
+                        info@epboxengineering.com
+                    </a>
+                </div>
+                
+                <!-- WhatsApp Contact -->
+                <div class="contact-card p-6 rounded-lg text-center">
+                    <div class="contact-icon text-4xl text-blue-400 mb-4">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">WhatsApp</h3>
+                    <p class="text-gray-300 mb-3">Quick chat and file sharing</p>
+                    <a href="https://wa.me/6281234567890" class="text-blue-400 hover:text-blue-300 font-semibold">
+                        +62 812-3456-7890
+                    </a>
+                </div>
+                
+                <!-- Office Location -->
+                <div class="contact-card p-6 rounded-lg text-center">
+                    <div class="contact-icon text-4xl text-blue-400 mb-4">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Office</h3>
+                    <p class="text-gray-300 mb-3">Visit our manufacturing facility</p>
+                    <p class="text-blue-400 font-semibold">
+                        1 Sunview Road, Ecotect@Sunview
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6 cta-animated-gradient relative overflow-hidden fade-section">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+                Ready to Start Your Project?
+            </h2>
+            <p class="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+                Let's discuss your control panel and automation requirements. Our expert team is ready to help you bring your vision to life.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact-form" class="bg-white hover:bg-gray-100 text-blue-600 px-8 py-4 rounded-lg font-semibold transition shadow-lg">
+                    <i class="fas fa-paper-plane mr-2"></i>Get Free Quote
+                </a>
+                <a href="tel:+6281234567890" class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 text-white px-8 py-4 rounded-lg font-semibold transition">
+                    <i class="fas fa-phone mr-2"></i>Call Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact-form" class="py-20 px-6 bg-gray-800 relative overflow-hidden fade-section">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Request Quotation</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mb-4"></div>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                    Fill out the form below and we'll get back to you with a detailed quotation for your project
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="contact-card p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-6">Send Us a Message</h3>
+                    
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Name *</label>
+                            <input type="text" name="name" required class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="Your full name">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Company</label>
+                            <input type="text" name="company" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="Your company name">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Phone Contact *</label>
+                            <input type="tel" name="phone" required class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="Your phone number">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email Address *</label>
+                            <input type="email" name="email" required class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="Your email address">
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold transition shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Send Message
+                        </button>
+                    </form>
+                    
+                    <!-- Success Message -->
+                    <div id="successMessage" class="success-message mt-6 p-4 bg-green-600 rounded-lg text-center">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.
+                    </div>
+                </div>
+                
+                <!-- Additional Information -->
+                <div class="space-y-8">
+                    <div class="contact-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">Why Choose EPBox Engineering?</h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-400 mt-1 mr-3"></i>
+                                <span>Expert team with 10+ years of experience</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-400 mt-1 mr-3"></i>
+                                <span>Custom solutions tailored to your needs</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-400 mt-1 mr-3"></i>
+                                <span>Fast response time (within 24 hours)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-400 mt-1 mr-3"></i>
+                                <span>Competitive pricing and transparent quotes</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-400 mt-1 mr-3"></i>
+                                <span>Quality assurance and warranty support</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">Business Hours</h3>
+                        <div class="space-y-2 text-gray-300">
+                            <div class="flex justify-between">
+                                <span>Monday - Friday:</span>
+                                <span>8:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Saturday:</span>
+                                <span>9:00 AM - 3:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Sunday:</span>
+                                <span>Closed</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-900 rounded-lg">
+                            <p class="text-sm text-blue-200">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                Emergency support available 24/7 for existing clients
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">Response Time</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Initial Response:</span>
+                                <span class="text-blue-400 font-semibold">Within 24 hours</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Detailed Quote:</span>
+                                <span class="text-blue-400 font-semibold">2-3 business days</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Technical Consultation:</span>
+                                <span class="text-blue-400 font-semibold">Within 48 hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-20 px-6 bg-gray-900 relative overflow-hidden fade-section">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Visit Our Facility</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mb-4"></div>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                    Come see our state-of-the-art manufacturing facility and meet our team in person
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.6666666666667!2d106.8456!3d-6.2088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTInMzEuNyJTIDEwNsKwNTAnNDQuMiJF!5e0!3m2!1sen!2sid!4v1234567890"
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="contact-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">EPBox Engineering</h3>
+                        <div class="space-y-3 text-gray-300">
+                            <p class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3"></i>
+                                <span>1 Sunview Road<br>Ecotect@Sunview</span>
+                            </p>
+                            <p class="flex items-center">
+                                <i class="fas fa-phone text-blue-400 mr-3"></i>
+                                <span>+62 812-3456-7890</span>
+                            </p>
+                            <p class="flex items-center">
+                                <i class="fas fa-envelope text-blue-400 mr-3"></i>
+                                <span>info@epboxengineering.com</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">Schedule a Visit</h3>
+                        <p class="text-gray-300 mb-4">
+                            Want to see our facility in person? Contact us to schedule a guided tour of our manufacturing facility.
+                        </p>
+                        <a href="#contact-form" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition">
+                            <i class="fas fa-calendar mr-2"></i>Schedule Tour
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-6 text-gray-400">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4"><span class="text-blue-400">EP</span>BOX ENGINEERING</h3>
+                    <p class="mb-4">
+                        Specialized manufacturer of control panels and control panel systems for industrial applications.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-400">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition">Control Panel Manufacturing</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Control Panel Systems Design</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Panel Integration & SCADA</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Panel Installation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-blue-400 transition">About Us</a></li>
+                        <li><a href="project.html" class="hover:text-blue-400 transition">Projects</a></li>
+                        <li><a href="blog.html" class="hover:text-blue-400 transition">Blog</a></li>
+                        <li><a href="#downloads" class="hover:text-blue-400 transition">Downloads</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800">
+                <p class="text-center">
+                    © 2023 Epbox Engineering. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const offsetTop = targetElement.offsetTop - 100;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar Downloads dropdown
+        function toggleNavDownloadsMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('navDownloadsMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+        document.addEventListener('click', function(event) {
+            const btn = document.getElementById('navDownloadsBtn');
+            const menu = document.getElementById('navDownloadsMenu');
+            if (btn && menu && !btn.contains(event.target) && !menu.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+        
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            console.log('Form submitted:', data);
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+        
+        // Initialize fade sections on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.fade-section').forEach(section => {
+                if (section.getBoundingClientRect().top < window.innerHeight) {
+                    section.classList.add('visible');
+                }
+            });
+        });
+
+        // Chat box function
+        function scrollToContact() {
+            const contactSection = document.querySelector('#contact-form');
+            if (contactSection) {
+                window.scrollTo({
+                    top: contactSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // Toggle chat popup
+        function toggleChat() {
+            const popup = document.getElementById('chatPopup');
+            popup.classList.toggle('show');
+        }
+        
+        // Send message function
+        function sendMessage() {
+            const message = document.getElementById('chatMessage').value;
+            if (message.trim()) {
+                // Here you can add actual chat functionality
+                alert('Thank you for your message! We will get back to you soon.');
+                document.getElementById('chatMessage').value = '';
+                toggleChat();
+            }
+        }
+        
+        // Close popup when clicking outside
+        document.addEventListener('click', function(event) {
+            const popup = document.getElementById('chatPopup');
+            const chatBox = document.querySelector('.chat-box');
+            
+            if (!popup.contains(event.target) && !chatBox.contains(event.target)) {
+                popup.classList.remove('show');
+            }
+        });
+    </script>
+
+    <!-- Floating Chat Box -->
+    <div class="chat-box" onclick="toggleChat()">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chat Popup -->
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <h3><i class="fas fa-headset mr-2"></i>Chat with EPBox Engineering</h3>
+            <button class="close-chat" onclick="toggleChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-body">
+            <p class="text-gray-300 text-sm mb-4">How can we help you today?</p>
+            <input type="text" class="chat-input" placeholder="Type your message here..." id="chatMessage">
+            <div class="chat-actions">
+                <button class="chat-btn primary" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane mr-2"></i>Send
+                </button>
+                <button class="chat-btn secondary" onclick="scrollToContact()">
+                    <i class="fas fa-phone mr-2"></i>Call Us
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

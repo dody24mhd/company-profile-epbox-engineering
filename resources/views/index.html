@@ -1,0 +1,3103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epbox Engineering | Panel Manufacturer & Control System Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --navy: #0F1C3F;
+            --sky-blue: #1E90FF;
+            --dark-navy: #0A1128;
+            --gradient: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy) 50%, var(--sky-blue) 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            background: var(--dark-navy);
+            line-height: 1.6;
+        }
+
+        .gradient-bg {
+            background: var(--gradient);
+        }
+
+        .navbar {
+            background: rgba(15, 28, 63, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(30, 144, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 28, 63, 0.98);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1E90FF, #00BFFF);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::before {
+            width: 80%;
+        }
+
+        .nav-link:hover {
+            background: rgba(30, 144, 255, 0.1);
+            color: #00BFFF !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link i {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .nav-link:hover i {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .nav-link.active {
+            background: rgba(30, 144, 255, 0.2);
+            color: #00BFFF !important;
+        }
+
+        .nav-link.active::before {
+            width: 80%;
+        }
+
+        .logo-text {
+            background: linear-gradient(45deg, #1E90FF, #00BFFF, #87CEEB);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .mobile-menu-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .mobile-menu-btn.active {
+            transform: rotate(90deg);
+        }
+
+        .mobile-menu {
+            background: rgba(15, 28, 63, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            border-radius: 12px;
+            margin-top: 8px;
+            overflow: hidden;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-menu a {
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(30, 144, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-menu a::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(30, 144, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .mobile-menu a:hover::before {
+            left: 100%;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(30, 144, 255, 0.1);
+            padding-left: 30px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            animation: zoomEffect 8s ease-in-out infinite;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        @keyframes zoomEffect {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Hero Content Animation */
+        .hero-content h1,
+        .hero-content p,
+        .hero-content .flex {
+            transition: all 0.6s ease-in-out;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .hero-content.fade-out h1,
+        .hero-content.fade-out p,
+        .hero-content.fade-out .flex {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        /* Interactive Animations */
+        @keyframes slideInFromLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromBottom {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Hover effects for buttons */
+        .hero-content .flex a {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .hero-content .flex a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .hero-content .flex a:hover::before {
+            left: 100%;
+        }
+
+        .hero-content .flex a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 144, 255, 0.3);
+        }
+
+        /* Slider dots enhancement */
+        .slider-dot {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: #1E90FF;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .slider-dot.active::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Particle Animation */
+        @keyframes particleFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-50px) scale(0);
+            }
+        }
+
+        /* Enhanced slider indicators */
+        .slider-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(30, 144, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot:hover {
+            background: rgba(30, 144, 255, 0.7);
+            transform: scale(1.2);
+        }
+
+        .slider-dot.active {
+            background: #1E90FF;
+            border-color: #1E90FF;
+            box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+        }
+
+        /* Ripple Animation */
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced hero content positioning */
+        .hero-content {
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Video Section Styles */
+        .video-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .play-button-small {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-button-small::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .play-button-small:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-thumbnail {
+            transition: all 0.3s ease;
+        }
+
+        .video-thumbnail:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Vision & Mission Image Gallery Styles */
+        .image-gallery-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .main-image {
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .main-image:hover {
+            transform: scale(1.1);
+        }
+
+        .image-thumbnail {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .image-thumbnail:hover {
+            transform: scale(1.1);
+            border-color: #1E90FF;
+        }
+
+        .image-thumbnail.active {
+            border-color: #1E90FF;
+            box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+        }
+
+        .slider-indicator {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .slider-indicator:hover {
+            transform: scale(1.3);
+            opacity: 1 !important;
+        }
+
+        .slider-indicator.active {
+            opacity: 1 !important;
+            background: #1E90FF !important;
+            transform: scale(1.2);
+            box-shadow: 0 0 8px rgba(30, 144, 255, 0.6);
+        }
+
+        /* Auto-slider animation */
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        /* Zoom effect on hover */
+        .zoom-container {
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .zoom-image {
+            transition: transform 0.5s ease;
+        }
+
+        .zoom-container:hover .zoom-image {
+            transform: scale(1.15);
+        }
+
+        /* Video Modal Styles */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .video-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .video-modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .video-modal.active .video-modal-content {
+            transform: scale(1);
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .video-modal-close:hover {
+            background: rgba(255, 0, 0, 0.8);
+            transform: scale(1.1);
+        }
+
+        .hero-slide:nth-child(1) {
+            background: linear-gradient(rgba(15, 28, 63, 0.7), rgba(15, 28, 63, 0.9)), url('https://images.squarespace-cdn.com/content/v1/63fe1c005e900952091f678b/0d2cbf84-8ff6-4699-af5e-8a3bb822fd79/Small+control+panels+variety.jpg') no-repeat center center/cover;
+        }
+
+        .hero-slide:nth-child(2) {
+            background: linear-gradient(rgba(15, 28, 63, 0.7), rgba(15, 28, 63, 0.9)), url('https://www.lloydmorris.co.uk/wp-content/uploads/2023/01/ControlPanel-image1.jpg') no-repeat center center/cover;
+        }
+
+        .hero-slide:nth-child(3) {
+            background: linear-gradient(rgba(15, 28, 63, 0.7), rgba(15, 28, 63, 0.9)), url('https://image.altponelectricalsystem.com/s3/productimages/webp/co250359/p1070059/w600-h600/658ae65f-e85b-45fc-a814-d4234d245f72.jpeg') no-repeat center center/cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .slider-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: #1E90FF;
+            transform: scale(1.2);
+        }
+
+        .service-card,
+        .project-card,
+        .blog-card,
+        .download-card,
+        .industry-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover,
+        .project-card:hover,
+        .blog-card:hover,
+        .download-card:hover,
+        .industry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(30, 144, 255, 0.2);
+        }
+
+        .industry-icon {
+            transition: all 0.3s ease;
+        }
+
+        .industry-card:hover .industry-icon {
+            transform: scale(1.1);
+            color: #00BFFF !important;
+        }
+
+        .stats-item {
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stats-item:hover {
+            background: rgba(30, 144, 255, 0.1);
+        }
+
+        .chat-box {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1E90FF, #0F1C3F);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(30, 144, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .chat-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(30, 144, 255, 0.4);
+        }
+
+        .chat-box i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .chat-popup {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            background: rgba(15, 28, 63, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: none;
+            border: 1px solid rgba(30, 144, 255, 0.3);
+        }
+
+        .chat-popup.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #1E90FF, #0F1C3F);
+            padding: 15px 20px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            color: white;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        /* Interactive Elements */
+        .fade-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(.4, 2, .3, 1), transform 0.8s cubic-bezier(.4, 2, .3, 1);
+        }
+
+        .fade-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Interactive Background Elements */
+        .interactive-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .interactive-bg>div {
+            position: absolute;
+            background: radial-gradient(circle, rgba(30, 144, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        /* Floating Gradient Orbs */
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(16px);
+            opacity: 0.18;
+            pointer-events: none;
+            animation: orbFloat 10s ease-in-out infinite alternate;
+        }
+
+        .floating-orb.orb1 {
+            width: 180px;
+            height: 180px;
+            top: 10%;
+            left: 5%;
+            background: radial-gradient(circle, #1E90FF 0%, #0F1C3F 100%);
+            animation-delay: 0s;
+        }
+
+        .floating-orb.orb2 {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 10%;
+            background: radial-gradient(circle, #0F1C3F 0%, #1E90FF 100%);
+            animation-delay: 2s;
+        }
+
+        .floating-orb.orb3 {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 20%;
+            background: radial-gradient(circle, #1E90FF 0%, #0A1128 100%);
+            animation-delay: 4s;
+        }
+
+        @keyframes orbFloat {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-20px) rotate(360deg);
+            }
+        }
+
+        /* Parallax Background Elements */
+        .parallax-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+        }
+
+        .parallax-bg>div {
+            position: absolute;
+            background: radial-gradient(circle, rgba(30, 144, 255, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: parallaxFloat 15s ease-in-out infinite;
+        }
+
+        @keyframes parallaxFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-30px) scale(1.1);
+            }
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .chat-body {
+            padding: 20px;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #1E90FF;
+            box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+        }
+
+        .chat-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .chat-btn.primary {
+            background: #1E90FF;
+            color: white;
+        }
+
+        .chat-btn.primary:hover {
+            background: #187bcd;
+        }
+
+        .chat-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .chat-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50 py-4 px-6" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold logo-text">
+                    <span class="text-blue-400">EP</span>BOX ENGINEERING
+                </span>
+            </div>
+            <div class="hidden md:flex space-x-2">
+                <a href="#home" class="nav-link text-white">
+                    <i class="fas fa-home"></i>Home
+                </a>
+                <a href="about.html" class="nav-link text-white">
+                    <i class="fas fa-users"></i>About Us
+                </a>
+                <a href="services.html" class="nav-link text-white">
+                    <i class="fas fa-cogs"></i>Services
+                </a>
+                <a href="industries.html" class="nav-link text-white">
+                    <i class="fas fa-industry"></i>Industries
+                </a>
+                <a href="project.html" class="nav-link text-white">
+                    <i class="fas fa-project-diagram"></i>Projects
+                </a>
+                <a href="blog.html" class="nav-link text-white">
+                    <i class="fas fa-blog"></i>Blog
+                </a>
+                <div class="relative">
+                    <button class="nav-link text-white" id="navDownloadsBtn" onclick="toggleNavDownloadsMenu(event)">
+                        <i class="fas fa-download"></i>Downloads <i class="fas fa-caret-down ml-1"></i>
+                    </button>
+                    <div id="navDownloadsMenu"
+                        class="hidden absolute right-0 mt-2 w-60 origin-top-right rounded-lg bg-gray-900/95 border border-white/10 shadow-lg z-50">
+                        <a href="docs/company-profile.pdf" download
+                            class="flex items-center gap-2 px-4 py-2 text-sm text-gray-200 hover:bg-white/10">
+                            <i class="fas fa-file-pdf text-blue-400"></i>Company Profile
+                        </a>
+                        <a href="docs/service-brochure.pdf" download
+                            class="flex items-center gap-2 px-4 py-2 text-sm text-gray-200 hover:bg-white/10">
+                            <i class="fas fa-file-alt text-blue-400"></i>Service Brochure
+                        </a>
+                        <a href="docs/product-catalog.pdf" download
+                            class="flex items-center gap-2 px-4 py-2 text-sm text-gray-200 hover:bg-white/10">
+                            <i class="fas fa-book text-blue-400"></i>Product Catalog
+                        </a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-link text-white">
+                    <i class="fas fa-envelope"></i>Contact
+                </a>
+            </div>
+            <button class="md:hidden mobile-menu-btn text-white text-2xl" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden mobile-menu" id="mobile-menu">
+            <a href="#home" class="block text-white">
+                <i class="fas fa-home mr-3"></i>Home
+            </a>
+            <a href="about.html" class="block text-white">
+                <i class="fas fa-users mr-3"></i>About Us
+            </a>
+            <a href="services.html" class="block text-white">
+                <i class="fas fa-cogs mr-3"></i>Services
+            </a>
+            <a href="industries.html" class="block text-white">
+                <i class="fas fa-industry mr-3"></i>Industries
+            </a>
+            <a href="project.html" class="block text-white">
+                <i class="fas fa-project-diagram mr-3"></i>Projects
+            </a>
+            <a href="blog.html" class="block text-white">
+                <i class="fas fa-blog mr-3"></i>Blog
+            </a>
+            <a href="#downloads" class="block text-white">
+                <i class="fas fa-download mr-3"></i>Downloads
+            </a>
+            <a href="contact.html" class="block text-white">
+                <i class="fas fa-envelope mr-3"></i>Contact
+            </a>
+        </div>
+    </nav>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal" onclick="closeVideoModal()">
+        <div class="video-modal-content" onclick="event.stopPropagation()">
+            <button class="video-modal-close" onclick="closeVideoModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="videoPlayer" class="aspect-video bg-black">
+                <!-- Video will be loaded here -->
+                <div class="flex items-center justify-center h-full text-white">
+                    <div class="text-center">
+                        <i class="fas fa-play-circle text-6xl mb-4 text-blue-400"></i>
+                        <p class="text-xl">Video Player</p>
+                        <p class="text-gray-400 mt-2">Click to play</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Section -->
+    <section id="home" class="hero pt-32 pb-20 px-6 flex items-center relative">
+        <!-- Hero Slider -->
+        <div class="hero-slider">
+            <div class="hero-slide active"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+        </div>
+
+        <!-- Slider Indicators -->
+        <div class="slider-indicators">
+            <div class="slider-dot active" onclick="goToSlide(0)"></div>
+            <div class="slider-dot" onclick="goToSlide(1)"></div>
+            <div class="slider-dot" onclick="goToSlide(2)"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero-content max-w-7xl mx-auto text-center md:text-left">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight" id="hero-title">
+                Professional <span class="text-blue-300">Panel Manufacturing</span><br>& Control System Solutions
+            </h1>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto md:mx-0" id="hero-description">
+                Specialized manufacturer of electrical control panels and control panel systems. We deliver reliable,
+                customized solutions for industrial automation and control applications across various industries.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start" id="hero-buttons">
+                <a href="contact.html"
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold transition shadow-lg">
+                    Contact Us
+                </a>
+                <a href="#about"
+                    class="bg-transparent border-2 border-blue-500 hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 px-6 bg-gray-900 relative overflow-hidden fade-section">
+        <!-- Interactive Background Elements -->
+        <div class="interactive-bg">
+            <div class="w-16 h-16 top-20 left-10 animate-pulse"></div>
+            <div class="w-24 h-24 top-1/2 right-20 animate-pulse delay-1000"></div>
+            <div class="w-12 h-12 bottom-20 left-1/4 animate-pulse delay-500"></div>
+        </div>
+
+        <!-- Floating Orbs -->
+        <div class="floating-orb orb1"></div>
+        <div class="floating-orb orb2"></div>
+        <div class="floating-orb orb3"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 about-title">EPBOX ENGINEERING</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mb-4 about-underline"></div>
+            </div>
+
+            <!-- Main About Content -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                <div class="order-2 lg:order-1">
+                    <div class="relative group">
+                        <div class="image-gallery-container zoom-container">
+                            <img src="control panel image/sunview.jpg" alt="Sunview"
+                                class="main-image zoom-image rounded-lg shadow-2xl w-full h-96 object-cover cursor-pointer slide-in"
+                                id="mainImage">
+
+                            <!-- Image gallery thumbnails -->
+                            <div
+                                class="absolute bottom-4 left-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="w-12 h-12 rounded border-2 border-white cursor-pointer overflow-hidden image-thumbnail active"
+                                    onclick="changeImage('control panel image/sunview.jpg', 0)">
+                                    <img src="control panel image/sunview.jpg" alt="Sunview"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="w-12 h-12 rounded border-2 border-white cursor-pointer overflow-hidden image-thumbnail"
+                                    onclick="changeImage('control panel image/panel control.jpg', 1)">
+                                    <img src="control panel image/panel control.jpg" alt="Panel Control"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="w-12 h-12 rounded border-2 border-white cursor-pointer overflow-hidden image-thumbnail"
+                                    onclick="changeImage('control panel image/power2.jpg', 2)">
+                                    <img src="control panel image/power2.jpg" alt="Power2"
+                                        class="w-full h-full object-cover">
+                                </div>
+                            </div>
+
+                            <!-- Auto-slider indicators -->
+                            <div class="absolute bottom-4 right-4 flex gap-2">
+                                <div class="w-2 h-2 bg-white rounded-full opacity-60 slider-indicator active"
+                                    data-index="0"></div>
+                                <div class="w-2 h-2 bg-white rounded-full opacity-60 slider-indicator" data-index="1">
+                                </div>
+                                <div class="w-2 h-2 bg-white rounded-full opacity-60 slider-indicator" data-index="2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-6 -right-6 bg-blue-600 p-6 rounded-lg shadow-xl hover:scale-110 transition-transform duration-300 cursor-pointer"
+                            onclick="animateCounter()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-blue-300">Our Vision & Mission</h3>
+
+                    <!-- Expandable content -->
+                    <div class="mission-content">
+                        <p class="text-gray-300 mb-6 text-lg leading-relaxed text-justify">
+                            Founded in 2017, Epbox Engineering has grown to become a specialized manufacturer of
+                            electrical control panels and control panel systems. Our mission is to provide high-quality,
+                            reliable control panel solutions that enhance industrial efficiency and safety.
+                        </p>
+
+                        <div class="expandable-content hidden" id="expandedContent">
+                            <p class="text-gray-300 mb-6 text-lg leading-relaxed text-justify">
+                                Our team of experienced electrical engineers and technicians work tirelessly to design
+                                and manufacture custom control panels and control panel systems that meet the specific
+                                needs of various industries. We believe in delivering innovative control panel solutions
+                                that improve productivity and operational safety.
+                            </p>
+                            <p class="text-gray-300 mb-6 text-lg leading-relaxed text-justify">
+                                We specialize in manufacturing control panels for industrial automation, process
+                                control, and machine operation. Our expertise includes PLC programming, HMI integration,
+                                and complete control system architecture design.
+                            </p>
+                        </div>
+
+                        <button
+                            class="text-blue-400 hover:text-blue-300 font-semibold mb-8 transition-colors duration-300"
+                            onclick="toggleExpandable()">
+                            <span id="expandText">Read More</span>
+                            <i class="fas fa-chevron-down ml-2 transition-transform duration-300" id="expandIcon"></i>
+                        </button>
+                    </div>
+
+
+                    <!-- Key Features with tooltips -->
+                    <div class="grid sm:grid-cols-2 gap-4 mb-8">
+                        <div class="feature-item flex items-center bg-gray-800 bg-opacity-50 px-4 py-3 rounded-lg border border-gray-700 hover:bg-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer group"
+                            data-tooltip="ISO 9001 certification ensures our quality management system meets international standards">
+                            <i
+                                class="fas fa-check-circle text-blue-400 mr-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                            <span class="font-medium">ISO 9001 Certified</span>
+                            <i
+                                class="fas fa-info-circle text-gray-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                        <div class="feature-item flex items-center bg-gray-800 bg-opacity-50 px-4 py-3 rounded-lg border border-gray-700 hover:bg-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer group"
+                            data-tooltip="Successfully completed over 150 control panel projects across various industries">
+                            <i
+                                class="fas fa-check-circle text-blue-400 mr-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                            <span class="font-medium">150+ Projects Completed</span>
+                            <i
+                                class="fas fa-info-circle text-gray-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                        <div class="feature-item flex items-center bg-gray-800 bg-opacity-50 px-4 py-3 rounded-lg border border-gray-700 hover:bg-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer group"
+                            data-tooltip="Our global network ensures support and service availability worldwide">
+                            <i
+                                class="fas fa-check-circle text-blue-400 mr-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                            <span class="font-medium">Global Service Network</span>
+                            <i
+                                class="fas fa-info-circle text-gray-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                        <div class="feature-item flex items-center bg-gray-800 bg-opacity-50 px-4 py-3 rounded-lg border border-gray-700 hover:bg-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer group"
+                            data-tooltip="Round-the-clock technical support for all our control panel systems">
+                            <i
+                                class="fas fa-check-circle text-blue-400 mr-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                            <span class="font-medium">24/7 Technical Support</span>
+                            <i
+                                class="fas fa-info-circle text-gray-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="contact.html"
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 text-center transform hover:scale-105">
+                            Get Free Quote
+                        </a>
+                        <a href="#projects"
+                            class="bg-transparent border-2 border-blue-600 hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 text-center transform hover:scale-105">
+                            View Projects
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Values with enhanced interactivity -->
+            <!-- <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="value-card text-center p-8 bg-gray-800 bg-opacity-30 rounded-lg border border-gray-700 hover:border-blue-500 hover:bg-gray-800 hover:bg-opacity-50 transition-all duration-500 transform hover:scale-105 cursor-pointer group" onclick="showValueDetails('innovation')">
+                    <div class="text-blue-400 text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Innovation</h3>
+                    <p class="text-gray-300">
+                        Continuously developing cutting-edge control panel technologies and solutions to meet evolving industry demands.
+                    </p>
+                    <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-blue-400 text-sm">Click for details →</span>
+                    </div>
+                </div>
+                
+                <div class="value-card text-center p-8 bg-gray-800 bg-opacity-30 rounded-lg border border-gray-700 hover:border-blue-500 hover:bg-gray-800 hover:bg-opacity-50 transition-all duration-500 transform hover:scale-105 cursor-pointer group" onclick="showValueDetails('quality')">
+                    <div class="text-blue-400 text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Quality</h3>
+                    <p class="text-gray-300">
+                        Maintaining the highest standards in manufacturing and testing to ensure reliable, safe, and durable control panels.
+                    </p>
+                    <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-blue-400 text-sm">Click for details →</span>
+                    </div>
+                </div>
+                
+                <div class="value-card text-center p-8 bg-gray-800 bg-opacity-30 rounded-lg border border-gray-700 hover:border-blue-500 hover:bg-gray-800 hover:bg-opacity-50 transition-all duration-500 transform hover:scale-105 cursor-pointer group" onclick="showValueDetails('customer')">
+                    <div class="text-blue-400 text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Customer Focus</h3>
+                    <p class="text-gray-300">
+                        Building long-term partnerships through exceptional service, technical expertise, and customized solutions.
+                    </p>
+                    <div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-blue-400 text-sm">Click for details →</span>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Enhanced Stats Section with animated counters -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="stats-item p-8 text-center rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-blue-500 hover:scale-105 transition-all duration-300 cursor-pointer"
+                    onclick="animateCounter()">
+                    <div class="text-blue-400 text-5xl font-bold mb-2 counter" data-target="15">0</div>
+                    <p class="text-gray-300 font-medium">Years Experience</p>
+                    <p class="text-gray-500 text-sm mt-1">Since 2005</p>
+                </div>
+                <div class="stats-item p-8 text-center rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-blue-500 hover:scale-105 transition-all duration-300 cursor-pointer"
+                    onclick="animateCounter()">
+                    <div class="text-blue-400 text-5xl font-bold mb-2 counter" data-target="150">0</div>
+                    <p class="text-gray-300 font-medium">Projects Completed</p>
+                    <p class="text-gray-500 text-sm mt-1">Successfully Delivered</p>
+                </div>
+                <div class="stats-item p-8 text-center rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-blue-500 hover:scale-105 transition-all duration-300 cursor-pointer"
+                    onclick="animateCounter()">
+                    <div class="text-blue-400 text-5xl font-bold mb-2 counter" data-target="40">0</div>
+                    <p class="text-gray-300 font-medium">Countries Served</p>
+                    <p class="text-gray-500 text-sm mt-1">Global Reach</p>
+                </div>
+                <div class="stats-item p-8 text-center rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-blue-500 hover:scale-105 transition-all duration-300 cursor-pointer"
+                    onclick="animateCounter()">
+                    <div class="text-blue-400 text-5xl font-bold mb-2 counter" data-target="100">0</div>
+                    <p class="text-gray-300 font-medium">Client Satisfaction</p>
+                    <p class="text-gray-500 text-sm mt-1">Proven Track Record</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tooltip container -->
+        <div id="tooltip"
+            class="fixed bg-gray-900 text-white px-3 py-2 rounded-lg text-sm shadow-lg opacity-0 pointer-events-none z-50 transition-opacity duration-300">
+        </div>
+
+        <!-- Value Details Modal -->
+        <div id="valueModal"
+            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="bg-gray-800 rounded-lg p-8 max-w-md mx-4 transform scale-95 transition-transform duration-300">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-blue-300" id="modalTitle"></h3>
+                    <button onclick="closeValueModal()" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="modalContent" class="text-gray-300"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-20 px-6 gradient-bg relative overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
+            <div
+                class="absolute bottom-10 right-10 w-40 h-40 bg-cyan-500 rounded-full blur-3xl animate-pulse delay-1000">
+            </div>
+            <div class="absolute top-1/2 left-1/2 w-24 h-24 bg-blue-400 rounded-full blur-2xl animate-pulse delay-500">
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Why Choose EPBox Engineering?</h2>
+                <div class="w-32 h-1 bg-white mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Technical excellence and innovation that sets us apart in control panel manufacturing
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                <!-- Technical Advantages -->
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-bold mb-8 text-blue-300">
+                        <i class="fas fa-cogs mr-3"></i>Technical Excellence
+                    </h3>
+
+                    <div class="space-y-6">
+                        <div
+                            class="tech-advantage p-6 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300 group">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="tech-icon w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-microchip text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-2">Advanced PLC Programming</h4>
+                                    <p class="text-gray-300 text-sm">
+                                        Expert programming in Siemens, Allen-Bradley, Schneider, and Mitsubishi PLCs
+                                        with optimized logic for maximum efficiency and reliability.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="tech-advantage p-6 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300 group">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="tech-icon w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-network-wired text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-2">SCADA & HMI Integration</h4>
+                                    <p class="text-gray-300 text-sm">
+                                        Seamless integration with Wonderware, Ignition, WinCC, and FactoryTalk for
+                                        real-time monitoring and control with intuitive operator interfaces.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="tech-advantage p-6 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300 group">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="tech-icon w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-shield-alt text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-2">Safety Instrumented Systems (SIS)</h4>
+                                    <p class="text-gray-300 text-sm">
+                                        IEC 61508/61511 compliant safety systems with SIL 1-3 certification for critical
+                                        process protection and emergency shutdown capabilities.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="tech-advantage p-6 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300 group">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="tech-icon w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-wifi text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-2">Industrial IoT & Remote Monitoring</h4>
+                                    <p class="text-gray-300 text-sm">
+                                        Edge computing solutions with secure cloud connectivity, predictive maintenance
+                                        algorithms, and mobile dashboard access for 24/7 monitoring.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Specifications Visual -->
+                <div class="relative">
+                    <div
+                        class="tech-display bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-8 border border-blue-500 border-opacity-30">
+                        <h4 class="text-xl font-bold mb-6 text-center text-blue-300">Technical Specifications</h4>
+
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="spec-item text-center p-4 bg-blue-900 bg-opacity-30 rounded-lg">
+                                <div class="text-3xl font-bold text-blue-400 mb-2">IP65</div>
+                                <p class="text-sm text-gray-300">Protection Rating</p>
+                            </div>
+                            <div class="spec-item text-center p-4 bg-blue-900 bg-opacity-30 rounded-lg">
+                                <div class="text-3xl font-bold text-blue-400 mb-2">-40°C</div>
+                                <p class="text-sm text-gray-300">Operating Range</p>
+                            </div>
+                            <div class="spec-item text-center p-4 bg-blue-900 bg-opacity-30 rounded-lg">
+                                <div class="text-3xl font-bold text-blue-400 mb-2">99.9%</div>
+                                <p class="text-sm text-gray-300">Uptime</p>
+                            </div>
+                            <div class="spec-item text-center p-4 bg-blue-900 bg-opacity-30 rounded-lg">
+                                <div class="text-3xl font-bold text-blue-400 mb-2">IEC</div>
+                                <p class="text-sm text-gray-300">Standards</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 text-center">
+                            <div
+                                class="tech-badge inline-flex items-center gap-2 bg-green-900 bg-opacity-50 px-4 py-2 rounded-full text-green-300 text-sm">
+                                <i class="fas fa-check-circle"></i>
+                                <span>ISO 9001:2015 Certified</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Tech Icons -->
+                    <div class="absolute -top-4 -left-4 w-8 h-8 bg-blue-500 rounded-full animate-ping"></div>
+                    <div class="absolute -bottom-4 -right-4 w-6 h-6 bg-cyan-500 rounded-full animate-ping delay-1000">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Engineering Capabilities -->
+            <div class="grid md:grid-cols-4 gap-6">
+                <div
+                    class="capability-card p-6 bg-white bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-20 text-center hover:bg-opacity-10 transition-all duration-300 group">
+                    <div
+                        class="capability-icon w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-drafting-compass text-white text-2xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Custom Design</h4>
+                    <p class="text-gray-300 text-sm">AutoCAD & EPLAN engineering with 3D modeling and thermal analysis
+                    </p>
+                </div>
+
+                <div
+                    class="capability-card p-6 bg-white bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-20 text-center hover:bg-opacity-10 transition-all duration-300 group">
+                    <div
+                        class="capability-icon w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-vial text-white text-2xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Testing & Validation</h4>
+                    <p class="text-gray-300 text-sm">FAT, SAT, and environmental testing with complete documentation</p>
+                </div>
+
+                <div
+                    class="capability-card p-6 bg-white bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-20 text-center hover:bg-opacity-10 transition-all duration-300 group">
+                    <div
+                        class="capability-icon w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-tools text-white text-2xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Commissioning</h4>
+                    <p class="text-gray-300 text-sm">On-site installation, commissioning, and operator training services
+                    </p>
+                </div>
+
+                <div
+                    class="capability-card p-6 bg-white bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-20 text-center hover:bg-opacity-10 transition-all duration-300 group">
+                    <div
+                        class="capability-icon w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-headset text-white text-2xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Lifecycle Support</h4>
+                    <p class="text-gray-300 text-sm">24/7 remote support, spare parts, and system upgrades</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="contact.html"
+                    class="inline-flex items-center gap-3 bg-white text-blue-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <i class="fas fa-rocket"></i>
+                    <span>Start Your Technical Project</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-6 gradient-bg relative overflow-hidden fade-section">
+        <!-- Interactive Background Elements -->
+        <div class="interactive-bg">
+            <div class="w-20 h-20 top-10 right-10 animate-pulse delay-300"></div>
+            <div class="w-16 h-16 bottom-10 left-1/3 animate-pulse delay-700"></div>
+            <div class="w-28 h-28 top-1/3 right-1/4 animate-pulse delay-500"></div>
+        </div>
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+                <div class="w-20 h-1 bg-white mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card p-8 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Custom Control Panel Manufacturing</h3>
+                    <p class="text-gray-300">
+                        Design and manufacture of custom electrical control panels and control panel systems for
+                        industrial automation, process control, and machine operation.
+                    </p>
+                </div>
+
+                <div class="service-card p-8 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Control Panel Systems Design</h3>
+                    <p class="text-gray-300">
+                        Complete control panel systems design including PLC programming, HMI integration, and control
+                        system architecture for industrial applications.
+                    </p>
+                </div>
+
+                <div class="service-card p-8 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Panel Integration & SCADA</h3>
+                    <p class="text-gray-300">
+                        Integration of control panels with SCADA systems for real-time monitoring and control of
+                        industrial processes and equipment.
+                    </p>
+                </div>
+
+                <div class="service-card p-8 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Control Panel Installation & Commissioning</h3>
+                    <p class="text-gray-300">
+                        Professional installation and commissioning of control panels and control panel systems,
+                        including wiring, testing, and system integration.
+                    </p>
+                </div>
+
+                <div class="service-card p-8 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Panel Maintenance & Repair</h3>
+                    <p class="text-gray-300">
+                        Preventive maintenance, troubleshooting, and repair services for control panels and control
+                        panel systems.
+                    </p>
+                </div>
+
+                <div class="service-card p-8 rounded-lg">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Safety Control Panels</h3>
+                    <p class="text-gray-300">
+                        Emergency stop systems, safety relays, and fail-safe control panel solutions for industrial
+                        safety compliance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Served Section -->
+    <!-- <section id="industries" class="py-20 px-6 bg-gray-900 relative overflow-hidden fade-section"> -->
+    <!-- Floating Orbs -->
+    <!-- <div class="floating-orb orb1"></div>
+        <div class="floating-orb orb2"></div>
+        <div class="floating-orb orb3"></div> -->
+
+    <!-- Parallax Background Elements -->
+    <!-- <div class="parallax-bg">
+            <div class="w-24 h-24 top-20 left-10"></div>
+            <div class="w-32 h-32 bottom-20 right-10" style="animation-delay: 2s;"></div>
+            <div class="w-20 h-20 top-1/2 left-1/4" style="animation-delay: 4s;"></div>
+        </div>
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Industries We Serve</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8"> -->
+    <!-- Manufacturing -->
+    <!-- <div class="industry-card p-8 rounded-lg text-left">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Manufacturing Control Panel" class="w-full h-48 object-cover rounded-lg mb-6 shadow-lg">
+                    <div class="industry-icon text-blue-400 text-5xl mb-6">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Manufacturing</h3>
+                    <p class="text-gray-300 mb-4">
+                        Automated production lines, quality control systems, and process optimization solutions for manufacturing facilities.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• Production Line Automation</li>
+                        <li>• Quality Control Systems</li>
+                        <li>• Process Monitoring</li>
+                        <li>• Safety Compliance</li>
+                    </ul>
+                </div> -->
+
+    <!-- Oil & Gas -->
+    <!-- <div class="industry-card p-8 rounded-lg text-left">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80" alt="Oil & Gas Control Panel" class="w-full h-48 object-cover rounded-lg mb-6 shadow-lg">
+                    <div class="industry-icon text-blue-400 text-5xl mb-6">
+                        <i class="fas fa-oil-can"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Oil & Gas</h3>
+                    <p class="text-gray-300 mb-4">
+                        Critical control systems for upstream, midstream, and downstream operations with safety-first approach.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• Pipeline Monitoring</li>
+                        <li>• Refinery Control Systems</li>
+                        <li>• Safety Shutdown Systems</li>
+                        <li>• Remote Monitoring</li>
+                    </ul>
+                </div> -->
+
+    <!-- Building Automation -->
+    <!-- <div class="industry-card p-8 rounded-lg text-left">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Building Automation Control Panel" class="w-full h-48 object-cover rounded-lg mb-6 shadow-lg">
+                    <div class="industry-icon text-blue-400 text-5xl mb-6">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Building Automation</h3>
+                    <p class="text-gray-300 mb-4">
+                        Smart building control systems for HVAC, lighting, security, and energy management optimization.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• HVAC Control Systems</li>
+                        <li>• Lighting Automation</li>
+                        <li>• Security Integration</li>
+                        <li>• Energy Management</li>
+                    </ul>
+                </div> -->
+
+    <!-- Process Control -->
+    <!-- <div class="industry-card p-8 rounded-lg text-left">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80" alt="Process Control Panel" class="w-full h-48 object-cover rounded-lg mb-6 shadow-lg">
+                    <div class="industry-icon text-blue-400 text-5xl mb-6">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Process Control</h3>
+                    <p class="text-gray-300 mb-4">
+                        Advanced process control systems for industrial automation and manufacturing optimization.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• SCADA Systems</li>
+                        <li>• PLC Programming</li>
+                        <li>• Data Acquisition</li>
+                        <li>• Real-time Monitoring</li>
+                    </ul>
+                </div> -->
+
+    <!-- Transportation -->
+    <!-- <div class="industry-card p-8 rounded-lg text-left">
+                    <img src="control panel image/car.jpg" alt="Transportation Control Panel" class="w-full h-48 object-cover rounded-lg mb-6 shadow-lg">
+                    <div class="industry-icon text-blue-400 text-5xl mb-6">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Transportation</h3>
+                    <p class="text-gray-300 mb-4">
+                        Control systems for logistics, fleet management, and transportation infrastructure automation.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• Fleet Management Systems</li>
+                        <li>• Traffic Control</li>
+                        <li>• Logistics Automation</li>
+                        <li>• Safety Monitoring</li>
+                    </ul>
+                </div> -->
+
+    <!-- Automotive -->
+    <!-- <div class="industry-card p-8 rounded-lg text-left">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80" alt="Automotive Control Panel" class="w-full h-48 object-cover rounded-lg mb-6 shadow-lg">
+                    <div class="industry-icon text-blue-400 text-5xl mb-6">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Automotive</h3>
+                    <p class="text-gray-300 mb-4">
+                        Assembly Line automation, testing systems, and quality control for automotive manufacturing.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• Assembly Line Control</li>
+                        <li>• Testing & Inspection</li>
+                        <li>• Robotic Integration</li>
+                        <li>• Quality Assurance</li>
+                    </ul>
+                </div> -->
+    <!-- </div>
+        </div>
+    </section> -->
+
+    <!-- Projects Section -->
+    <!-- <section id="projects" class="py-20 px-6 gradient-bg">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Projects</h2>
+                <div class="w-20 h-1 bg-white mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card p-6 rounded-lg">
+                    <img src="https://image.altponelectricalsystem.com/s3/productimages/webp/co250359/p1070059/w600-h600/658ae65f-e85b-45fc-a814-d4234d245f72.jpeg" alt="Industrial Control Panel" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Offshore Platform Control Panels</h3>
+                    <p class="text-gray-300 mb-4">Complete control panel system for deep-water drilling platform in Gulf of Mexico.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-blue-400 text-sm">2023</span>
+                        <span class="bg-blue-600 px-3 py-1 rounded-full text-xs">Completed</span>
+                    </div>
+                </div>
+                
+                <div class="project-card p-6 rounded-lg">
+                    <img src="https://mikmargracindo.com/wp-content/uploads/2022/04/8.-Jasa-Instalasi-Kontrol-Panel-Mesin-scaled.jpg" alt="Control Panel Systems" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Pipeline Control Panel Systems</h3>
+                    <p class="text-gray-300 mb-4">Control panel systems for 500km pipeline network monitoring in Middle East.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-blue-400 text-sm">2023</span>
+                        <span class="bg-green-600 px-3 py-1 rounded-full text-xs">Ongoing</span>
+                    </div>
+                </div>
+                
+                <div class="project-card p-6 rounded-lg">
+                    <img src="https://images.squarespace-cdn.com/content/v1/63fe1c005e900952091f678b/0d2cbf84-8ff6-4699-af5e-8a3bb822fd79/Small+control+panels+variety.jpg" alt="Refinery Control Panels" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Refinery Control Panel Systems</h3>
+                    <p class="text-gray-300 mb-4">Control panel systems upgrade for major refinery resulting in 25% efficiency increase.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-blue-400 text-sm">2022</span>
+                        <span class="bg-blue-600 px-3 py-1 rounded-full text-xs">Completed</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Portfolio Button -->
+    <!-- <div class="text-center mt-12">
+                <a href="portfolio.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg inline-block transition duration-300 transform hover:scale-105 font-semibold text-lg">
+                    <i class="fas fa-images mr-2"></i>
+                    Full Portfolio
+                </a>
+            </div>
+        </div> -->
+    <!-- </section> -->
+
+    <!-- Video Promotion Section -->
+    <section id="downloads"
+        class="py-20 px-6 bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900 relative overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-10 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
+            <div
+                class="absolute bottom-10 right-10 w-40 h-40 bg-blue-400/10 rounded-full blur-xl animate-pulse delay-1000">
+            </div>
+            <div
+                class="absolute top-1/2 left-1/4 w-24 h-24 bg-blue-300/10 rounded-full blur-xl animate-pulse delay-500">
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
+                    See Our <span class="text-blue-300">Work in Action</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Watch how our control panels and automation systems transform industrial processes with precision
+                    and reliability
+                </p>
+            </div>
+
+            <!-- Video Container -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Video Player -->
+                <div class="order-2 lg:order-1">
+                    <div class="relative group">
+                        <div
+                            class="video-container bg-gray-800 rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 group-hover:scale-105">
+                            <!-- Placeholder for video - you can replace with actual video -->
+                            <div
+                                class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+                                <!-- Video Thumbnail/Preview -->
+                                <img src="control panel image/control panel 6.jpg"
+                                    alt="Control Panel Manufacturing Process"
+                                    class="w-full h-full object-cover opacity-80">
+
+                                <!-- Play Button Overlay -->
+                                <div class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-all duration-300 cursor-pointer"
+                                    onclick="playVideo()">
+                                    <div
+                                        class="play-button bg-blue-500 hover:bg-blue-600 w-20 h-20 rounded-full flex items-center justify-center transform transition-all duration-300 hover:scale-110 shadow-2xl">
+                                        <i class="fas fa-play text-white text-2xl ml-1"></i>
+                                    </div>
+                                </div>
+
+                                <!-- Video Duration Badge -->
+                                <div
+                                    class="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                    2:45
+                                </div>
+
+                                <!-- Video Title Overlay -->
+                                <div class="absolute bottom-4 left-4 right-4">
+                                    <h3 class="text-white font-semibold text-lg mb-2">Control Panel Manufacturing
+                                        Process</h3>
+                                    <p class="text-gray-300 text-sm">Watch our precision manufacturing in action</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Controls -->
+                        <div class="mt-4 flex items-center justify-between text-gray-400">
+                            <div class="flex items-center gap-4">
+                                <button class="flex items-center gap-2 hover:text-blue-400 transition-colors"
+                                    onclick="toggleMute()">
+                                    <i class="fas fa-volume-up" id="volume-icon"></i>
+                                    <span class="text-sm">Sound</span>
+                                </button>
+                                <button class="flex items-center gap-2 hover:text-blue-400 transition-colors"
+                                    onclick="toggleFullscreen()">
+                                    <i class="fas fa-expand"></i>
+                                    <span class="text-sm">Fullscreen</span>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-eye"></i>
+                                <span class="text-sm">1.2K views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Content -->
+                <div class="order-1 lg:order-2">
+                    <div class="space-y-8">
+                        <!-- Video Features -->
+                        <div class="space-y-6">
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-6">
+                                Why Watch Our <span class="text-blue-300">Process Videos?</span>
+                            </h3>
+
+                            <div class="space-y-4">
+                                <div
+                                    class="flex items-start gap-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:border-blue-500 transition-all duration-300 group">
+                                    <div
+                                        class="flex-shrink-0 w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center group-hover:bg-blue-500/30 transition-colors">
+                                        <i class="fas fa-eye text-blue-400 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold mb-2">Transparent Process</h4>
+                                        <p class="text-gray-300">See exactly how we design and manufacture your control
+                                            panels from start to finish</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="flex items-start gap-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:border-blue-500 transition-all duration-300 group">
+                                    <div
+                                        class="flex-shrink-0 w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center group-hover:bg-blue-500/30 transition-colors">
+                                        <i class="fas fa-cogs text-blue-400 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold mb-2">Quality Assurance</h4>
+                                        <p class="text-gray-300">Witness our rigorous testing and quality control
+                                            procedures in action</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="flex items-start gap-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:border-blue-500 transition-all duration-300 group">
+                                    <div
+                                        class="flex-shrink-0 w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center group-hover:bg-blue-500/30 transition-colors">
+                                        <i class="fas fa-users text-blue-400 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold mb-2">Expert Team</h4>
+                                        <p class="text-gray-300">Meet our skilled engineers and technicians who bring
+                                            your projects to life</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Call to Action -->
+                        <div
+                            class="bg-gradient-to-r from-blue-600/20 to-blue-800/20 p-6 rounded-xl border border-blue-500/30">
+                            <h4 class="text-white font-semibold text-lg mb-3">Ready to See More?</h4>
+                            <p class="text-gray-300 mb-4">Explore our complete video library showcasing various projects
+                                and processes</p>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <button
+                                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105"
+                                    onclick="showVideoGallery()">
+                                    <i class="fas fa-play-circle mr-2"></i>View All Videos
+                                </button>
+                                <button
+                                    class="bg-transparent border-2 border-blue-500 hover:bg-blue-900 text-white px-6 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105"
+                                    onclick="requestCustomVideo()">
+                                    <i class="fas fa-video mr-2"></i>Request Custom Video
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Latest News from Blog -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-white mb-8 text-center">Latest <span class="text-blue-300">News from
+                        Blog</span></h3>
+                <div class="grid md:grid-cols-3 gap-6" id="blog-preview">
+                    <!-- Blog Post 1 -->
+                    <div
+                        class="blog-card group cursor-pointer bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:transform hover:scale-105">
+                        <div class="relative overflow-hidden">
+                            <img src="control panel image/control panel 6.jpg" alt="Oil & Gas Industry Trends"
+                                class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-3 left-3">
+                                <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">Industry</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-gray-400 text-sm mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Dec 15, 2024</span>
+                                <i class="fas fa-clock ml-3"></i>
+                                <span>5 min read</span>
+                            </div>
+                            <h4
+                                class="text-white font-semibold text-lg mb-3 group-hover:text-blue-400 transition-colors">
+                                Latest Trends in Oil & Gas Control Systems
+                            </h4>
+                            <p class="text-gray-300 text-sm mb-4 line-clamp-3">
+                                Discover the latest innovations in control panel technology for the oil and gas
+                                industry, including AI integration and advanced safety systems.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-blue-400 text-sm font-medium">Read More</span>
+                                <i
+                                    class="fas fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 2 -->
+                    <div
+                        class="blog-card group cursor-pointer bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:transform hover:scale-105">
+                        <div class="relative overflow-hidden">
+                            <img src="control panel image/power2.jpg" alt="SCADA Systems Guide"
+                                class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-3 left-3">
+                                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full">Technology</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-gray-400 text-sm mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Dec 12, 2024</span>
+                                <i class="fas fa-clock ml-3"></i>
+                                <span>7 min read</span>
+                            </div>
+                            <h4
+                                class="text-white font-semibold text-lg mb-3 group-hover:text-blue-400 transition-colors">
+                                SCADA Systems: The Future of Industrial Automation
+                            </h4>
+                            <p class="text-gray-300 text-sm mb-4 line-clamp-3">
+                                Explore how modern SCADA systems are revolutionizing industrial processes with real-time
+                                monitoring and predictive analytics capabilities.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-blue-400 text-sm font-medium">Read More</span>
+                                <i
+                                    class="fas fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 3 -->
+                    <div
+                        class="blog-card group cursor-pointer bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:transform hover:scale-105">
+                        <div class="relative overflow-hidden">
+                            <img src="control panel image/control panel.jpg" alt="Safety Standards"
+                                class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-3 left-3">
+                                <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full">Safety</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-gray-400 text-sm mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Dec 10, 2024</span>
+                                <i class="fas fa-clock ml-3"></i>
+                                <span>6 min read</span>
+                            </div>
+                            <h4
+                                class="text-white font-semibold text-lg mb-3 group-hover:text-blue-400 transition-colors">
+                                ATEX & SIL Standards: Ensuring Safety in Hazardous Environments
+                            </h4>
+                            <p class="text-gray-300 text-sm mb-4 line-clamp-3">
+                                Learn about the critical safety standards that protect workers and equipment in
+                                explosive atmospheres and high-risk industrial operations.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-blue-400 text-sm font-medium">Read More</span>
+                                <i
+                                    class="fas fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View All Blog Posts Button -->
+                <div class="text-center mt-8">
+                    <a href="blog.html"
+                        class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
+                        <i class="fas fa-newspaper mr-2"></i>
+                        View All Blog Posts
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/RFQ Section -->
+    <section id="contact" class="py-20 px-6 bg-gray-900 relative overflow-hidden fade-section">
+        <!-- Interactive Background Elements -->
+        <div class="interactive-bg">
+            <div class="w-20 h-20 top-10 left-10 animate-pulse delay-100"></div>
+            <div class="w-16 h-16 bottom-10 right-10 animate-pulse delay-800"></div>
+            <div class="w-24 h-24 top-1/3 right-1/3 animate-pulse delay-300"></div>
+        </div>
+
+        <!-- Parallax Background Elements -->
+        <div class="parallax-bg">
+            <div class="w-28 h-28 top-20 right-20" style="animation-delay: 1s;"></div>
+            <div class="w-20 h-20 bottom-20 left-20" style="animation-delay: 3s;"></div>
+        </div>
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Contact Us / Request Quote</h2>
+                <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+                <p class="text-gray-300 mt-6 max-w-2xl mx-auto">
+                    Have a project in mind? Our team of experts is ready to discuss your needs and find the best
+                    solution for your challenges.
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2">
+                    <form class="space-y-6 bg-gray-800 bg-opacity-50 p-8 rounded-lg backdrop-filter backdrop-blur-sm">
+                        <div>
+                            <label for="name" class="block mb-2 text-gray-300">Full Name</label>
+                            <input type="text" id="name"
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                                placeholder="Your Name">
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-2 text-gray-300">Email Address</label>
+                            <input type="email" id="email"
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                                placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label for="company" class="block mb-2 text-gray-300">Company</label>
+                            <input type="text" id="company"
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                                placeholder="Company Name">
+                        </div>
+                        <div>
+                            <label for="service" class="block mb-2 text-gray-300">Service Required</label>
+                            <select id="service"
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                                <option value="">Select a service</option>
+                                <option value="control-panel-manufacturing">Control Panel Manufacturing</option>
+                                <option value="control-panel-systems">Control Panel Systems Design</option>
+                                <option value="panel-integration">Panel Integration & SCADA</option>
+                                <option value="panel-installation">Control Panel Installation</option>
+                                <option value="panel-maintenance">Panel Maintenance & Repair</option>
+                                <option value="safety-panels">Safety Control Panels</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block mb-2 text-gray-300">Project Details</label>
+                            <textarea id="message" rows="5"
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                                placeholder="Tell us about your project requirements"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                            Send Request
+                        </button>
+                    </form>
+                </div>
+
+                <div class="md:w-1/2">
+                    <div class="bg-gray-800 bg-opacity-50 p-8 rounded-lg backdrop-filter backdrop-blur-sm h-full">
+                        <h3 class="text-xl font-semibold mb-6">Contact Information</h3>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="text-blue-400 mr-4 mt-1">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Headquarters</h4>
+                                    <p class="text-gray-400">1 Sunview Road, Ecotect@Sunview</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="text-blue-400 mr-4 mt-1">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Phone</h4>
+                                    <p class="text-gray-400">+1 (800) 555-OILG</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="text-blue-400 mr-4 mt-1">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Email</h4>
+                                    <p class="text-gray-400">info@epboxengineering.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="text-blue-400 mr-4 mt-1">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Global Offices</h4>
+                                    <p class="text-gray-400">London • Dubai • Singapore • Rio de Janeiro</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h3 class="text-xl font-semibold mb-4">Follow Us</h3>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-gray-400 hover:text-blue-400 text-xl transition">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-blue-400 text-xl transition">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-blue-400 text-xl transition">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-blue-400 text-xl transition">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-6 text-gray-400">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4"><span class="text-blue-400">EP</span>BOX
+                        ENGINEERING</h3>
+                    <p class="mb-4">
+                        Specialized manufacturer of control panels and control panel systems for industrial
+                        applications.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-400">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition">Control Panel Manufacturing</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Control Panel Systems Design</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Panel Integration & SCADA</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Panel Installation</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Projects</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Downloads</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-800">
+                <p class="text-center">
+                    © 2023 Epbox Engineering. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Box -->
+    <div class="chat-box" onclick="toggleChat()">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chat Popup -->
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <h3><i class="fas fa-headset mr-2"></i>Chat with EPBox Engineering</h3>
+            <button class="close-chat" onclick="toggleChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-body">
+            <p class="text-gray-300 text-sm mb-4">How can we help you today?</p>
+            <input type="text" class="chat-input" placeholder="Type your message here..." id="chatMessage">
+            <div class="chat-actions">
+                <button class="chat-btn primary" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane mr-2"></i>Send
+                </button>
+                <button class="chat-btn secondary" onclick="scrollToContact()">
+                    <i class="fas fa-phone mr-2"></i>Call Us
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle with animation
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            const menu = document.getElementById('mobile-menu');
+            const button = this;
+
+            menu.classList.toggle('hidden');
+            button.classList.toggle('active');
+
+            if (!menu.classList.contains('hidden')) {
+                setTimeout(() => menu.classList.add('show'), 10);
+            } else {
+                menu.classList.remove('show');
+            }
+        });
+
+        // Active link highlighting
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+
+        function highlightActiveSection() {
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightActiveSection);
+        highlightActiveSection(); // Run on page load
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Chat box function
+        function scrollToContact() {
+            const contactSection = document.querySelector('#contact');
+            if (contactSection) {
+                window.scrollTo({
+                    top: contactSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Toggle chat popup
+        function toggleChat() {
+            const popup = document.getElementById('chatPopup');
+            popup.classList.toggle('show');
+        }
+
+        // Send message function
+        function sendMessage() {
+            const message = document.getElementById('chatMessage').value;
+            if (message.trim()) {
+                // Here you can add actual chat functionality
+                alert('Thank you for your message! We will get back to you soon.');
+                document.getElementById('chatMessage').value = '';
+                toggleChat();
+            }
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function (event) {
+            const popup = document.getElementById('chatPopup');
+            const chatBox = document.querySelector('.chat-box');
+
+            if (!popup.contains(event.target) && !chatBox.contains(event.target)) {
+                popup.classList.remove('show');
+            }
+        });
+
+        // Animate elements on scroll
+        document.querySelectorAll('.service-card, .project-card, .blog-card, .download-card, .industry-card, .stats-item, .value-card, .feature-item').forEach(card => {
+            card.classList.add('animate__animated', 'animate__fadeInUp');
+        });
+
+        // About Us Section Interactivity
+        function toggleExpandable() {
+            const expandedContent = document.getElementById('expandedContent');
+            const expandText = document.getElementById('expandText');
+            const expandIcon = document.getElementById('expandIcon');
+
+            expandedContent.classList.toggle('hidden');
+            expandText.textContent = expandedContent.classList.contains('hidden') ? 'Read More' : 'Read Less';
+            expandIcon.classList.toggle('fa-chevron-down');
+            expandIcon.classList.toggle('fa-chevron-up');
+        }
+
+        // Image gallery functionality
+        function changeImage(src) {
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.image-gallery-container div');
+
+            mainImage.src = src;
+            thumbnails.forEach(thumb => {
+                thumb.classList.remove('border-blue-500');
+                thumb.classList.add('border-white');
+            });
+
+            // Highlight the clicked thumbnail
+            thumbnails.forEach(thumb => {
+                if (thumb.querySelector('img').src === src) {
+                    thumb.classList.remove('border-white');
+                    thumb.classList.add('border-blue-500');
+                }
+            });
+        }
+
+        // Tooltip functionality
+        function showTooltip(event, text) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.textContent = text;
+            tooltip.style.left = `${event.clientX + 10}px`;
+            tooltip.style.top = `${event.clientY - tooltip.offsetHeight - 10}px`;
+            tooltip.style.opacity = '1';
+            tooltip.style.pointerEvents = 'auto';
+        }
+
+        function hideTooltip() {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.opacity = '0';
+            tooltip.style.pointerEvents = 'none';
+        }
+
+        // Add tooltip event listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            const features = document.querySelectorAll('.feature-item');
+
+            features.forEach(feature => {
+                feature.addEventListener('mouseenter', (event) => {
+                    const tooltipText = feature.getAttribute('data-tooltip');
+                    showTooltip(event, tooltipText);
+                });
+
+                feature.addEventListener('mouseleave', hideTooltip);
+            });
+        });
+
+        // Value Details Modal
+        function showValueDetails(valueType) {
+            const valueModal = document.getElementById('valueModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            let title = '';
+            let details = '';
+
+            switch (valueType) {
+                case 'innovation':
+                    title = 'Innovation';
+                    details = `
+                        <div class="space-y-4">
+                            <p>Our commitment to innovation drives us to continuously develop cutting-edge control panel technologies and solutions.</p>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Advanced PLC programming techniques</li>
+                                <li>State-of-the-art HMI integration</li>
+                                <li>Innovative control system architecture design</li>
+                                <li>Future-ready technology implementation</li>
+                            </ul>
+                            <p class="text-blue-400 font-semibold">We stay at the forefront of technological advancements to ensure our products are not only reliable but also adaptable to future industry needs.</p>
+                        </div>
+                    `;
+                    break;
+                case 'quality':
+                    title = 'Quality';
+                    details = `
+                        <div class="space-y-4">
+                            <p>Quality is at the heart of everything we do. We maintain rigorous manufacturing and testing processes.</p>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>ISO 9001 certified quality management system</li>
+                                <li>Rigorous testing and validation procedures</li>
+                                <li>Comprehensive quality control protocols</li>
+                                <li>Continuous improvement processes</li>
+                            </ul>
+                            <p class="text-blue-400 font-semibold">Our commitment to quality ensures reliable, safe, and durable control panels that exceed industry standards.</p>
+                        </div>
+                    `;
+                    break;
+                case 'customer':
+                    title = 'Customer Focus';
+                    details = `
+                        <div class="space-y-4">
+                            <p>Customer satisfaction is our top priority. We build long-term partnerships through exceptional service.</p>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>24/7 technical support availability</li>
+                                <li>Global service network coverage</li>
+                                <li>Customized solutions for unique needs</li>
+                                <li>Proactive customer relationship management</li>
+                            </ul>
+                            <p class="text-blue-400 font-semibold">Our global network ensures that wherever you are, we are just a call away with prompt response to your needs.</p>
+                        </div>
+                    `;
+                    break;
+            }
+
+            modalTitle.textContent = title;
+            modalContent.innerHTML = details;
+            valueModal.style.opacity = '1';
+            valueModal.style.pointerEvents = 'auto';
+            valueModal.querySelector('.bg-gray-800').style.transform = 'scale(1)';
+        }
+
+        function closeValueModal() {
+            const valueModal = document.getElementById('valueModal');
+            valueModal.style.opacity = '0';
+            valueModal.style.pointerEvents = 'none';
+            valueModal.querySelector('.bg-gray-800').style.transform = 'scale(0.95)';
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function (event) {
+            const valueModal = document.getElementById('valueModal');
+            if (event.target === valueModal) {
+                closeValueModal();
+            }
+        });
+
+        // Animated counters
+        let countersAnimated = false;
+
+        function animateCounter() {
+            if (countersAnimated) return;
+
+            const counters = document.querySelectorAll('.counter');
+            const speed = 2000; // Animation duration in milliseconds
+
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / (speed / 16); // 60fps
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target + (counter.getAttribute('data-target') === '100' ? '%' : '+');
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current) + (counter.getAttribute('data-target') === '100' ? '%' : '+');
+                    }
+                }, 16);
+            });
+
+            countersAnimated = true;
+        }
+
+        // Trigger counter animation when About Us section is visible
+        const aboutSection = document.getElementById('about');
+        const aboutObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countersAnimated) {
+                    animateCounter();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        aboutObserver.observe(aboutSection);
+
+        // Hero Slider functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        // Slide content data
+        const slideData = [
+            {
+                title: 'Professional <span class="text-blue-300">Panel Manufacturing</span><br>& Control System Solutions',
+                description: 'Specialized manufacturer of electrical control panels and control panel systems. We deliver reliable, customized solutions for industrial automation and control applications across various industries.',
+                buttons: [
+                    { text: 'Contact Us', href: 'contact.html', primary: true },
+                    { text: 'Learn More', href: '#about', primary: false }
+                ]
+            },
+            {
+                title: 'Advanced <span class="text-blue-300">Industrial Automation</span><br>& Smart Control Systems',
+                description: 'Cutting-edge automation solutions with intelligent control systems. We design and implement smart manufacturing processes that optimize efficiency, reduce costs, and enhance operational safety.',
+                buttons: [
+                    { text: 'Our Services', href: 'services.html', primary: true },
+                    { text: 'Industries', href: 'industries.html', primary: false }
+                ]
+            },
+            {
+                title: 'Custom <span class="text-blue-300">Engineering Solutions</span><br>& Quality Manufacturing',
+                description: 'Tailored engineering solutions with ISO 9001 certified quality standards. From concept to completion, we provide comprehensive design, manufacturing, and support services for your control system needs.',
+                buttons: [
+                    { text: 'Our Projects', href: 'project.html', primary: true },
+                    { text: 'Get Quote', href: 'contact.html', primary: false }
+                ]
+            }
+        ];
+
+        function showSlide(index) {
+            // Remove active class from all slides and dots
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Add active class to current slide and dot
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+
+            // Update hero content simultaneously with slide change
+            updateHeroContent(index);
+
+            currentSlide = index;
+        }
+
+        function updateHeroContent(slideIndex) {
+            const heroContent = document.querySelector('.hero-content');
+            const heroTitle = document.getElementById('hero-title');
+            const heroDescription = document.getElementById('hero-description');
+            const heroButtons = document.getElementById('hero-buttons');
+
+            const data = slideData[slideIndex];
+
+            // Add fade-out effect
+            heroContent.classList.add('fade-out');
+
+            // Update content after fade-out
+            setTimeout(() => {
+                heroTitle.innerHTML = data.title;
+                heroDescription.textContent = data.description;
+
+                // Update buttons
+                heroButtons.innerHTML = data.buttons.map(button => {
+                    const buttonClass = button.primary
+                        ? 'bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold transition shadow-lg'
+                        : 'bg-transparent border-2 border-blue-500 hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition';
+                    return `<a href="${button.href}" class="${buttonClass}">${button.text}</a>`;
+                }).join('');
+
+                // Remove fade-out effect
+                heroContent.classList.remove('fade-out');
+
+                // Add interactive animations
+                addInteractiveAnimations();
+            }, 300);
+        }
+
+        function addInteractiveAnimations() {
+            const heroTitle = document.getElementById('hero-title');
+            const heroDescription = document.getElementById('hero-description');
+            const heroButtons = document.getElementById('hero-buttons');
+
+            // Reset animations
+            heroTitle.style.animation = 'none';
+            heroDescription.style.animation = 'none';
+            heroButtons.style.animation = 'none';
+
+            // Trigger reflow
+            void heroTitle.offsetWidth;
+            void heroDescription.offsetWidth;
+            void heroButtons.offsetWidth;
+
+            // Random animation selection for variety
+            const animations = ['slideInFromLeft', 'slideInFromRight', 'slideInFromBottom', 'fadeInScale'];
+            const titleAnim = animations[Math.floor(Math.random() * animations.length)];
+            const descAnim = animations[Math.floor(Math.random() * animations.length)];
+            const buttonAnim = animations[Math.floor(Math.random() * animations.length)];
+
+            // Add staggered animations with variety
+            heroTitle.style.animation = `${titleAnim} 0.8s ease-out forwards`;
+            heroDescription.style.animation = `${descAnim} 0.8s ease-out 0.2s forwards`;
+            heroButtons.style.animation = `${buttonAnim} 0.8s ease-out 0.4s forwards`;
+
+            // Add interactive particle effect
+            addParticleEffect();
+        }
+
+        function addParticleEffect() {
+            const heroContent = document.querySelector('.hero-content');
+
+            // Create particles
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: #1E90FF;
+                    border-radius: 50%;
+                    pointer-events: none;
+                    animation: particleFloat 2s ease-out forwards;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                `;
+                heroContent.appendChild(particle);
+
+                // Remove particle after animation
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 2000);
+            }
+        }
+
+        function nextSlide() {
+            const next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+            // Reset the automatic timer when manually navigating
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            // Clear any existing interval
+            if (slideInterval) {
+                clearInterval(slideInterval);
+            }
+            // Start automatic sliding every 10 seconds
+            slideInterval = setInterval(nextSlide, 10000);
+        }
+
+        function resetAutoSlide() {
+            // Clear current interval and restart
+            if (slideInterval) {
+                clearInterval(slideInterval);
+            }
+            // Restart after a slightly longer delay
+            setTimeout(startAutoSlide, 2000);
+        }
+
+        // Initialize automatic slider when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            // Start automatic sliding immediately
+            startAutoSlide();
+
+            // Add interactive hover effects
+            addHeroHoverEffects();
+        });
+
+        function addHeroHoverEffects() {
+            const heroContent = document.querySelector('.hero-content');
+
+            heroContent.addEventListener('mouseenter', function () {
+                // Pause auto-slide on hover
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                }
+
+                // Add subtle glow effect
+                this.style.textShadow = '0 0 20px rgba(30, 144, 255, 0.3)';
+            });
+
+            heroContent.addEventListener('mouseleave', function () {
+                // Resume auto-slide when mouse leaves
+                startAutoSlide();
+
+                // Remove glow effect
+                this.style.textShadow = 'none';
+            });
+
+            // Add click effect for buttons
+            const buttons = heroContent.querySelectorAll('a');
+            buttons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.3);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        pointer-events: none;
+                    `;
+
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+
+                    this.appendChild(ripple);
+
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        }
+
+        // Manual navigation with arrow keys
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowLeft') {
+                const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(prev);
+                resetAutoSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+                resetAutoSlide();
+            }
+        });
+
+        // Video functionality
+        let isMuted = false;
+        let currentVideo = null;
+
+        function playVideo(videoType = 'main') {
+            const modal = document.getElementById('videoModal');
+            const videoPlayer = document.getElementById('videoPlayer');
+
+            // Video data based on type
+            const videoData = {
+                main: {
+                    title: 'Control Panel Manufacturing Process',
+                    description: 'Watch our precision manufacturing in action',
+                    // You can replace these with actual video URLs
+                    url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Placeholder
+                    thumbnail: 'control panel image/control panel 6.jpg'
+                },
+                automation: {
+                    title: 'Industrial Automation Setup',
+                    description: 'Complete automation system installation',
+                    url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Placeholder
+                    thumbnail: 'control panel image/panel control2.jpg'
+                },
+                testing: {
+                    title: 'Quality Testing Process',
+                    description: 'Rigorous quality control procedures',
+                    url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Placeholder
+                    thumbnail: 'control panel image/panel control3.jpg'
+                },
+                installation: {
+                    title: 'Installation & Setup Guide',
+                    description: 'Step-by-step installation process',
+                    url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Placeholder
+                    thumbnail: 'control panel image/cpnl.jpg'
+                }
+            };
+
+            const video = videoData[videoType];
+            currentVideo = videoType;
+
+            // Create iframe for video
+            videoPlayer.innerHTML = `
+                <iframe 
+                    src="${video.url}?autoplay=1&mute=${isMuted ? 1 : 0}" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    class="w-full h-full"
+                ></iframe>
+            `;
+
+            // Show modal with animation
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Add view count animation
+            animateViewCount();
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const videoPlayer = document.getElementById('videoPlayer');
+
+            // Clear video
+            videoPlayer.innerHTML = `
+                <div class="flex items-center justify-center h-full text-white">
+                    <div class="text-center">
+                        <i class="fas fa-play-circle text-6xl mb-4 text-blue-400"></i>
+                        <p class="text-xl">Video Player</p>
+                        <p class="text-gray-400 mt-2">Click to play</p>
+                    </div>
+                </div>
+            `;
+
+            // Hide modal
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            const volumeIcon = document.getElementById('volume-icon');
+
+            if (isMuted) {
+                volumeIcon.className = 'fas fa-volume-mute';
+            } else {
+                volumeIcon.className = 'fas fa-volume-up';
+            }
+
+            // Update video if playing
+            if (currentVideo) {
+                const iframe = document.querySelector('#videoPlayer iframe');
+                if (iframe) {
+                    const currentSrc = iframe.src;
+                    const newSrc = currentSrc.replace(/[?&]mute=\d/, '') + (currentSrc.includes('?') ? '&' : '?') + `mute=${isMuted ? 1 : 0}`;
+                    iframe.src = newSrc;
+                }
+            }
+        }
+
+        function toggleFullscreen() {
+            const modal = document.getElementById('videoModal');
+            if (!modal.classList.contains('active')) {
+                playVideo();
+            }
+        }
+
+        function showVideoGallery() {
+            // Scroll to video gallery section
+            const gallery = document.getElementById('video-gallery');
+            gallery.scrollIntoView({ behavior: 'smooth' });
+
+            // Add highlight effect
+            gallery.style.animation = 'pulse 2s ease-in-out';
+            setTimeout(() => {
+                gallery.style.animation = '';
+            }, 2000);
+        }
+
+        function requestCustomVideo() {
+            // Show contact form or redirect to contact page
+            window.location.href = 'contact.html?request=video';
+        }
+
+        function animateViewCount() {
+            const viewElement = document.querySelector('.text-sm:contains("1.2K views")');
+            if (viewElement) {
+                viewElement.style.animation = 'pulse 1s ease-in-out';
+                setTimeout(() => {
+                    viewElement.style.animation = '';
+                }, 1000);
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
+
+        // Navbar Downloads dropdown
+        function toggleNavDownloadsMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('navDownloadsMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Close navbar downloads dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            const btn = document.getElementById('navDownloadsBtn');
+            const menu = document.getElementById('navDownloadsMenu');
+            if (btn && menu && !btn.contains(event.target) && !menu.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // About Us Section Interactivity
+        const missionContent = document.getElementById('expandedContent');
+        const expandButton = document.querySelector('.mission-content button');
+        const expandText = document.getElementById('expandText');
+        const expandIcon = document.getElementById('expandIcon');
+
+        function toggleExpandable() {
+            missionContent.classList.toggle('hidden');
+            expandText.textContent = missionContent.classList.contains('hidden') ? 'Read More' : 'Read Less';
+            expandIcon.classList.toggle('fa-chevron-down');
+            expandIcon.classList.toggle('fa-chevron-up');
+        }
+
+        // Image gallery functionality
+        const mainImage = document.getElementById('mainImage');
+        const imageGalleryContainer = document.querySelector('.image-gallery-container');
+        const thumbnails = document.querySelectorAll('.image-thumbnail');
+        const sliderIndicators = document.querySelectorAll('.slider-indicator');
+
+        // Image array for auto-slider
+        const images = [
+            'control panel image/sunview.jpg',
+            'control panel image/panel control.jpg',
+            'control panel image/power2.jpg'
+        ];
+
+        let currentImageIndex = 0;
+        let autoSliderInterval;
+
+        function changeImage(src, index = null) {
+            // Add slide-in animation
+            mainImage.classList.remove('slide-in');
+            void mainImage.offsetWidth; // Trigger reflow
+            mainImage.classList.add('slide-in');
+
+            // Update main image
+            mainImage.src = src;
+
+            // Update current index
+            if (index !== null) {
+                currentImageIndex = index;
+            } else {
+                currentImageIndex = images.indexOf(src);
+            }
+
+            // Update active thumbnail
+            thumbnails.forEach((thumb, i) => {
+                thumb.classList.remove('active');
+                if (i === currentImageIndex) {
+                    thumb.classList.add('active');
+                }
+            });
+
+            // Update active indicator
+            sliderIndicators.forEach((indicator, i) => {
+                indicator.classList.remove('active');
+                if (i === currentImageIndex) {
+                    indicator.classList.add('active');
+                }
+            });
+
+            // Reset auto-slider
+            startAutoSlider();
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            changeImage(images[currentImageIndex]);
+        }
+
+        function startAutoSlider() {
+            // Clear existing interval
+            if (autoSliderInterval) {
+                clearInterval(autoSliderInterval);
+            }
+
+            // Start new interval (change image every 4 seconds)
+            autoSliderInterval = setInterval(nextImage, 4000);
+        }
+
+        function stopAutoSlider() {
+            if (autoSliderInterval) {
+                clearInterval(autoSliderInterval);
+            }
+        }
+
+        // Start auto-slider on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            startAutoSlider();
+
+            // Pause auto-slider on hover
+            imageGalleryContainer.addEventListener('mouseenter', stopAutoSlider);
+            imageGalleryContainer.addEventListener('mouseleave', startAutoSlider);
+
+            // Add click events to slider indicators
+            sliderIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    changeImage(images[index], index);
+                });
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade sections
+        document.querySelectorAll('.fade-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Initialize fade sections on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.fade-section').forEach(section => {
+                if (section.getBoundingClientRect().top < window.innerHeight) {
+                    section.classList.add('visible');
+                }
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>
