@@ -1,10 +1,19 @@
 {
     "version": 2,
-    "functions": {
-        "api/index.php": {
-            "runtime": "@vercel/php@1.0.0"
+    "builds": [
+        {
+            "src": "public/**",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "api/index.php",
+            "use": "@vercel/php"
+        },
+        {
+            "src": "index.php",
+            "use": "@vercel/php"
         }
-    },
+    ],
     "routes": [
         {
             "src": "/img/(.*)",
@@ -53,6 +62,5 @@
         "DB_CONNECTION": "mysql",
         "MAIL_MAILER": "log",
         "QUEUE_CONNECTION": "sync"
-    },
-    "outputDirectory": "public"
+    }
 }
