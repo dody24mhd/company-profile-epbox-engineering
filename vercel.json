@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "composer install --no-dev --optimize-autoloader",
+    "framework": "laravel",
     "routes": [
         {
             "src": "/img/(.*)",
@@ -28,7 +28,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "/index.php"
+            "dest": "/public/index.php"
         }
     ],
     "env": {

@@ -1,1 +1,17 @@
-vendor
+# Add vendor back for Laravel deployment
+# vendor
+
+# Ignore development files
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/framework/testing/*
+
+# Ignore IDE files
+.vscode/
+.idea/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
