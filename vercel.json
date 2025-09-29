@@ -50,8 +50,7 @@
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
-        "DB_CONNECTION": "sqlite",
-        "DB_DATABASE": "/tmp/database.sqlite",
+        "DB_CONNECTION": "mysql",
         "MAIL_MAILER": "log",
         "QUEUE_CONNECTION": "sync"
     },
