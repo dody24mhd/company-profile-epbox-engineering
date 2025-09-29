@@ -1,10 +1,6 @@
 {
     "version": 2,
-    "functions": {
-        "api/index.php": {
-            "runtime": "@vercel/php@0.7.1"
-        }
-    },
+    "buildCommand": "composer install --no-dev --optimize-autoloader",
     "routes": [
         {
             "src": "/img/(.*)",
@@ -32,14 +28,14 @@
         },
         {
             "src": "/(.*)",
-            "dest": "/api/index.php"
+            "dest": "/index.php"
         }
     ],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_NAME": "EPBOX Engineering",
-        "APP_URL": "https://company-profile-epbox-engineering.vercel.app",
+        "APP_URL": "$VERCEL_URL",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
