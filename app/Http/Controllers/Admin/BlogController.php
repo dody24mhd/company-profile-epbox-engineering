@@ -61,7 +61,7 @@ class BlogController extends Controller
         }
 
         Blog::create($validated);
-        return redirect()->route('admin.blogs.index')->with('success','Blog created successfully.');
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog created successfully.');
     }
 
     public function edit(Blog $blog)
@@ -110,7 +110,7 @@ class BlogController extends Controller
                     Storage::disk('public')->delete($oldThumb);
                 }
             }
-            
+
             $validated['img'] = $this->resizeAndStore($request->file('img'), 'blogs', 1200);
             $validated['image_url'] = $validated['img']; // Set both for compatibility
         }
@@ -126,7 +126,7 @@ class BlogController extends Controller
         }
 
         $blog->update($validated);
-        return redirect()->route('admin.blogs.index')->with('success','Blog updated successfully.');
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog updated successfully.');
     }
 
     public function destroy(Blog $blog)
@@ -138,11 +138,11 @@ class BlogController extends Controller
                 Storage::disk('public')->delete($old);
             }
         }
-        
+
         $blog->delete();
-        return redirect()->route('admin.blogs.index')->with('success','Blog deleted.');
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog deleted.');
     }
-    
+
     /**
      * Resize uploaded image to max width and store to public disk.
      */
@@ -172,21 +172,21 @@ class BlogController extends Controller
                 $path = $file->store($directory, 'public');
                 return Storage::disk('public')->url($path);
         }
-        
+
         $sourceWidth = imagesx($source);
         $sourceHeight = imagesy($source);
-        
+
         if ($sourceWidth <= $maxWidth) {
             $path = $file->store($directory, 'public');
             return Storage::disk('public')->url($path);
         }
-        
+
         $ratio = $maxWidth / $sourceWidth;
         $newWidth = $maxWidth;
         $newHeight = $sourceHeight * $ratio;
-        
+
         $resized = imagecreatetruecolor($newWidth, $newHeight);
-        
+
         // Preserve transparency for PNG and GIF
         if ($mime === 'image/png' || $mime === 'image/gif') {
             imagealphablending($resized, false);
@@ -194,12 +194,12 @@ class BlogController extends Controller
             $transparent = imagecolorallocatealpha($resized, 255, 255, 255, 127);
             imagefilledrectangle($resized, 0, 0, $newWidth, $newHeight, $transparent);
         }
-        
+
         imagecopyresampled($resized, $source, 0, 0, 0, 0, $newWidth, $newHeight, $sourceWidth, $sourceHeight);
-        
+
         $filename = uniqid() . '_' . time() . '.' . pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
         $path = $directory . '/' . $filename;
-        
+
         switch ($mime) {
             case 'image/jpeg':
             case 'image/jpg':
@@ -215,10 +215,10 @@ class BlogController extends Controller
                 imagegif($resized, storage_path('app/public/' . $path));
                 break;
         }
-        
+
         imagedestroy($source);
         imagedestroy($resized);
-        
+
         return Storage::disk('public')->url($path);
     }
 }

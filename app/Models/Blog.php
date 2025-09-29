@@ -73,7 +73,7 @@ class Blog extends Model
             }
             return $value;
         }
-        
+
         // Fallback to old 'img' field
         if ($this->img) {
             if (!str_starts_with($this->img, 'http')) {
@@ -81,7 +81,7 @@ class Blog extends Model
             }
             return $this->img;
         }
-        
+
         return null;
     }
 
@@ -94,7 +94,7 @@ class Blog extends Model
         if ($value) {
             return $value;
         }
-        
+
         // Fallback to old 'description' field
         return $this->description;
     }
@@ -107,7 +107,7 @@ class Blog extends Model
         if ($value) {
             return $value;
         }
-        
+
         // Generate excerpt from content or description
         $content = $this->content ?: $this->description;
         return Str::limit(strip_tags($content), 200);
@@ -121,7 +121,7 @@ class Blog extends Model
         if ($value) {
             return $value;
         }
-        
+
         // Fallback to old 'date_publish' field
         return $this->date_publish;
     }
@@ -137,7 +137,7 @@ class Blog extends Model
             if (!$blog->slug) {
                 $blog->slug = Str::slug($blog->title);
             }
-            
+
             if (!$blog->status) {
                 $blog->status = 'draft';
             }

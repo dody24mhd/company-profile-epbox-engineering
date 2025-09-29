@@ -27,16 +27,27 @@ class ProjectController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:4096',
-            'categories' => 'nullable|string',
+            'categories' => 'required|string',
+            'status' => 'required|in:published,draft,archived',
+            'client' => 'nullable|string|max:255',
+            'year' => 'nullable|string|max:4',
+            'technologies' => 'nullable|array',
+            'technologies.*' => 'string|max:50',
+            'is_featured' => 'boolean',
         ]);
 
         if ($request->hasFile('img')) {
             $validated['img'] = $this->resizeAndStore($request->file('img'), 'projects', 1200);
         }
 
+        // Convert technologies array to JSON
+        if (isset($validated['technologies'])) {
+            $validated['technologies'] = array_filter($validated['technologies']); // Remove empty values
+        }
+
         Project::create($validated);
 
-        return redirect()->route('admin.projects.index')->with('success','Project created successfully.');
+        return redirect()->route('admin.projects.index')->with('success', 'Project created successfully.');
     }
 
     public function edit(Project $project)
@@ -50,7 +61,13 @@ class ProjectController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:4096',
-            'categories' => 'nullable|string',
+            'categories' => 'required|string',
+            'status' => 'required|in:published,draft,archived',
+            'client' => 'nullable|string|max:255',
+            'year' => 'nullable|string|max:4',
+            'technologies' => 'nullable|array',
+            'technologies.*' => 'string|max:50',
+            'is_featured' => 'boolean',
         ]);
 
         if ($request->hasFile('img')) {
@@ -63,15 +80,20 @@ class ProjectController extends Controller
             $validated['img'] = $this->resizeAndStore($request->file('img'), 'projects', 1200);
         }
 
+        // Convert technologies array to JSON
+        if (isset($validated['technologies'])) {
+            $validated['technologies'] = array_filter($validated['technologies']); // Remove empty values
+        }
+
         $project->update($validated);
 
-        return redirect()->route('admin.projects.index')->with('success','Project updated successfully.');
+        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
     }
 
     public function destroy(Project $project)
     {
         $project->delete();
-        return redirect()->route('admin.projects.index')->with('success','Project deleted.');
+        return redirect()->route('admin.projects.index')->with('success', 'Project deleted.');
     }
 
     /**

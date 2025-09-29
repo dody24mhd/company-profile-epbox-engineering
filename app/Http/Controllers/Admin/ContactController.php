@@ -28,7 +28,7 @@ class ContactController extends Controller
         ]);
 
         Contact::create($validated);
-        return redirect()->route('admin.contacts.index')->with('success','Contact created successfully.');
+        return redirect()->route('admin.contacts.index')->with('success', 'Contact created successfully.');
     }
 
     public function edit(Contact $contact)
@@ -44,13 +44,13 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
         $contact->update($validated);
-        return redirect()->route('admin.contacts.index')->with('success','Contact updated successfully.');
+        return redirect()->route('admin.contacts.index')->with('success', 'Contact updated successfully.');
     }
 
     public function destroy(Contact $contact)
     {
         $contact->delete();
-        return redirect()->route('admin.contacts.index')->with('success','Contact deleted.');
+        return redirect()->route('admin.contacts.index')->with('success', 'Contact deleted.');
     }
 
     // export/mark-read features are deferred until frontend ready

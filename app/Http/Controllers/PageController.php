@@ -20,6 +20,10 @@ class PageController extends Controller
     {
         return view('site.pages.industries');
     }
+    public function oilGas()
+    {
+        return view('site.pages.oil-gas');
+    }
     public function contact()
     {
         return view('site.pages.contact');

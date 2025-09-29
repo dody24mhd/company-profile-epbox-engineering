@@ -2,174 +2,421 @@
 @section('title','Our Services | Epbox Engineering')
 @section('content')
 <!-- Hero/Intro Section -->
-<section class="pt-32 pb-20 px-6 gradient-bg fade-section relative services-hero">
+<section class="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 gradient-bg fade-section relative services-hero">
   <!-- Particles Canvas Layer -->
-  <canvas id="servicesParticles" class="absolute inset-0 w-full h-full pointer-events-none" style="z-index:1">Your browser doesn't support Canvas.</canvas>
+  <canvas id="servicesParticles" class="absolute inset-0 w-full h-full pointer-events-none" style="z-index:1">Your
+    browser doesn't support Canvas.</canvas>
   <div class="max-w-7xl mx-auto text-center relative z-10">
-    <h1 class="text-4xl md:text-6xl font-bold mb-6">Our Services</h1>
+    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+      style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">OUR SERVICES</h1>
     <div class="w-32 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mb-6"></div>
-    <p class="text-xl text-gray-300 max-w-2xl mx-auto">We believe that reliable industrial automation begins with precise design, accurate integration, and a strong commitment to quality.
-      Our services are engineered to meet the demands of mission-critical sectors through robust, measurable, and internationally compliant solutions.</p>
+    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+      style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">We deliver precision
+      automation systems from initial
+      concept through final handover, ensuring every project meets the highest
+      standards of safety, performance, and reliability.</p>
   </div>
 </section>
 
-<!-- Key Services Overview -->
-<section class="py-20 px-6 bg-gray-900 fade-section relative">
+{{-- Our Key Products moved under Our Capabilities below --}}
+
+<!-- Our Key Products (separated section) -->
+<section id="our-key-products" class="py-12 px-6 bg-[#0A1128] relative overflow-hidden fade-section">
+  <!-- Canvas Background -->
+  <canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none"
+    style="z-index:0; opacity:0.5;"></canvas>
+  <!-- Interactive Background Elements -->
+  <div class="interactive-bg">
+    <div class="w-16 h-16 top-20 left-10 animate-pulse"></div>
+    <div class="w-24 h-24 top-1/2 right-20 animate-pulse delay-1000"></div>
+    <div class="w-12 h-12 bottom-16 left-1/4 animate-pulse delay-500"></div>
+  </div>
+
+  <!-- Floating Orbs -->
+  <div class="floating-orb orb1"></div>
+  <div class="floating-orb orb2"></div>
+  <div class="floating-orb orb3"></div>
+
+  <div class="max-w-7xl mx-auto relative z-10">
+    <!-- Our Key Products -->
+    <div class="mt-4">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl lg:text-4xl font-bold mb-4 text-blue-300 section-title"
+          style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">WHAT WE OFFER</h2>
+        <div class="w-20 h-1 bg-blue-500 mx-auto mb-6"></div>
+        <p class="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed"
+          style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Explore our core product
+          offerings designed to deliver exceptional
+          performance and reliability in industrial automation</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- PLC & HMI Programming -->
+        <a href="{{ route('site.product.plc') }}" class="product-card overflow-hidden group border-0">
+          <div class="relative overflow-hidden">
+            <img src="{{ asset('img/epbox/plc1.png') }}" alt="PLC & HMI Programming"
+              class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            </div>
+          </div>
+          <div class="p-6 bg-gray-800/50 backdrop-blur-sm text-center border-0">
+            <h3 class="text-xl font-semibold mb-4 group-hover:text-blue-300 transition-colors">PLC Control Panel
+            </h3>
+            <div class="flex justify-center">
+              <span class="text-blue-400 text-sm font-medium group-hover:text-blue-300">Learn More <i
+                  class="fas fa-arrow-right ml-1"></i></span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Power Distribution Systems -->
+        <a href="{{ route('site.product.power') }}" class="product-card overflow-hidden group border-0">
+          <div class="relative overflow-hidden">
+            <img src="{{ asset('img/epbox/EPP.png') }}" alt="Power Distribution Systems"
+              class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            </div>
+          </div>
+          <div class="p-6 bg-gray-800/50 backdrop-blur-sm text-center border-0">
+            <h3 class="text-xl font-semibold mb-4 group-hover:text-blue-300 transition-colors">Explosion Proof Panels
+            </h3>
+            <div class="flex justify-center">
+              <span class="text-blue-400 text-sm font-medium group-hover:text-blue-300">Learn More <i
+                  class="fas fa-arrow-right ml-1"></i></span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Motor Control Center -->
+        <a href="{{ route('site.product.motor') }}" class="product-card overflow-hidden group border-0">
+          <div class="relative overflow-hidden">
+            <img src="{{ asset('img/epbox/LV.png') }}" alt="Motor Control Center"
+              class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            </div>
+          </div>
+          <div class="p-6 bg-gray-800/50 backdrop-blur-sm text-center border-0">
+            <h3 class="text-xl font-semibold mb-4 group-hover:text-blue-300 transition-colors">Power Distribution Panel (LV)</h3>
+            <div class="flex justify-center">
+              <span class="text-blue-400 text-sm font-medium group-hover:text-blue-300">Learn More <i
+                  class="fas fa-arrow-right ml-1"></i></span>
+            </div>
+          </div>
+        </a>
+
+        <!-- SCADA Systems -->
+        <a href="{{ route('site.product.scada') }}" class="product-card overflow-hidden group border-0">
+          <div class="relative overflow-hidden">
+            <img src="{{ asset('img/epbox/MMTR.png') }}" alt="SCADA Systems"
+              class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            </div>
+          </div>
+          <div class="p-6 bg-gray-800/50 backdrop-blur-sm text-center border-0">
+            <h3 class="text-xl font-semibold mb-4 group-hover:text-blue-300 transition-colors">Motor Control Centre (MCC LV)</h3>
+            <div class="flex justify-center">
+              <span class="text-blue-400 text-sm font-medium group-hover:text-blue-300">Learn More <i
+                  class="fas fa-arrow-right ml-1"></i></span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Safety Systems -->
+        <a href="{{ route('site.product.safety') }}" class="product-card overflow-hidden group border-0">
+          <div class="relative overflow-hidden">
+            <img src="{{ asset('img/epbox/LCL.png') }}" alt="Safety Systems"
+              class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            </div>
+          </div>
+          <div class="p-6 bg-gray-800/50 backdrop-blur-sm text-center border-0">
+            <h3 class="text-xl font-semibold mb-4 group-hover:text-blue-300 transition-colors">Local Control Panel (LCP)</h3>
+            <div class="flex justify-center">
+              <span class="text-blue-400 text-sm font-medium group-hover:text-blue-300">Learn More <i
+                  class="fas fa-arrow-right ml-1"></i></span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Custom Control Panels -->
+        <a href="{{ route('site.product.panels') }}" class="product-card overflow-hidden group border-0">
+          <div class="relative overflow-hidden">
+            <img src="{{ asset('img/epbox/FR.png') }}" alt="Custom Control Panels"
+              class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            </div>
+          </div>
+          <div class="p-6 bg-gray-800/50 backdrop-blur-sm text-center border-0">
+            <h3 class="text-xl font-semibold mb-4 group-hover:text-blue-300 transition-colors">Custom Control Panels
+            </h3>
+            <div class="flex justify-center">
+              <span class="text-blue-400 text-sm font-medium group-hover:text-blue-300">Learn More <i
+                  class="fas fa-arrow-right ml-1"></i></span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="mt-4"></div>
+  </div>
+</section>
+
+<!-- What We Do Section -->
+<section id="offer-services" class="py-12 px-6 gradient-bg relative overflow-hidden fade-section">
+  <!-- Canvas Background -->
+  <canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none"
+    style="z-index:0; opacity:0.5;"></canvas>
+  <!-- Animated Background Elements -->
   <div class="absolute inset-0 opacity-10">
-    <div class="absolute top-20 left-10 w-20 h-20 bg-blue-500 rounded-full blur-xl animate-pulse"></div>
-    <div class="absolute bottom-20 right-10 w-32 h-32 bg-blue-400 rounded-full blur-xl animate-pulse delay-1000"></div>
+    <div class="absolute top-10 left-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-10 right-10 w-40 h-40 bg-cyan-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    <div class="absolute top-1/2 left-1/2 w-24 h-24 bg-blue-400 rounded-full blur-2xl animate-pulse delay-500"></div>
   </div>
 
   <div class="max-w-7xl mx-auto relative z-10">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl md:text-4xl lg:text-4xl font-bold mb-4 section-title"
+        style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">OUR CAPABILITIES</h2>
+      <div class="w-32 h-1 bg-white mx-auto mb-4"></div>
+    </div>
+
+    <!-- Capabilities Grid Layout -->
+    <div class="capabilities-container">
+      <ul class="capabilities-grid">
+        <!-- Control Panel Engineering -->
+        <li class="capability-item control-panel">
+          <h3 class="capability-title">CONTROL PANEL ENGINEERING</h3>
+          <p class="capability-description">Complete design and manufacturing of LV panels, MCC, and PLC systems with
+            full documentation and FAT testing.</p>
+          <a href="{{ route('site.service.control') }}" class="capability-link">Learn More</a>
+        </li>
+
+        <!-- Automation Integration -->
+        <li class="capability-item automation">
+          <h3 class="capability-title">AUTOMATION INTEGRATION</h3>
+          <p class="capability-description">Seamless integration of PLC, SCADA, and HMI systems for intelligent
+            industrial automation solutions.</p>
+          <a href="{{ route('site.service.automation') }}" class="capability-link">Learn More</a>
+        </li>
+
+        <!-- System Integration Solutions -->
+        <li class="capability-item system-integration">
+          <h3 class="capability-title">SYSTEM INTEGRATION SOLUTIONS</h3>
+          <p class="capability-description">End-to-end system integration with robust networking and communication for
+            critical operations.</p>
+          <a href="{{ route('site.service.system') }}" class="capability-link">Learn More</a>
+        </li>
+
+        <!-- Engineering & Technical Support -->
+        <li class="capability-item engineering">
+          <h3 class="capability-title">ENGINEERING & TECHNICAL SUPPORT</h3>
+          <p class="capability-description">Comprehensive technical support and engineering expertise throughout the
+            entire project lifecycle.</p>
+          <a href="{{ route('site.service.engineering') }}" class="capability-link">Learn More</a>
+        </li>
+
+        <!-- Safety & Compliance by Design -->
+        <li class="capability-item safety">
+          <h3 class="capability-title">SAFETY & COMPLIANCE BY DESIGN</h3>
+          <p class="capability-description">ATEX, SIL, and marine-grade compliance built into solutions for hazardous
+            and demanding environments.</p>
+          <a href="{{ route('site.service.safety') }}" class="capability-link">Learn More</a>
+        </li>
+      </ul>
+    </div>
+    <div class="mt-8"></div>
+  </div>
+</section>
+
+<!-- Testimonials Clients -->
+<section class="py-20 px-6 bg-[#0A1128] relative overflow-hidden fade-section">
+	<!-- Canvas Background -->
+	<canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
+	<!-- Interactive Background Elements -->
+	<div class="interactive-bg">
+		<div class="w-16 h-16 top-20 left-10 animate-pulse"></div>
+		<div class="w-24 h-24 top-1/2 right-20 animate-pulse delay-1000"></div>
+		<div class="w-12 h-12 bottom-16 left-1/4 animate-pulse delay-500"></div>
+	</div>
+
+	<!-- Floating Orbs -->
+	<div class="floating-orb orb1"></div>
+	<div class="floating-orb orb2"></div>
+	<div class="floating-orb orb3"></div>
+
+	<div class="max-w-7xl mx-auto relative z-10">
+	  <div class="text-center mb-16">
+		<h2 class="text-3xl md:text-4xl font-bold mb-4 text-white-300" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">CLIENT TESTIMONIALS</h2>
+		<div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+	  </div>
+	  <div class="grid md:grid-cols-3 gap-8">
+			<div class="bg-gray-800 p-6 rounded-lg">
+			  <div class="flex items-center mb-4">
+				<div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-white"></i></div>
+				<div class="flex-1">
+				  <h4 class="font-semibold">John Smith</h4>
+				  <p class="text-gray-400 text-sm">Plant Manager, Toyota Indonesia</p>
+				  <div class="flex items-center mt-2">
+					<i class="fab fa-linkedin text-blue-400 text-xs mr-1"></i>
+					<span class="text-gray-500 text-xs">LinkedIn Review</span>
+				  </div>
+				</div>
+			  </div>
+			  <p class="text-gray-300 italic">"Epbox Engineering delivered an exceptional automation system that exceeded our expectations. Their expertise in automotive manufacturing control systems is unmatched."</p>
+			</div>
+			<div class="bg-gray-800 p-6 rounded-lg">
+			  <div class="flex items-center mb-4">
+				<div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-white"></i></div>
+				<div class="flex-1">
+				  <h4 class="font-semibold">Sarah Johnson</h4>
+				  <p class="text-gray-400 text-sm">Operations Director, PLN</p>
+				  <div class="flex items-center mt-2">
+					<i class="fas fa-microphone text-green-400 text-xs mr-1"></i>
+					<span class="text-gray-500 text-xs">Industry Interview</span>
+				  </div>
+				</div>
+			  </div>
+			  <p class="text-gray-300 italic">"The power plant control system from Epbox Engineering has significantly improved our operational efficiency and grid stability. Highly recommended!"</p>
+			</div>
+			<div class="bg-gray-800 p-6 rounded-lg">
+			  <div class="flex items-center mb-4">
+				<div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-white"></i></div>
+				<div class="flex-1">
+				  <h4 class="font-semibold">Michael Chen</h4>
+				  <p class="text-gray-400 text-sm">CEO, PetroChem Industries</p>
+				  <div class="flex items-center mt-2">
+					<i class="fas fa-star text-yellow-400 text-xs mr-1"></i>
+					<span class="text-gray-500 text-xs">Google Reviews</span>
+				  </div>
+				</div>
+			  </div>
+			  <p class="text-gray-300 italic">"Outstanding work on our refinery control system. The safety features and monitoring capabilities have given us complete peace of mind."</p>
+			</div>
+	  </div>
+	</div>
+</section>
+
+<!-- Why Clients Choose Us Section -->
+<section id="why-choose-us" class="py-20 px-6 gradient-bg relative overflow-hidden fade-section">
+  <!-- Canvas Background -->
+  <canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none"
+    style="z-index:0; opacity:0.5;"></canvas>
+  <!-- Animated Background Elements -->
+  <div class="absolute bottom-10 right-10 w-40 h-40 bg-cyan-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
+  <div class="absolute top-1/2 left-1/2 w-24 h-24 bg-blue-400 rounded-full blur-2xl animate-pulse delay-500"></div>
+  </div>
+  <div class="floating-orb orb1"></div>
+  <div class="floating-orb orb2"></div>
+  <div class="floating-orb orb3"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Key Services</h2>
-      <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-3 text-white-300 section-title"
+        style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">WHY CHOOSE US</h2>
+      <div class="w-32 h-1 bg-blue-500 mx-auto mb-4"></div>
     </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="service-card p-8 rounded-lg text-center">
-        <div class="text-blue-400 text-4xl mb-4"><i class="fas fa-cogs"></i></div>
-        <h3 class="text-xl font-semibold mb-4">Custom Control Panel Manufacturing</h3>
-        <p class="text-gray-300">Design and manufacture of custom electrical control panels and systems for industrial automation, process control, and machine operation.</p>
+    <!-- Why Choose Us - Alternative Style -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- End-to-End Expertise -->
+      <div
+        class="bg-[#1c2a5a] p-6 rounded-lg border border-transparent hover:bg-[#2a3a7a] hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start mb-4">
+          <div class="bg-[#3b82f6]/20 p-3 rounded-full mr-4">
+            <i class="fas fa-cogs text-blue-400 text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white">End-to-End Expertise</h3>
+        </div>
+        <p class="text-[#aab8d3] text-sm"
+          style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">From concept design to
+          commissioning, we provide complete industrial automation and control solutions.</p>
       </div>
-      <div class="service-card p-8 rounded-lg text-center">
-        <div class="text-blue-400 text-4xl mb-4"><i class="fas fa-microchip"></i></div>
-        <h3 class="text-xl font-semibold mb-4">PLC Programming & Integration</h3>
-        <p class="text-gray-300">Advanced PLC programming, integration, and troubleshooting for seamless industrial automation and process control.</p>
-      </div>
-      <div class="service-card p-8 rounded-lg text-center">
-        <div class="text-blue-400 text-4xl mb-4"><i class="fas fa-desktop"></i></div>
-        <h3 class="text-xl font-semibold mb-4">SCADA Systems</h3>
-        <p class="text-gray-300">SCADA system design, implementation, and integration for real-time monitoring and control of industrial processes.</p>
-      </div>
-      <div class="service-card p-8 rounded-lg text-center">
-        <div class="text-blue-400 text-4xl mb-4"><i class="fas fa-tools"></i></div>
-        <h3 class="text-xl font-semibold mb-4">Panel Installation & Commissioning</h3>
-        <p class="text-gray-300">Professional installation, commissioning, and testing of control panels and automation systems on-site.</p>
-      </div>
-      <div class="service-card p-8 rounded-lg text-center">
-        <div class="text-blue-400 text-4xl mb-4"><i class="fas fa-wrench"></i></div>
-        <h3 class="text-xl font-semibold mb-4">Maintenance & Support</h3>
-        <p class="text-gray-300">Preventive maintenance, troubleshooting, and 24/7 technical support for all control panel and automation systems.</p>
-      </div>
-      <div class="service-card p-8 rounded-lg text-center">
-        <div class="text-blue-400 text-4xl mb-4"><i class="fas fa-shield-alt"></i></div>
-        <h3 class="text-xl font-semibold mb-4">Safety & Compliance Solutions</h3>
-        <p class="text-gray-300">Safety control panels, emergency stop systems, and compliance with international safety standards (ISO, IEC, etc).</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- PLC & HMI Section -->
-<section class="py-20 px-6 gradient-bg fade-section">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-    <div class="order-1">
-      <h2 class="text-3xl font-bold mb-4 text-blue-300">PLC & HMI Programming for Operational Performance</h2>
-      <div class="w-20 h-1 bg-blue-500 mb-6"></div>
-      <p class="text-lg text-gray-300 mb-4 text-justify">We engineer PLC logic and HMI screens that mirror your real process — fast to learn, easy to operate, and resilient in production. Operators see only what matters, alarms are prioritized, and recovery steps are clear.</p>
-      <p class="text-gray-300 mb-4 text-justify">Under the hood, we use modular architectures (state machines, FB/FC, consistent tag strategy) with standardized alarms/events and diagnostics. This keeps troubleshooting straightforward and changes safe to deploy.</p>
-      <p class="text-gray-300 mb-6 text-justify">Deliverables include version control, documentation, and scalable layouts, so your system stays maintainable as your plant grows.</p>
-      <h3 class="text-xl font-semibold text-blue-300 mb-3">Supported Platforms</h3>
-      <div class="platform-badges flex flex-wrap items-center gap-3 mb-6">
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 text-blue-200 border border-blue-400/30" data-platform="Siemens">
-          <i class="fas fa-microchip text-blue-300"></i>
-          Siemens
-        </span>
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 text-blue-200 border border-blue-400/30" data-platform="Mitsubishi">
-          <i class="fas fa-microchip text-blue-300"></i>
-          Mitsubishi
-        </span>
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 text-blue-200 border border-blue-400/30" data-platform="Omron">
-          <i class="fas fa-microchip text-blue-300"></i>
-          Omron
-        </span>
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 text-blue-200 border border-blue-400/30" data-platform="Siemens">
-          <i class="fas fa-microchip text-blue-300"></i>
-          Allen Bradley
-        </span>
+      <!-- Safety & Compliance -->
+      <div
+        class="bg-[#1c2a5a] p-6 rounded-lg border border-transparent hover:bg-[#2a3a7a] hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start mb-4">
+          <div class="bg-[#3b82f6]/20 p-3 rounded-full mr-4">
+            <i class="fas fa-shield-alt text-blue-400 text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white">Safety & Compliance</h3>
+        </div>
+        <p class="text-[#aab8d3] text-sm"
+          style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Our solutions are
+          engineered with ATEX, IECEx, IEC, NFPA, NEMA, and CP5 principles, ensuring compliance with international
+          safety standards.</p>
+      </div>
+
+      <!-- Tailored Solutions -->
+      <div
+        class="bg-[#1c2a5a] p-6 rounded-lg border border-transparent hover:bg-[#2a3a7a] hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start mb-4">
+          <div class="bg-[#3b82f6]/20 p-3 rounded-full mr-4">
+            <i class="fas fa-tools text-blue-400 text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white">Tailored Solutions</h3>
+        </div>
+        <p class="text-[#aab8d3] text-sm"
+          style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">We don't believe in
+          one-size-fits-all. Every panel, system, and integration project is designed to meet the specific needs of each
+          client's operation.</p>
+      </div>
+
+      <!-- Global Standards -->
+      <div
+        class="bg-[#1c2a5a] p-6 rounded-lg border border-transparent hover:bg-[#2a3a7a] hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start mb-4">
+          <div class="bg-[#3b82f6]/20 p-3 rounded-full mr-4">
+            <i class="fas fa-globe text-blue-400 text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white">Global Standards</h3>
+        </div>
+        <p class="text-[#aab8d3] text-sm"
+          style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">With operations in
+          Singapore and Batam, Indonesia, we offer world-class engineering backed by local fabrication and faster
+          delivery.</p>
+      </div>
+
+      <!-- Trusted Across Industries -->
+      <div
+        class="bg-[#1c2a5a] p-6 rounded-lg border border-transparent hover:bg-[#2a3a7a] hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start mb-4">
+          <div class="bg-[#3b82f6]/20 p-3 rounded-full mr-4">
+            <i class="fas fa-industry text-blue-400 text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white">Trusted Across Industries</h3>
+        </div>
+        <p class="text-[#aab8d3] text-sm"
+          style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Our experience spans oil &
+          gas, marine & offshore, power generation, clean energy, data centers, and critical infrastructure. This
+          cross-industry expertise enables us to adapt proven best practices to new challenges.</p>
+      </div>
+
+      <!-- Partnership Approach -->
+      <div
+        class="bg-[#1c2a5a] p-6 rounded-lg border border-transparent hover:bg-[#2a3a7a] hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start mb-4">
+          <div class="bg-[#3b82f6]/20 p-3 rounded-full mr-4">
+            <i class="fas fa-handshake text-blue-400 text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white">Partnership Approach</h3>
+        </div>
+        <p class="text-[#aab8d3] text-sm"
+          style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">We see ourselves not only
+          as a supplier but as a strategic partner — working closely with clients to understand their challenges and
+          build solutions that are safe, efficient, and future-ready.</p>
       </div>
     </div>
-    <div class="order-2">
-      <img src="{{ asset('img/img_asset/control_panel4.jpg') }}" alt="Control panel and HMI" class="w-full h-80 object-cover rounded-lg shadow-2xl mb-8 md:mb-0 transition-transform duration-300 hover:scale-110 cursor-pointer">
-    </div>
-  </div>
-</section>
 
-<!-- SCADA Section -->
-<section class="py-20 px-6 bg-gray-900 fade-section">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-    <div class="order-2 md:order-2">
-      <h2 class="text-3xl font-bold mb-4 text-blue-300">SCADA & Remote Access
-      </h2>
-      <div class="w-20 h-1 bg-blue-500 mb-6"></div>
-      <p class="text-lg text-gray-300 mb-4 text-justify">Design, development, and deployment of SCADA for real‑time monitoring, centralized control, and secure remote access — engineered to fit your process and infrastructure.</p>
-      <p class="text-gray-300 mb-4 text-justify">We integrate SCADA with PLCs and HMIs to create a seamless data path from field to dashboard, with role‑based access and hardened industrial connectivity.</p>
-      <h3 class="text-xl font-semibold text-blue-300 mb-3">Key Features</h3>
-      <ul class="list-disc list-inside text-gray-300 mb-4 space-y-2 text-justify">
-        <li>SCADA & Remote Access (secure web/VPN clients, audit‑ready). Modular, scalable SCADA architecture. Industrial‑grade cybersecurity (accounts, encryption, RBAC). Reliable remote access with buffering/resync on link drops</li>
-      </ul>
-      <p class="text-gray-300 mb-2 text-justify">Remote access is enabled via HTTPS/VPN with role‑based permissions and optional MFA. Access is logged, and data continuity is preserved with store‑and‑forward where supported.</p>
-    </div>
-    <div class="order-1 md:order-1">
-      <img src="{{ asset('img/img_asset/control_panel4.jpg') }}" alt="SCADA System" class="w-full h-80 object-cover rounded-lg shadow-2xl mb-8 md:mb-0 transition-transform duration-300 hover:scale-110 cursor-pointer">
-    </div>
-  </div>
-</section>
-
-<!-- Control Panels Section -->
-<section class="py-20 px-6 gradient-bg fade-section">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-    <div class="order-1">
-      <h2 class="text-3xl font-bold mb-4 text-blue-300">Retrofit & Upgrade</h2>
-      <div class="w-20 h-1 bg-blue-500 mb-6"></div>
-      <p class="text-lg text-gray-300 mb-4 text-justify">We modernize legacy panels and control systems with current‑generation hardware and software — improving reliability, safety, and maintainability without disrupting production.</p>
-      <ul class="list-disc list-inside text-gray-300 mb-6 space-y-2 text-justify">
-        <li>Controller migrations (obsolete PLCs to current platforms), HMI refresh. Rewiring, labeling, and documentation clean‑up for serviceability. Safety upgrades, component re‑selection, and thermal/cable re‑sizing</li>
-      </ul>
-      <h3 class="text-xl font-semibold text-blue-300 mb-3">System Integration & Commissioning</h3>
-      <p class="text-gray-300 mb-4 text-justify">From electrical design to field I/O mapping, we integrate systems across all layers — PLC, HMI/SCADA, drives, and networks — and stay through FAT/SAT to handover.</p>
-      <ul class="list-disc list-inside text-gray-300 mb-4 space-y-2 text-justify">
-        <li>Detailed drawings, panel layouts, and bill of materials. End‑to‑end I/O checks, logic verification, and interlock testing. On‑site commissioning, training, and final documentation</li>
-      </ul>
-    </div>
-    <div class="order-2">
-      <img src="{{ asset('img/img_asset/control_panel4.jpg') }}" alt="Control Panel" class="w-full h-80 object-cover rounded-lg shadow-2xl mb-8 md:mb-0 transition-transform duration-300 hover:scale-110 cursor-pointer">
-    </div>
-  </div>
-</section>
-
-<!-- Testing & Quality Assurance Section (below Retrofit & Upgrade) -->
-<section class="py-20 px-6 bg-gray-900 fade-section relative">
-  <div class="absolute inset-0 opacity-10">
-    <div class="absolute top-20 left-10 w-20 h-20 bg-blue-500 rounded-full blur-xl animate-pulse"></div>
-    <div class="absolute bottom-20 right-10 w-32 h-32 bg-blue-400 rounded-full blur-xl animate-pulse delay-1000"></div>
-  </div>
-
-  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
-    <div class="order-1 md:order-1">
-      <img src="{{ asset('img/img_asset/control_panel4.jpg') }}" alt="Testing & Quality Assurance" class="w-full h-80 object-cover rounded-lg shadow-2xl mb-8 md:mb-0 transition-transform duration-300 hover:scale-110 cursor-pointer">
-    </div>
-    <div class="order-2 md:order-2">
-      <h2 class="text-3xl font-bold mb-4 text-blue-300">Testing & Quality Assurance</h2>
-      <div class="w-20 h-1 bg-blue-500 mb-6"></div>
-      <p class="text-lg text-gray-300 mb-4 text-justify">Every project undergoes rigorous verification so your system is safe, reliable, and ready for operation at handover.</p>
-      <h3 class="text-xl font-semibold text-blue-300 mb-3">System Integration & Commissioning</h3>
-      <p class="text-gray-300 mb-4 text-justify">From electrical design to field I/O mapping, we integrate systems across all layers — PLC, HMI/SCADA, drives, and networks — and stay through FAT/SAT to handover.</p>
-      <ul class="list-disc list-inside text-gray-300 mb-4 space-y-2 text-justify">
-        <li>Detailed drawings, panel layouts, and bill of materials. End‑to‑end I/O checks, logic verification, and interlock testing. On‑site commissioning, training, and final documentation</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- CTA Section -->
-<section class="py-20 px-6 cta-animated-gradient relative overflow-hidden fade-section">
-  <div class="max-w-7xl mx-auto relative z-10 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Automate Your Industry?</h2>
-    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Contact us to discuss your automation, PLC, SCADA, or control panel needs. Our experts are ready to help you achieve operational excellence.</p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="{{ route('site.contact') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105">Get Free Quote</a>
-      <a href="{{ route('site.portfolio.index') }}" class="bg-transparent border-2 border-blue-600 hover:bg-blue-900 text-white px-8 py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105">View Our Projects</a>
+    <!-- Section footer branding -->
+    <div class="text-center mt-12 pt-8 border-t border-[#3b82f6]">
+      <h3 class="text-3xl md:text-4xl font-bold text-[#3b82f6] mb-2"
+        style="font-family: 'Helvetica', Arial, sans-serif; font-weight: bold;">"Beyond Boundaries, We Command Control"
+      </h3>
     </div>
   </div>
 </section>
@@ -192,4 +439,5 @@
     </div>
   </div>
 </div>
+
 @endsection

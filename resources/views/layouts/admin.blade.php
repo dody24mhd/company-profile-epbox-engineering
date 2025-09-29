@@ -20,6 +20,7 @@
             <div id="content">
                 @include('layouts.topbar')
 
+
                 <div class="container-fluid">
                     @include('components.alerts')
                     @yield('content')

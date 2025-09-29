@@ -17,53 +17,53 @@ class BlogController extends Controller
         // Get query parameters
         $category = $request->get('category');
         $search = $request->get('search');
-        
+
         // Start building the query
         $query = Blog::with('category')
                     ->where('status', 'published')
                     ->orderBy('created_at', 'desc');
-        
+
         // Apply category filter
         if ($category && $category !== 'all') {
-            $query->whereHas('category', function($q) use ($category) {
+            $query->whereHas('category', function ($q) use ($category) {
                 $q->where('name', $category);
             });
         }
-        
+
         // Apply search filter
         if ($search) {
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
                   ->orWhere('content', 'like', "%{$search}%")
                   ->orWhere('excerpt', 'like', "%{$search}%");
             });
         }
-        
+
         // Get paginated results
         $blogs = $query->paginate(12);
-        
+
         // Get featured blog (most recent)
         $featuredBlog = Blog::with('category')
                            ->where('status', 'published')
                            ->where('is_featured', true)
                            ->orderBy('created_at', 'desc')
                            ->first();
-        
+
         // Get categories with blog count
-        $categories = Category::withCount(['blogs' => function($query) {
+        $categories = Category::withCount(['blogs' => function ($query) {
             $query->where('status', 'published');
         }])->orderBy('name')->get();
-        
+
         // Get recent blogs for sidebar
         $recentBlogs = Blog::with('category')
                           ->where('status', 'published')
                           ->orderBy('created_at', 'desc')
                           ->limit(3)
                           ->get();
-        
+
         // Get popular tags
         $popularTags = $this->getPopularTags();
-        
+
         return view('site.blog', compact(
             'blogs',
             'featuredBlog',
@@ -72,7 +72,7 @@ class BlogController extends Controller
             'popularTags'
         ));
     }
-    
+
     /**
      * Display a specific blog post
      */
@@ -81,7 +81,7 @@ class BlogController extends Controller
         $blog = Blog::with('category')
                     ->where('status', 'published')
                     ->findOrFail($id);
-        
+
         // Get related blogs
         $relatedBlogs = Blog::with('category')
                            ->where('status', 'published')
@@ -90,10 +90,10 @@ class BlogController extends Controller
                            ->orderBy('created_at', 'desc')
                            ->limit(3)
                            ->get();
-        
+
         return view('site.blog-detail', compact('blog', 'relatedBlogs'));
     }
-    
+
     /**
      * Handle newsletter subscription
      */
@@ -102,19 +102,19 @@ class BlogController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:newsletter_subscriptions,email'
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => $validator->errors()->first()
             ], 422);
         }
-        
+
         try {
             // Here you would typically save to a newsletter_subscriptions table
             // For now, we'll just return success
             // NewsletterSubscription::create(['email' => $request->email]);
-            
+
             return response()->json([
                 'success' => true,
                 'message' => 'Successfully subscribed to newsletter!'
@@ -126,7 +126,7 @@ class BlogController extends Controller
             ], 500);
         }
     }
-    
+
     /**
      * Get popular tags from blog posts
      */
@@ -147,7 +147,7 @@ class BlogController extends Controller
             'Innovation'
         ];
     }
-    
+
     /**
      * API endpoint to get blog data for modal
      */
@@ -156,7 +156,7 @@ class BlogController extends Controller
         $blog = Blog::with('category')
                     ->where('status', 'published')
                     ->findOrFail($id);
-        
+
         return response()->json([
             'id' => $blog->id,
             'title' => $blog->title,
@@ -169,21 +169,21 @@ class BlogController extends Controller
             'updated_at' => $blog->updated_at
         ]);
     }
-    
+
     /**
      * Search blogs
      */
     public function search(Request $request)
     {
         $search = $request->get('q');
-        
+
         if (!$search) {
             return response()->json(['blogs' => []]);
         }
-        
+
         $blogs = Blog::with('category')
                     ->where('status', 'published')
-                    ->where(function($query) use ($search) {
+                    ->where(function ($query) use ($search) {
                         $query->where('title', 'like', "%{$search}%")
                               ->orWhere('content', 'like', "%{$search}%")
                               ->orWhere('excerpt', 'like', "%{$search}%");
@@ -191,7 +191,7 @@ class BlogController extends Controller
                     ->orderBy('created_at', 'desc')
                     ->limit(10)
                     ->get();
-        
+
         return response()->json(['blogs' => $blogs]);
     }
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<ruleset name="EPBOX Engineering">
+    <description>PHP CodeSniffer configuration for EPBOX Engineering Laravel project</description>
+
+    <!-- What to scan -->
+    <file>app</file>
+    <file>config</file>
+    <file>database</file>
+    <file>routes</file>
+    <file>bootstrap</file>
+    
+    <file>tests</file>
+    
+    <!-- Explicitly exclude resources directory -->
+    <exclude-pattern>resources/*</exclude-pattern>
+
+    <!-- Exclude directories -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/storage/*</exclude-pattern>
+    <exclude-pattern>*/bootstrap/cache/*</exclude-pattern>
+    <exclude-pattern>*/public/build/*</exclude-pattern>
+    <exclude-pattern>*/public/vendor/*</exclude-pattern>
+
+    <!-- Exclude Blade template files -->
+    <exclude-pattern>*/resources/views/*.blade.php</exclude-pattern>
+    <exclude-pattern>resources/views/**/*.blade.php</exclude-pattern>
+    <exclude-pattern>**/*.blade.php</exclude-pattern>
+    <exclude-pattern>resources/views/auth/*.blade.php</exclude-pattern>
+    <exclude-pattern>resources/views/admin/*.blade.php</exclude-pattern>
+    <exclude-pattern>resources/views/site/*.blade.php</exclude-pattern>
+    <exclude-pattern>resources/views/layouts/*.blade.php</exclude-pattern>
+    <exclude-pattern>resources/views/components/*.blade.php</exclude-pattern>
+
+    <!-- Exclude other non-PHP files -->
+    <exclude-pattern>*.js</exclude-pattern>
+    <exclude-pattern>*.css</exclude-pattern>
+    <exclude-pattern>*.scss</exclude-pattern>
+    <exclude-pattern>*.json</exclude-pattern>
+    <exclude-pattern>*.md</exclude-pattern>
+    <exclude-pattern>*.yml</exclude-pattern>
+    <exclude-pattern>*.yaml</exclude-pattern>
+    <exclude-pattern>*.xml</exclude-pattern>
+    <exclude-pattern>*.sql</exclude-pattern>
+
+    <!-- How to scan -->
+    <arg name="colors"/>
+    <arg name="parallel" value="80"/>
+    <arg name="cache" value=".phpcs-cache"/>
+
+    <!-- Rules: Use PSR-12 as base -->
+    <rule ref="PSR12"/>
+
+    <!-- Additional rules -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="140"/>
+        </properties>
+    </rule>
+
+    <!-- Exclude some rules that might be too strict -->
+    <rule ref="PSR12.Files.FileHeader.SpacingAfterBlock">
+        <severity>0</severity>
+    </rule>
+</ruleset>

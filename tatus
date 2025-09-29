@@ -1,0 +1,8 @@
+[33m6bb5f6d1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: commit: Update company profile with latest features and improvements
+[33m1690b7db[m HEAD@{1}: commit: Create db_compro.sql
+[33m1d49f8ab[m HEAD@{2}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33mb66162e3[m HEAD@{3}: commit: Update forgot-password.blade.php
+[33m481bc6d6[m[33m ([m[1;31morigin/backup_before_overwrite[m[33m)[m HEAD@{4}: commit: Initial commit: EPBOX Engineering CMS (Laravel + SB Admin)
+[33me417ebc9[m[33m ([m[1;33mtag: [m[1;33mv11.6.1[m[33m)[m HEAD@{5}: checkout: moving from e417ebc95d76da3cbee761f0d2b77aebdf52cdc9 to main
+[33me417ebc9[m[33m ([m[1;33mtag: [m[1;33mv11.6.1[m[33m)[m HEAD@{6}: checkout: moving from 12.x to v11.6.1
+[33m84501124[m[33m ([m[1;32m12.x[m[33m)[m HEAD@{7}: clone: from C:/Users/Admin/AppData/Local/Composer/vcs/https---github.com-laravel-laravel.git/

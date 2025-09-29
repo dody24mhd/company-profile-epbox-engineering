@@ -21,6 +21,26 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
+        /* Page Loader Styles */
+        #page-loader {
+            background: linear-gradient(135deg, #0A1128 0%, #0F1C3F 70%);
+        }
+        
+        .loader-bar {
+            animation: loaderAnimation 2s ease-in-out infinite;
+        }
+        
+        @keyframes loaderAnimation {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(300%); }
+        }
+        
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
     </style>
     @yield('meta')
 

@@ -69,6 +69,6 @@ class UserController extends Controller
             $data['password'] = bcrypt($validated['password']);
         }
         $user->update($data);
-        return redirect()->route('admin.admins.index')->with('success','Admin updated');
+        return redirect()->route('admin.admins.index')->with('success', 'Admin updated');
     }
 }

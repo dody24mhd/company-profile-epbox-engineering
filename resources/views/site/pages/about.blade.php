@@ -2,7 +2,7 @@
 @section('title','About Us | Epbox Engineering')
 @section('content')
 <!-- About Hero Section -->
-<section class="about-hero pt-32 pb-20 px-6 relative fade-section">
+<section class="about-hero pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 relative fade-section">
 	<div class="interactive-bg">
 		<div class="w-16 h-16 top-20 left-10 animate-pulse"></div>
 		<div class="w-24 h-24 top-1/2 right-20 animate-pulse delay-1000"></div>
@@ -16,109 +16,182 @@
 
 	<div class="max-w-7xl mx-auto relative z-10">
 		<div class="text-center mb-16">
-			<h1 class="text-4xl md:text-6xl font-bold mb-6">
-				<span class="text-blue-300">EPBOX ENGINEERING</span>
+			<h1 class="text-4xl md:text-6xl font-bold mb-6 section-title" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">
+				<span class="text-white-300">EPBOX ENGINEERING PRIVATE LIMITED</span>
 			</h1>
 			<div class="w-32 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mb-6"></div>
-			<p class="text-xl text-gray-300 max-w-3xl mx-auto">
-				Leading manufacturer of electrical control panels and control panel systems, delivering innovative solutions for industrial automation and control applications worldwide.
+			<p class="text-xl text-white-300 max-w-3xl mx-auto" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">
+				we provide end to end solutions in industrial control, integrating advanced hardware design with intelligent programming and robust system architecture.
 			</p>
 		</div>
 
 		<!-- Quick Stats -->
-		<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
 			<div class="about-stats p-6 rounded-lg text-center">
-				<div class="about-counter" data-target="7">0</div>
+				<div class="about-counter" data-target="8">0</div>
 				<p class="text-gray-300 font-medium">Years Experience</p>
 			</div>
 			<div class="about-stats p-6 rounded-lg text-center">
-				<div class="about-counter" data-target="150">0</div>
-				<p class="text-gray-300 font-medium">Projects Completed</p>
+				<div class="about-counter" data-target="30+">0</div>
+				<p class="text-gray-300 font-medium">Projects Delivered</p>
 			</div>
 			<div class="about-stats p-6 rounded-lg text-center">
-				<div class="about-counter" data-target="40">0</div>
-				<p class="text-gray-300 font-medium">Countries Served</p>
+				<div class="about-counter" data-target="10+">0</div>
+				<p class="text-gray-300 font-medium">Number of Clients</p>
 			</div>
 			<div class="about-stats p-6 rounded-lg text-center">
-				<div class="about-counter" data-target="100">0</div>
-				<p class="text-gray-300 font-medium">Client Satisfaction %</p>
+				<div class="about-counter" data-target="123">0</div>
+				<p class="text-gray-300 font-medium">Views</p>
 			</div>
 		</div>
 	</div>
 </section>
+<!-- Our Story Modal -->
+<div id="ourStoryModal" class="fixed inset-0 z-50 hidden items-center justify-center">
+    <div id="ourStoryBackdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+    <div class="relative z-10 w-full max-w-3xl px-4">
+        <div id="ourStoryPanel" class="bg-gray-900/90 
+		backdrop-blur-lg rounded-lg p-6 md:p-8 border border-gray-700/70 shadow-2xl transform-gpu transition-all duration-300 opacity-0 translate-y-4 scale-95">
+            <div class="flex items-start justify-between mb-4">
+                <h3 class="text-2xl font-semibold text-white">ABOUT US</h3>
+                <button aria-label="Close" class="text-gray-400 hover:text-white transition" onclick="closeOurStoryModal()">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="text-gray-300 space-y-4 text-justify">
+                <p>EPBOX ENGINEERING is a trusted name in industrial automation, control systems, and intelligent panel solutions. Founded on 14 March 2017 in Singapore, the company was established with a clear vision:</p>
+                <p class="italic">“To be the one stop solution for industrial control and automation, delivering integrated services from panel design to system commissioning, and empowering global transformation.”</p>
+                <p>From our early years, we have focused on providing tailored control panels, power distribution systems, and automation solutions that meet international safety and compliance standards. Our approach has always been guided by a deep understanding of the challenges faced in mission-critical and hazardous environments, where performance and safety are essential.</p>
+                <p>In 2024, we expanded operations to Batam, Indonesia, strengthening our presence in Southeast Asia. This expansion allows us to combine localized engineering expertise and faster delivery with global compliance frameworks such as IEC, NEMA, ATEX, IECEx, NFPA, ABS, DNV, and CP5.</p>
+                <p>Today, EPBOX ENGINEERING provides end-to-end services from conceptual design, CAD drafting, and panel fabrication to PLC, HMI, and SCADA programming, FAT/SAT, and commissioning. More than a manufacturer, we see ourselves as a solutions partner, working closely with clients to develop safe, efficient, and future-ready systems. Our solutions are applied across oil & gas, marine & offshore, power generation, data centres, clean energy, and critical infrastructure, consistently supporting industries with reliable and sustainable operations. With every project, we are committed to combining engineering excellence, compliance, and innovation to deliver results that build long-term trust.</p>
+            </div>
+        </div>
+    </div>
+    <div class="sr-only" aria-live="polite"></div>
+    <script>
+        function openOurStoryModal(e){ e && e.preventDefault && e.preventDefault(); const m=document.getElementById('ourStoryModal'); const b=document.getElementById('ourStoryBackdrop'); const p=document.getElementById('ourStoryPanel'); if(!m||!b||!p) return; m.classList.remove('hidden'); m.classList.add('flex'); requestAnimationFrame(()=>{ b.classList.remove('opacity-0'); b.classList.add('opacity-100'); p.classList.remove('opacity-0','translate-y-4','scale-95'); p.classList.add('opacity-100','translate-y-0','scale-100'); }); }
+        function closeOurStoryModal(){ const m=document.getElementById('ourStoryModal'); const b=document.getElementById('ourStoryBackdrop'); const p=document.getElementById('ourStoryPanel'); if(!m||!b||!p) return; b.classList.remove('opacity-100'); b.classList.add('opacity-0'); p.classList.remove('opacity-100','translate-y-0','scale-100'); p.classList.add('opacity-0','translate-y-4','scale-95'); setTimeout(()=>{ m.classList.add('hidden'); m.classList.remove('flex'); },300); }
+        document.addEventListener('keydown',function(ev){ if(ev.key==='Escape'){ closeOurStoryModal(); }});
+        document.getElementById('ourStoryBackdrop')?.addEventListener('click', closeOurStoryModal);
+    </script>
+</div>
 
 <!-- Company Story Section -->
-<section class="py-20 px-6 bg-gray-900 relative overflow-hidden fade-section">
-	<div class="absolute inset-0 opacity-10">
-		<div class="absolute top-20 left-10 w-20 h-20 bg-blue-500 rounded-full blur-xl animate-pulse"></div>
-		<div class="absolute bottom-20 right-10 w-32 h-32 bg-blue-400 rounded-full blur-xl animate-pulse delay-1000"></div>
-	</div>
-
+<section id="our-story" class="pt-20 pb-24 md:pb-28 lg:pb-32 px-8 md:px-12 lg:px-16 mb-0 relative overflow-hidden fade-section">
+    <!-- Canvas Background (match Home style) -->
+    <canvas id="story-canvas" class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
+    <!-- Interactive Background Elements -->
+    <div class="interactive-bg">
+        <div class="w-20 h-20 top-10 right-10 animate-pulse delay-300"></div>
+        <div class="w-16 h-16 bottom-10 left-1/3 animate-pulse delay-700"></div>
+        <div class="w-28 h-28 top-1/3 right-1/4 animate-pulse delay-500"></div>
+    </div>
+    <!-- Parallax Background Elements -->
+    <div class="parallax-bg absolute inset-0 pointer-events-none">
+        <div class="absolute w-24 h-24 top-20 left-10"></div>
+        <div class="absolute w-32 h-32 bottom-20 right-10" style="animation-delay: 2s;"></div>
+        <div class="absolute w-20 h-20 top-1/2 left-1/4" style="animation-delay: 4s;"></div>
+    </div>
 	<div class="max-w-7xl mx-auto relative z-10">
-		<div class="grid lg:grid-cols-2 gap-12 items-center">
-			<div>
-				<h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-300">Our Story</h2>
-				<p class="text-gray-300 mb-6 text-lg leading-relaxed">Founded in 2017, Epbox Engineering began as a small team of passionate electrical engineers with a vision to revolutionize industrial control systems. What started as a local workshop has grown into a global leader in control panel manufacturing and system integration.</p>
-				<p class="text-gray-300 mb-6 text-lg leading-relaxed">Our journey has been marked by continuous innovation, unwavering commitment to quality, and deep understanding of industrial automation needs. Today, we serve clients across 40+ countries, delivering cutting-edge control panel solutions that drive efficiency and safety.</p>
-				<div class="flex flex-col sm:flex-row gap-4">
-					<a href="#mission" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 text-center transform hover:scale-105">Our Mission</a>
-					<a href="#team" class="bg-transparent border-2 border-blue-600 hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 text-center transform hover:scale-105">Meet Our Team</a>
+		<div class="grid lg:grid-cols-2 gap-12 items-start">
+			<div class="pb-16 md:pb-20 lg:pb-24">
+				<h2 class="text-3xl md:text-4xl font-bold mb-3 text-white section-title" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">ABOUT US</h2>
+				<div class="w-32 h-1 bg-blue-500 mb-4"></div>
+				<p class="text-gray-300 mb-6 text-lg leading-relaxed" style="text-align: justify !important; text-justify: inter-word; font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">EPBOX ENGINEERING is a trusted name in industrial automation, control systems, and 
+					intelligent panel solutions. Founded on 14 March 2017 in Singapore, the company was 
+					established with a clear vision: 
+					"To be the one stop solution for industrial control and automation, delivering integrated 
+					services from panel design to system commissioning, and empowering global 
+					transformation." </p>
+				<p class="text-gray-300 mb-4 text-lg leading-relaxed" style="text-align: justify !important; text-justify: inter-word; font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">From our early years, we have focused on providing tailored control panels, power 
+					distribution systems, and automation solutions that meet international safety and compliance 
+					standards. Our approach has always been guided by a deep understanding of the challenges 
+					faced in mission-critical and hazardous environments, where performance and safety are 
+					essential.</p>
+				<a href="#" onclick="openOurStoryModal(event)" class="inline-block text-blue-400 hover:text-blue-300 font-semibold mb-6">Read more →</a>
+				<div class="flex flex-col sm:flex-row gap-4 mb-10 md:mb-14 lg:mb-16">
+					<a href="#mission" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 text-center transform hover:scale-105">Vision & Mission</a>
+				<a href="#commitment" class="bg-transparent border-2 border-blue-600 hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 text-center transform hover:scale-105">Our Commitment</a>
 				</div>
 			</div>
-
-			<div class="about-image-gallery relative">
+			<div class="about-image-gallery relative self-start mt-12 md:mt-14">
 				<div class="absolute -top-8 left-1/2 -translate-x-1/2 w-96 h-96 md:w-[420px] md:h-[420px] bg-[radial-gradient(circle,rgba(59,130,246,0.35)_0%,rgba(59,130,246,0.12)_60%,transparent_100%)] blur-2xl z-0"></div>
-				<img src="{{ asset('img/img_asset/sunview.jpg') }}" alt="Sunview Control Panel" class="w-full h-96 object-cover rounded-lg shadow-2xl relative z-10">
+				<img src="{{ asset('img/epbox/sunview.jpg') }}" alt="Sunview Control Panel" class="w-full h-96 object-cover rounded-lg shadow-2xl relative z-10">
 				<div class="about-image-overlay"></div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!-- ISO Certification Section -->
-<section class="py-20 px-6 gradient-bg relative overflow-hidden fade-section">
-	<div class="absolute inset-0 opacity-10">
+<!-- ISO Certification Section (with Visi & Misi) -->
+<section id="mission" class="py-20 px-6 gradient-bg relative overflow-hidden fade-section">
+    <canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
+    <div class="absolute inset-0 opacity-10">
 		<div class="absolute top-20 left-10 w-20 h-20 bg-blue-500 rounded-full blur-xl animate-pulse"></div>
 		<div class="absolute bottom-20 right-10 w-32 h-32 bg-blue-400 rounded-full blur-xl animate-pulse delay-1000"></div>
 	</div>
 
-	<div class="max-w-7xl mx-auto relative z-10">
-		<div class="grid lg:grid-cols-2 gap-12 items-center">
-			<div class="order-2 lg:order-1">
+		<div class="max-w-7xl mx-auto relative z-10">
+			<!-- Visi & Misi merged into ISO section -->
+			<div class="max-w-7xl mx-auto relative z-10">
+				<div class="grid md:grid-cols-2 gap-6">
+					<!-- Vision (Left) -->
+					<div class="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-none">
+						<h3 class="text-2xl font-semibold mb-3 text-white section-title" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">Our Vision</h3>
+						<div class="w-20 h-1 bg-blue-500 mb-4"></div>
+						<p class="text-gray-200 leading-relaxed" style="text-align: justify !important; text-justify: inter-word; font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">
+							To be the one stop solution for industrial control and automation, delivering integrated services from panel design to system commissioning, empowering global transformation.
+						</p>
+					</div>
+					<!-- Mission (Right) -->
+					<div class="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-none">
+						<h3 class="text-2xl font-semibold mb-3 text-white section-title" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">Our Mission</h3>
+						<div class="w-20 h-1 bg-blue-500 mb-4"></div>
+						<p class="text-gray-200 leading-relaxed" style="text-align: justify !important; text-justify: inter-word; font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">
+							To revolutionize industries worldwide with cutting‑edge panel solutions, driving progress, growth, and connectivity toward a sustainable future.
+						</p>
+					</div>
+				</div>
+			</div>
+		<div class="grid lg:grid-cols-2 gap-12 items-center mt-12">
+				<div class="order-2 lg:order-1 self-start">
 				<div class="relative group">
 					<div class="image-gallery-container zoom-container">
 						<img src="{{ asset('img/aboutus/iso2015.jpg') }}" alt="ISO 9001:2015 Certificate" loading="lazy"
 							class="main-image zoom-image rounded-lg shadow-2xl w-full h-96 object-cover cursor-pointer slide-in">
 					</div>
+				</div>
+			</div>
 
-					<div class="absolute -bottom-6 -right-6 bg-blue-600 p-6 rounded-lg shadow-xl hover:scale-110 transition-transform duration-300 cursor-pointer">
-						<i class="fas fa-certificate text-white text-3xl"></i>
+				<div class="order-1 lg:order-2 flex flex-col self-start">
+			<h3 class="text-2xl md:text-3xl font-bold mb-4 text-white leading-snug md:leading-tight tracking-wide section-title text-left" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">ISO 9001:2015 CERTIFICATION</h3>
+					<div class="w-32 h-1 bg-blue-500 mb-6"></div>
+				<div class="mission-content">
+					<p class="text-gray-300 mb-4 text-lg leading-relaxed text-justify" style="text-align: justify !important; font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">
+						EPBOX ENGINEERING PTE. LTD is certified to ISO 9001:2015 standards, demonstrating our commitment to quality management and continuous improvement in all our processes and services.
+					</p>
+					<div class="mb-4">
+						<h4 class="text-white text-lg font-semibold mb-3" style="font-family: 'Roboto', sans-serif; font-weight: 600; letter-spacing: 0.3px;">Certification Benefits:</h4>
+						<ul class="text-gray-300 text-lg leading-relaxed" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">
+							<li class="mb-2">• Consistent quality standards</li>
+							<li class="mb-2">• Customer satisfaction focus</li>
+							<li class="mb-2">• Continuous process improvement</li>
+							<li class="mb-2">• International recognition</li>
+						</ul>
 					</div>
 				</div>
 			</div>
-
-			<div class="order-1 lg:order-2 lg:min-h-[32rem] flex flex-col">
-				<h3 class="text-2xl md:text-3xl font-bold mb-6 text-blue-300 leading-snug md:leading-tight tracking-wide">ISO 9001:2015 Certification</h3>
-				<div class="mission-content">
-					<p class="text-gray-300 mb-3 text-lg leading-relaxed text-justify" style="text-align: justify !important;">
-						Our ISO 9001:2015 certification is issued by Guardian Independent Certification Group (GIC Group Pte Ltd), an internationally accredited certification body based in Singapore.
-					</p>
-					<p class="text-gray-300 mb-3 text-lg leading-relaxed text-justify" style="text-align: justify !important;">
-						Through a comprehensive third-party audit, our quality management system has been formally recognized for the design, assembly, and testing of junction boxes, pulling boxes, signaling equipment, and control systems.
-					</p>
-					<p class="text-gray-300 mb-6 text-lg leading-relaxed text-justify" style="text-align: justify !important;">
-						This certification reflects our dedication to excellence and positions EPBOX ENGINEERING as a trusted partner for industrial automation solutions worldwide.
-					</p>
-				</div>
-			</div>
 		</div>
+
+	
 	</div>
 </section>
 
 <!-- Timeline Section -->
-<section class="py-20 px-6 relative overflow-hidden fade-section">
+<section id="journey" class="py-20 px-6 relative overflow-hidden fade-section">
+	<canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
 	<!-- Background Image -->
-	<div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ asset('img/img_asset/control_panel4.jpg') }}'); background-size: 120%;"></div>
+	<div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ asset('img/epbox/gambar1.png') }}'); background-size: 120%;"></div>
 	<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.7), rgba(15,28,63,0.9));"></div>
 	<!-- Decorative Shapes Overlay -->
 	<div class="absolute inset-0 opacity-70 pointer-events-none">
@@ -129,188 +202,96 @@
 
 	<div class="max-w-7xl mx-auto relative z-10">
 		<div class="text-center mb-16">
-			<h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-300">Our Journey</h2>
-			<div class="w-32 h-1 bg-blue-500 mx-auto mb-6"></div>
+			<h2 class="text-3xl md:text-4xl font-bold mb-3 text-blue-300 section-title" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">OUR JOURNEY</h2>
+			<div class="w-32 h-1 bg-blue-500 mx-auto mb-4"></div>
 		</div>
 		<div class="grid md:grid-cols-2 gap-12">
 			<div class="space-y-8">
 				<div class="timeline-item">
-					<h3 class="text-xl font-semibold mb-2 text-blue-300">2017 - Foundation</h3>
-					<p class="text-gray-300">Epbox Engineering was founded with a vision to revolutionize industrial control systems through innovative panel manufacturing.</p>
+					<h3 class="text-xl font-semibold mb-2 text-blue-300" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">2017 - Foundation</h3>
+					<p class="text-gray-300" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">The company started by renting a warehouse and tools, Initially, Epbox Engineering provided PLC programming services and panel design.</p>
 				</div>
 				<div class="timeline-item">
-					<h3 class="text-xl font-semibold mb-2 text-blue-300">2019 - Technology Center</h3>
-					<p class="text-gray-300">Opened our state-of-the-art technology center for advanced control panel development and testing.</p>
+					<h3 class="text-xl font-semibold mb-2 text-blue-300" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">2018 - Strategic Projects</h3>
+					<p class="text-gray-300" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">the company expanded by securing a new warehouse after winning the Google Data Center project, and also invested in new tools and hired three freelancers.</p>
 				</div>
 				<div class="timeline-item">
-					<h3 class="text-xl font-semibold mb-2 text-blue-300">2021 - Global Expansion</h3>
-					<p class="text-gray-300">Expanded operations to serve international markets, establishing partnerships across multiple continents.</p>
+					<h3 class="text-xl font-semibold mb-2 text-blue-300" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">2020 - Expansion & Major Projects</h3>
+					<p class="text-gray-300" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Completed the second Data Center and a Fire Fighting System project. Established partnerships with industry leaders and entered the oil & gas sector.</p>
 				</div>
 			</div>
 			<div class="space-y-8">
 				<div class="timeline-item">
-					<h3 class="text-xl font-semibold mb-2 text-blue-300">2022 - Digital Transformation</h3>
-					<p class="text-gray-300">Implemented IoT integration and smart manufacturing processes for enhanced efficiency and quality control.</p>
+					<h3 class="text-xl font-semibold mb-2 text-blue-300" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">2023 - Expansion into Indonesia</h3>
+					<p class="text-gray-300" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Purchased a new warehouse and officially opened operations in Indonesia, marking significant growth and expansion in Southeast Asia.</p>
 				</div>
 				<div class="timeline-item">
-					<h3 class="text-xl font-semibold mb-2 text-blue-300">2024 - ISO Certification</h3>
-					<p class="text-gray-300">Achieved ISO 9001:2015 certification, establishing our commitment to quality management and continuous improvement.</p>
+					<h3 class="text-xl font-semibold mb-2 text-blue-300" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">2024 - ISO Certification</h3>
+					<p class="text-gray-300" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Achieved ISO 9001:2015 certification establishing our commitment to quality management and continuous improvement.</p>
 				</div>
 				<div class="timeline-item">
-					<h3 class="text-xl font-semibold mb-2 text-blue-300">2024 - Industry Leadership</h3>
-					<p class="text-gray-300">Recognized as a leading manufacturer with 150+ successful projects and 40+ countries served worldwide.</p>
+					<h3 class="text-xl font-semibold mb-2 text-blue-300" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">2025 - Ongoing Growth</h3>
+					<p class="text-gray-300" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">EPBOX ENGINEERING Pte. Ltd. continues to innovate and expand its portfolio, solidifying its leadership in the industrial control systems sector.</p>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!-- Values Section -->
-<section class="py-20 px-6 gradient-bg relative overflow-hidden fade-section">
-	<div class="max-w-7xl mx-auto relative z-10">
-		<div class="text-center mb-16">
-			<h2 class="text-3xl md:text-4xl font-bold mb-6">Our Values</h2>
-			<div class="w-32 h-1 bg-white mx-auto mb-6"></div>
-		</div>
-		<div class="grid md:grid-cols-3 gap-8">
-			<div class="about-card p-8 rounded-lg text-center bg-white/10 backdrop-blur-sm border border-white/20">
-				<div class="text-blue-400 text-5xl mb-6"><i class="fas fa-lightbulb"></i></div>
-				<h3 class="text-xl font-semibold mb-4 text-white">Innovation</h3>
-				<p class="text-gray-200">Continuously developing cutting-edge control panel technologies and solutions to meet evolving industry demands and stay ahead of market trends.</p>
-			</div>
-			<div class="about-card p-8 rounded-lg text-center bg-white/10 backdrop-blur-sm border border-white/20">
-				<div class="text-blue-400 text-5xl mb-6"><i class="fas fa-shield-alt"></i></div>
-				<h3 class="text-xl font-semibold mb-4 text-white">Quality</h3>
-				<p class="text-gray-200">Maintaining the highest standards in manufacturing and testing to ensure reliable, safe, and durable control panels that exceed industry standards.</p>
-			</div>
-			<div class="about-card p-8 rounded-lg text-center bg-white/10 backdrop-blur-sm border border-white/20">
-				<div class="text-blue-400 text-5xl mb-6"><i class="fas fa-globe"></i></div>
-				<h3 class="text-xl font-semibold mb-4 text-white">Global Compliance</h3>
-				<p class="text-gray-200">Meeting regulatory requirements across multiple countries and industry-specific standards.</p>
-			</div>
-		</div>
+<!-- Why It Matters Section -->
+<section id="why-matters" class="py-20 px-6 relative overflow-hidden fade-section">
+    <!-- Canvas Background (match Home Company Profile) -->
+    <canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
+    <!-- Interactive Background Elements -->
+    <div class="interactive-bg">
+        <div class="w-16 h-16 top-20 left-10 animate-pulse"></div>
+        <div class="w-24 h-24 top-1/2 right-20 animate-pulse delay-1000"></div>
+        <div class="w-12 h-12 bottom-16 left-1/4 animate-pulse delay-500"></div>
+    </div>
+    <!-- Floating Orbs -->
+    <div class="floating-orb orb1"></div>
+    <div class="floating-orb orb2"></div>
+    <div class="floating-orb orb3"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10 text-center">
+	  <div class="mb-8">
+		<h2 class="text-3xl md:text-4xl font-bold section-title mb-3" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">BUILDING THE FUTURE TOGETHER</h2>
+		<div class="w-28 h-1 bg-blue-500 mx-auto"></div>
+	  </div>
+	  <p class="text-gray-300 max-w-4xl mx-auto text-lg leading-relaxed" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">
+		EPBOX ENGINEERING Pte. Ltd. is more than just a provider of control systems, we are innovators in intelligent, connected automation solutions. With a strong foundation in various industries, including oil & gas, utilities, and industrial plants, we are dedicated to delivering systems that ensure safety, reliability, and future readiness. Our team is driven by a passion for excellence, constantly evolving to meet the dynamic needs of our clients and the industries we serve. At EPBOX, we don't just create systems; we build lasting partnerships that drive operational success and enhance performance.
+	  </p>
+      <div class="max-w-4xl mx-auto text-center mt-6">
+		<p class="text-2xl md:text-3xl text-white leading-relaxed" style="font-family: 'Helvetica', Arial, sans-serif; font-weight: bold;">"Beyond Boundaries, We Command Control"</p>
 	</div>
-</section>
-
-<!-- Core Expertise Section -->
-<section class="py-20 px-6 bg-gray-900 relative overflow-hidden fade-section">
-	<div class="floating-orb orb1"></div>
-	<div class="floating-orb orb2"></div>
-	<div class="floating-orb orb3"></div>
-	<div class="max-w-7xl mx-auto relative z-10">
-		<div class="text-center mb-16">
-			<h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-300">Core Expertise</h2>
-			<div class="w-32 h-1 bg-blue-500 mx-auto mb-6"></div>
-		</div>
-
-		<div class="max-w-4xl mx-auto text-center mb-12">
-			<p class="text-xl text-gray-300 leading-relaxed mb-8">
-				Our expertise encompasses various technical fields that form the foundation for the success of every project. We specialize in delivering comprehensive solutions that integrate multiple disciplines seamlessly.
-			</p>
-		</div>
-
-		<!-- Core Expertise Grid -->
-		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-			<!-- I/O Mapping -->
-			<div class="expertise-card group">
-				<div class="bg-gradient-to-br from-cyan-500 to-blue-600 p-8 rounded-2xl text-center transform hover:scale-105 transition-all duration-500 hover:shadow-2xl">
-					<div class="text-white text-5xl mb-6 group-hover:rotate-12 transition-transform duration-500">
-						<i class="fas fa-sitemap"></i>
-					</div>
-					<h3 class="text-2xl font-bold text-white mb-4">I/O Mapping</h3>
-					<p class="text-blue-100 leading-relaxed">Comprehensive input-output mapping for enhanced system accuracy and functional optimization across all industrial processes.</p>
-				</div>
-			</div>
-
-			<!-- P&ID Design -->
-			<div class="expertise-card group">
-				<div class="bg-gradient-to-br from-purple-500 to-pink-600 p-8 rounded-2xl text-center transform hover:scale-105 transition-all duration-500 hover:shadow-2xl">
-					<div class="text-white text-5xl mb-6 group-hover:rotate-12 transition-transform duration-500">
-						<i class="fas fa-project-diagram"></i>
-					</div>
-					<h3 class="text-2xl font-bold text-white mb-4">P&ID Design</h3>
-					<p class="text-purple-100 leading-relaxed">Expert interpretation and implementation of Piping and Instrumentation Diagrams for seamless system integration.</p>
-				</div>
-			</div>
-
-			<!-- HMI Development -->
-			<div class="expertise-card group">
-				<div class="bg-gradient-to-br from-green-500 to-teal-600 p-8 rounded-2xl text-center transform hover:scale-105 transition-all duration-500 hover:shadow-2xl">
-					<div class="text-white text-5xl mb-6 group-hover:rotate-12 transition-transform duration-500">
-						<i class="fas fa-desktop"></i>
-					</div>
-					<h3 class="text-2xl font-bold text-white mb-4">HMI Development</h3>
-					<p class="text-green-100 leading-relaxed">Intuitive Human-Machine Interface design for effective control systems and enhanced user experience.</p>
-				</div>
-			</div>
-
-			<!-- Ex Panel Design -->
-			<div class="expertise-card group">
-				<div class="bg-gradient-to-br from-orange-500 to-red-600 p-8 rounded-2xl text-center transform hover:scale-105 transition-all duration-500 hover:shadow-2xl">
-					<div class="text-white text-5xl mb-6 group-hover:rotate-12 transition-transform duration-500">
-						<i class="fas fa-shield-alt"></i>
-					</div>
-					<h3 class="text-2xl font-bold text-white mb-4">Ex Panel Design</h3>
-					<p class="text-orange-100 leading-relaxed">Explosion-proof panel design for hazardous environments, compliant with international safety standards.</p>
-				</div>
-			</div>
-
-			<!-- Industrial Networking -->
-			<div class="expertise-card group">
-				<div class="bg-gradient-to-br from-yellow-500 to-orange-600 p-8 rounded-2xl text-center transform hover:scale-105 transition-all duration-500 hover:shadow-2xl">
-					<div class="text-white text-5xl mb-6 group-hover:rotate-12 transition-transform duration-500">
-						<i class="fas fa-network-wired"></i>
-					</div>
-					<h3 class="text-2xl font-bold text-white mb-4">Industrial Networking</h3>
-					<p class="text-yellow-100 leading-relaxed">Secure and reliable industrial network solutions ensuring uninterrupted connectivity and data transmission.</p>
-				</div>
-			</div>
-
-			<!-- Oil & Gas Solutions -->
-			<div class="expertise-card group">
-				<div class="bg-gradient-to-br from-indigo-500 to-purple-600 p-8 rounded-2xl text-center transform hover:scale-105 transition-all duration-500 hover:shadow-2xl">
-					<div class="text-white text-5xl mb-6 group-hover:rotate-12 transition-transform duration-500">
-						<i class="fas fa-oil-can"></i>
-					</div>
-					<h3 class="text-2xl font-bold text-white mb-4">Oil & Gas Solutions</h3>
-					<p class="text-indigo-100 leading-relaxed">Specialized control systems for upstream, midstream, and downstream operations with ATEX compliance and real-time monitoring.</p>
-				</div>
-			</div>
-		</div>
 	</div>
 </section>
 
 <!-- Commitment to Quality & Excellence Section -->
-<section class="py-20 px-6 cta-animated-gradient relative overflow-hidden fade-section">
-	<div class="max-w-7xl mx-auto relative z-10 text-center">
+<section id="commitment" class="py-20 px-6 cta-animated-gradient relative overflow-hidden fade-section">
+    <canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
+    <div class="max-w-7xl mx-auto relative z-10 text-center">
 		<!-- Header dengan format yang sama seperti Our Values -->
-		<div class="mb-16">
-			<h2 class="text-3xl md:text-4xl font-bold mb-6">Commitment to Quality</h2>
-			<div class="w-32 h-1 bg-white mx-auto mb-6"></div>
+		<div class="mb-8">
+			<h2 class="text-3xl md:text-4xl font-bold mb-3 section-title" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">COMMITMENT QUALITY</h2>
+			<div class="w-32 h-1 bg-white mx-auto mb-4"></div>
 		</div>
-
-		<div class="max-w-4xl mx-auto text-center mb-12">
-			<p class="text-lg text-gray-300 leading-relaxed">
-				We are committed to delivering solutions. We follow strict international standards, ensuring that the systems we install operate with maximum reliability and safety. With a comprehensive approach, from planning to implementation, we maintain quality at every stage, guaranteeing the success of every project.
-			</p>
-		</div>
-
 		<!-- Quality Pillars -->
 		<div class="grid md:grid-cols-3 gap-8 mb-12">
 			<div class="quality-pillar">
-				<div class="text-blue-400 text-4xl mb-4"><i class="fas fa-award"></i></div>
-				<h3 class="text-xl font-semibold text-white mb-3">International Standards</h3>
-				<p class="text-gray-300">Following strict international standards in design and manufacturing</p>
+				<div class="text-white text-4xl mb-4"><i class="fas fa-award"></i></div>
+				<h3 class="text-xl font-semibold text-white mb-3" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">International Standards</h3>
+				<p class="text-gray-300" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Following strict international standards in design and manufacturing</p>
 			</div>
 			<div class="quality-pillar">
-				<div class="text-blue-400 text-4xl mb-4"><i class="fas fa-shield-alt"></i></div>
-				<h3 class="text-xl font-semibold text-white mb-3">Maximum Reliability</h3>
-				<p class="text-gray-300">Ensuring systems operate with maximum reliability and safety</p>
+				<div class="text-white text-4xl mb-4"><i class="fas fa-shield-alt"></i></div>
+				<h3 class="text-xl font-semibold text-white mb-3" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">Maximum Reliability</h3>
+				<p class="text-gray-300" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Ensuring systems operate with maximum reliability and safety</p>
 			</div>
 			<div class="quality-pillar">
-				<div class="text-blue-400 text-4xl mb-4"><i class="fas fa-cogs"></i></div>
-				<h3 class="text-xl font-semibold text-white mb-3">Holistic Approach</h3>
-				<p class="text-gray-300">Quality maintained at every stage from planning to implementation</p>
+				<div class="text-white text-4xl mb-4"><i class="fas fa-cogs"></i></div>
+				<h3 class="text-xl font-semibold text-white mb-3" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">Holistic Approach</h3>
+				<p class="text-gray-300" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Quality maintained at every stage from planning to implementation</p>
 			</div>
 		</div>
 
@@ -321,112 +302,6 @@
 		</div>
 	</div>
 </section>
-
-<!-- Leadership & Teams Section - HIDDEN -->
-<!-- <section id="team" class="py-20 px-6 gradient-bg relative overflow-hidden fade-section"> -->
-<!-- <div class="max-w-7xl mx-auto relative z-10">
-		<div class="text-center mb-16">
-			<h2 class="text-3xl md:text-4xl font-bold mb-6">Our Leadership</h2>
-			<div class="w-32 h-1 bg-white mx-auto mb-6"></div>
-		</div>
-		<div class="mb-20">
-			<div class="about-card p-10 rounded-xl text-center mx-auto max-w-xl md:aspect-square flex flex-col justify-center">
-				<img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Erping Lee" class="w-36 h-36 object-cover rounded-full mx-auto mb-8 border-4 border-blue-400 shadow-lg">
-				<h3 class="text-3xl font-bold mb-4 text-blue-300">Erping Lee</h3>
-				<p class="text-blue-400 text-xl mb-6">CEO & Founder</p>
-				<p class="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">Visionary leader with a passion for industrial automation and control systems. Founded Epbox Engineering and leads the company with innovation and integrity.</p>
-			</div>
-		</div>
-
-		<div class="text-center mt-8 mb-16">
-			<h3 class="text-2xl md:text-3xl font-bold mb-6">Our Department Teams</h3>
-			<div class="w-24 h-1 bg-blue-400 mx-auto mb-6"></div>
-		</div>
-
-		<div class="mb-16">
-			<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-				<div class="about-card p-6 rounded-lg text-center flex flex-col items-center h-full">
-					<img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Anggi Simanjuntak" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
-					<h5 class="text-lg font-semibold mb-2">Anggi Simanjuntak</h5>
-					<p class="text-blue-400 mb-3">Marketing Specialist</p>
-					<p class="text-gray-300 text-sm">Creative marketing professional with expertise in industrial B2B marketing and brand development.</p>
-				</div>
-				<div class="about-card p-6 rounded-lg text-center flex flex-col items-center h-full">
-					<img src="https://randomuser.me/api/portraits/women/66.jpg" alt="Irene Tesalonika" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
-					<h5 class="text-lg font-semibold mb-2">Irene Tesalonika</h5>
-					<p class="text-blue-400 mb-3">Marketing Specialist</p>
-					<p class="text-gray-300 text-sm">Digital marketing and communications expert, focused on lead generation and client engagement.</p>
-				</div>
-				<div class="about-card p-6 rounded-lg text-center flex flex-col items-center h-full">
-					<img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Lisa Chen" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
-					<h5 class="text-lg font-semibold mb-2">Lisa Chen</h5>
-					<p class="text-blue-400 mb-3">Finance Manager</p>
-					<p class="text-gray-300 text-sm">Certified accountant with 10+ years experience in financial planning and business strategy.</p>
-				</div>
-				<div class="about-card p-6 rounded-lg text-center flex flex-col items-center h-full">
-					<img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Muhammad Dody" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
-					<h5 class="text-lg font-semibold mb-2">Muhammad Dody</h5>
-					<p class="text-blue-400 mb-3">IT Specialist</p>
-					<p class="text-gray-300 text-sm">IT infrastructure and digital security specialist, ensuring robust and reliable company systems.</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="mb-16">
-			<h4 class="text-xl font-semibold mb-8 text-center text-blue-300"><i class="fas fa-cogs mr-3"></i>Engineering Team</h4>
-			<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-				<div class="about-card p-6 rounded-lg text-center flex flex-col items-center h-full">
-					<img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Junned" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
-					<h5 class="text-lg font-semibold mb-2">Junned</h5>
-					<p class="text-blue-400 mb-3">Engineer</p>
-					<p class="text-gray-300 text-sm">Specialist in control system design and industrial automation solutions.</p>
-				</div>
-				<div class="about-card p-6 rounded-lg text-center flex flex-col items-center h-full">
-					<img src="https://randomuser.me/api/portraits/men/28.jpg" alt="Richard" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
-					<h5 class="text-lg font-semibold mb-2">Richard</h5>
-					<p class="text-blue-400 mb-3">Engineer</p>
-					<p class="text-gray-300 text-sm">Experienced in PLC programming and industrial automation systems.</p>
-				</div>
-				<div class="about-card p-6 rounded-lg text-center flex flex-col items-center h-full">
-					<img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Galih" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
-					<h5 class="text-lg font-semibold mb-2">Galih</h5>
-					<p class="text-blue-400 mb-3">Engineer</p>
-					<p class="text-gray-300 text-sm">Focused on SCADA integration and real-time monitoring solutions.</p>
-				</div>
-				<div class="about-card p-6 rounded-lg text-center flex flex-col items-center h-full">
-					<img src="https://randomuser.me/api/portraits/men/68.jpg" alt="Ryan" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
-					<h5 class="text-lg font-semibold mb-2">Ryan</h5>
-					<p class="text-blue-400 mb-3">Engineer</p>
-					<p class="text-gray-300 text-sm">Expert in IoT integration and smart manufacturing technologies.</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="mb-16">
-			<h4 class="text-xl font-semibold mb-8 text-center text-blue-300"><i class="fas fa-industry mr-3"></i>Production Team</h4>
-			<div class="grid md:grid-cols-3 gap-8 items-stretch">
-				<div class="about-card p-6 rounded-lg text-center flex flex-col items-center h-full">
-					<img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Hafidz" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
-					<h5 class="text-lg font-semibold mb-2">Hafidz</h5>
-					<p class="text-blue-400 mb-3">Production Staff</p>
-					<p class="text-gray-300 text-sm">Skilled in control panel assembly and production processes.</p>
-				</div>
-				<div class="about-card p-6 rounded-lg text-center flex flex-col items-center h-full">
-					<img src="https://randomuser.me/api/portraits/men/53.jpg" alt="Yudha" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
-					<h5 class="text-lg font-semibold mb-2">Yudha</h5>
-					<p class="text-blue-400 mb-3">Production Staff</p>
-					<p class="text-gray-300 text-sm">Experienced in quality control and production line management.</p>
-				</div>
-				<div class="about-card p-6 rounded-lg text-center flex flex-col items-center h-full">
-					<img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Bang Lea" class="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-blue-400 shadow">
-					<h5 class="text-lg font-semibold mb-2">Bang Lea</h5>
-					<p class="text-blue-400 mb-3">Leader Production</p>
-					<p class="text-gray-300 text-sm">Leader of the production team, ensuring high standards and efficient workflow.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</section> -->
 
 <!-- Chat Components (reuse global JS) -->
 <div class="chat-box" onclick="toggleChat()">

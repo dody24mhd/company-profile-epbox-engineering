@@ -1,0 +1,27 @@
+# PHPCS Ignore File
+# This file tells PHPCS to ignore certain files and directories
+
+# Blade template files
+*.blade.php
+resources/views/
+resources/views/**
+resources/views/**/*.blade.php
+
+# Other non-PHP files
+*.js
+*.css
+*.scss
+*.json
+*.md
+*.yml
+*.yaml
+*.xml
+*.sql
+
+# Vendor and build directories
+vendor/
+node_modules/
+storage/
+bootstrap/cache/
+public/build/
+public/vendor/

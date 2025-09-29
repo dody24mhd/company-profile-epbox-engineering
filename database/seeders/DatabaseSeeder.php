@@ -31,10 +31,21 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
         ]);
-        
+
         // Then migrate existing blog data
         $this->call([
             BlogMigrationSeeder::class,
         ]);
+
+        // Seed projects
+        $this->call([
+            ProjectSeeder::class,
+        ]);
+
+        // Seed products
+        $this->call([
+            ProductSeeder::class,
+        ]);
+
     }
 }

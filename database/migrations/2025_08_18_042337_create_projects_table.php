@@ -15,8 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('title'); // Project Title
             $table->text('description'); // Project Description
-            $table->string('img'); // Image (Filepath or URL)
-            $table->string('categories'); // Categories (You can store this as a comma-separated string or use a relation)
+            $table->string('img')->nullable(); // Image (Filepath or URL)
+            $table->string('categories'); // Categories (slug format)
+            $table->string('status')->default('published'); // published, draft, archived
+            $table->string('client')->nullable(); // Client name
+            $table->string('year')->nullable(); // Year completed
+            $table->json('technologies')->nullable(); // Technologies used (array)
+            $table->boolean('is_featured')->default(false); // Featured project
             $table->timestamps();
         });
     }

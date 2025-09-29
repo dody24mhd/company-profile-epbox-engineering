@@ -434,26 +434,26 @@ let slideInterval;
 // Slide content data
 const slideData = [
     {
-        title: 'Professional <span class="text-blue-300">Panel Manufacturing</span><br>& Control System Solutions',
-        description: 'Reliable, custom‑built control panels engineered for performance and compliance — from concept to commissioning.',
+        title: 'Professional <span class="text-blue-300">Panel Integration</span><br>& Smart Control Systems',
+        description: 'Custom built control panels and seamless system integration engineered for performance and compliance from design to commissioning.',
         buttons: [
             { text: 'Get a Quote', href: '/contact', primary: true },
-            { text: 'Our Expertise', href: '#about', primary: false }
+            { text: 'Our Capabilities', href: '#offer-services', primary: false }
         ]
     },
     {
-        title: 'Advanced <span class="text-blue-300">Industrial Automation</span><br>& Smart Control Systems',
-        description: 'PLC/SCADA integration, secure industrial networking, and turnkey delivery for mission‑critical operations.',
+        title: 'Advanced <span class="text-blue-300">Industrial Control Systems</span><br>& Automation Integration Solutions',
+        description: 'Empowering industries with integrated control and automation systems that streamline operations and enhance performance.',
         buttons: [
-            { text: 'See Services', href: '#services', primary: true },
-            { text: 'Industries', href: '#industries', primary: false }
+            { text: 'See Services', href: '/services', primary: true },
+            { text: 'Industries', href: '/industries', primary: false }
         ]
     },
     {
-        title: 'Custom <span class="text-blue-300">Engineering Solutions</span><br>& Quality Manufacturing',
-        description: 'ISO 9001:2015 quality, ATEX/offshore compliance, and responsive support — beyond boundaries, we command control.',
+        title: 'Custom <span class="text-blue-300">Control Systems</span><br>Engineering Solutions',
+        description: 'ISO 9001:2015 certified, ATEX and offshore compliant, engineered for performance and safety in challenging environments.',
         buttons: [
-            { text: 'View Projects', href: '/portfolio', primary: true },
+            { text: 'Our Project', href: '/portfolio', primary: true },
             { text: 'Talk to Expert', href: '/contact', primary: false }
         ]
     }
@@ -518,7 +518,13 @@ function updateHeroContent(slideIndex) {
 
     // Immediate update (avoid flicker)
     heroTitle.innerHTML = data.title;
+    heroTitle.style.fontFamily = "'Roboto', sans-serif";
+    heroTitle.style.fontWeight = "900";
+    heroTitle.style.letterSpacing = "0.5px";
     heroDescription.textContent = data.description;
+    heroDescription.style.fontFamily = "'Roboto', sans-serif";
+    heroDescription.style.fontWeight = "300";
+    heroDescription.style.letterSpacing = "0.3px";
 
     // Update buttons
     heroButtons.innerHTML = data.buttons.map(button => {
@@ -794,9 +800,9 @@ const sliderIndicators = document.querySelectorAll('.slider-indicator');
 
 // Image array for auto-slider
 const images = [
-    '/img/logo_login.jpg',
-    '/img/aboutus/aboutus2.jpg',
-    '/img/aboutus/aboutus3.jpg'
+    '/img/epbox/gambar18.png',
+    '/img/epbox/gambar33.png',
+    '/img/epbox/gambar26.png'
 ];
 
 let currentImageIndex = 0;
@@ -805,13 +811,24 @@ let autoSliderInterval;
 function changeImage(src, index = null) {
     if (!mainImage) return;
 
+    // Smooth fade out transition
+    mainImage.style.transition = 'opacity 0.4s ease-in-out, transform 0.4s ease-in-out';
+    mainImage.style.opacity = '0';
+    mainImage.style.transform = 'scale(0.95)';
+
+    setTimeout(() => {
+        // Update main image
+        mainImage.src = src;
+        
+        // Smooth fade in transition
+        mainImage.style.opacity = '1';
+        mainImage.style.transform = 'scale(1)';
+
     // Add slide-in animation
     mainImage.classList.remove('slide-in');
     void mainImage.offsetWidth; // Trigger reflow
     mainImage.classList.add('slide-in');
-
-    // Update main image
-    mainImage.src = src;
+    }, 200);
 
     // Update current index
     if (index !== null) {
@@ -851,8 +868,8 @@ function startAutoSlider() {
         clearInterval(autoSliderInterval);
     }
 
-    // Start new interval (change image every 4 seconds)
-    autoSliderInterval = setInterval(nextImage, 4000);
+    // Start new interval (change image every 3 seconds)
+    autoSliderInterval = setInterval(nextImage, 3000);
 }
 
 function stopAutoSlider() {
@@ -878,6 +895,51 @@ document.addEventListener('DOMContentLoaded', function () {
             changeImage(images[index], index);
         });
     });
+});
+
+// Global init: tippy tooltips and map/gallery auto-swap
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize tippy tooltips if library is present
+    if (window.tippy) {
+        const initTippy = () => window.tippy('.tippy', { theme: 'light', arrow: true });
+        initTippy();
+        const observer = new MutationObserver(() => initTippy());
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    // Map auto swap: alternate between map and work footage images every 5s
+    const mapImg = document.getElementById('company-map-img');
+    if (mapImg) {
+        const mapInner = mapImg.closest('.map-inner');
+        let list = [];
+        try {
+            list = JSON.parse(mapImg.getAttribute('data-images') || '[]');
+        } catch (e) {}
+        const images = (Array.isArray(list) && list.length ? list : [mapImg.src]).map(src => src);
+        const mapUrl = images[0]; // assume first is the map
+        let idx = 0;
+        if (images.length > 1) {
+            setInterval(() => {
+                idx = (idx + 1) % images.length;
+                mapImg.style.transition = 'opacity .35s ease';
+                mapImg.style.opacity = '0';
+                setTimeout(() => {
+                    mapImg.src = images[idx];
+                    mapImg.style.opacity = '1';
+                    // Adjust sizing per type (map vs footage)
+                    if (images[idx] === mapUrl) {
+                        // lock map size
+                        mapImg.style.height = '19rem';
+                        if (mapInner) mapInner.style.transform = 'scale(1.25)';
+                    } else {
+                        // footage smaller
+                        mapImg.style.height = '16rem';
+                        if (mapInner) mapInner.style.transform = 'scale(1)';
+                    }
+                }, 180);
+            }, 5000);
+        }
+    }
 });
 
 // Fade in animation on scroll
@@ -1307,3 +1369,259 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// Industries section canvas background (vanilla, no GSAP)
+(function () {
+	const section = document.getElementById('industries');
+	const canvas = document.getElementById('x-canvas');
+	if (!section || !canvas) return;
+
+	const ctx = canvas.getContext('2d');
+	let width = 0;
+	let height = 0;
+	let points = [];
+	let target = { x: 0, y: 0 };
+	let animate = true;
+
+	function rand(min, max) {
+		return Math.random() * (max - min) + min;
+	}
+
+	function distance2(a, b) {
+		const dx = a.x - b.x;
+		const dy = a.y - b.y;
+		return dx * dx + dy * dy;
+	}
+
+	function layout() {
+		const rect = section.getBoundingClientRect();
+		width = Math.max(300, Math.floor(rect.width));
+		height = Math.max(300, Math.floor(rect.height));
+		canvas.width = width;
+		canvas.height = height;
+
+		// Build points grid
+		points = [];
+		const cells = 20; // density
+		for (let x = 0; x < width; x += width / cells) {
+			for (let y = 0; y < height; y += height / cells) {
+				const px = x + Math.random() * (width / cells);
+				const py = y + Math.random() * (height / cells);
+				points.push({
+					x: px,
+					y: py,
+					originX: px,
+					originY: py,
+					tx: px,
+					ty: py,
+					start: 0,
+					dur: 0,
+					r: 1.5 + Math.random() * 1.5,
+					closest: [],
+					active: 0,
+					car: 0,
+				});
+			}
+		}
+
+		// Find 5 closest neighbors
+		for (let i = 0; i < points.length; i++) {
+			const p1 = points[i];
+			const clos = [];
+			for (let j = 0; j < points.length; j++) {
+				if (i === j) continue;
+				const p2 = points[j];
+				if (clos.length < 5) {
+					clos.push(p2);
+					clos.sort((a, b) => distance2(p1, a) - distance2(p1, b));
+				} else if (distance2(p1, p2) < distance2(p1, clos[4])) {
+					clos[4] = p2;
+					clos.sort((a, b) => distance2(p1, a) - distance2(p1, b));
+				}
+			}
+			p1.closest = clos;
+			assignNewTarget(p1);
+		}
+	}
+
+	function assignNewTarget(p) {
+		p.tx = p.originX + rand(-40, 40);
+		p.ty = p.originY + rand(-40, 40);
+		p.start = performance.now();
+		p.dur = rand(1200, 2200);
+	}
+
+	function updatePoint(p, now) {
+		const t = Math.min(1, (now - p.start) / p.dur);
+		// ease in-out (approximate)
+		const e = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+		p.x = p.x + (p.tx - p.x) * e;
+		p.y = p.y + (p.ty - p.y) * e;
+		if (t >= 1) assignNewTarget(p);
+	}
+
+	function draw(now) {
+		if (!animate) return;
+		ctx.clearRect(0, 0, width, height);
+
+		for (let i = 0; i < points.length; i++) {
+			const p = points[i];
+			updatePoint(p, now);
+
+			// activity based on cursor distance
+			const d2 = distance2(target, p);
+			if (d2 < 4000) {
+				p.active = 0.3; // line alpha
+				p.car = 0.6; // circle alpha
+			} else if (d2 < 20000) {
+				p.active = 0.12;
+				p.car = 0.35;
+			} else if (d2 < 40000) {
+				p.active = 0.04;
+				p.car = 0.15;
+			} else {
+				p.active = 0;
+				p.car = 0;
+			}
+
+			// lines
+			if (p.active > 0) {
+				for (let k = 0; k < p.closest.length; k++) {
+					const c = p.closest[k];
+					ctx.beginPath();
+					ctx.moveTo(p.x, p.y);
+					ctx.lineTo(c.x, c.y);
+					ctx.strokeStyle = 'rgba(95,205,255,' + p.active + ')';
+					ctx.stroke();
+				}
+			}
+			// circle
+			if (p.car > 0) {
+				ctx.beginPath();
+				ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+				ctx.fillStyle = 'rgba(95,205,255,' + p.car + ')';
+				ctx.fill();
+			}
+		}
+
+		requestAnimationFrame(draw);
+	}
+
+	function onMouseMove(e) {
+		const rect = section.getBoundingClientRect();
+		target.x = e.clientX - rect.left;
+		target.y = e.clientY - rect.top;
+	}
+
+	function onScroll() {
+		const rect = section.getBoundingClientRect();
+		// pause when off-screen
+		animate = rect.bottom > 0 && rect.top < window.innerHeight;
+		if (animate) requestAnimationFrame(draw);
+	}
+
+	function onResize() {
+		layout();
+	}
+
+	// init
+	layout();
+	target.x = width / 2; target.y = height / 2;
+	requestAnimationFrame(draw);
+
+	// listeners
+	if (!('ontouchstart' in window)) {
+		section.addEventListener('mousemove', onMouseMove, { passive: true });
+	}
+	window.addEventListener('scroll', onScroll, { passive: true });
+	window.addEventListener('resize', onResize);
+})();
+
+// Generic canvas network for any .x-canvas-net inside a section
+(function () {
+	const canvases = Array.from(document.querySelectorAll('section .x-canvas-net'));
+	if (!canvases.length) return;
+
+	canvases.forEach((canvas) => initCanvasNet(canvas));
+
+	function initCanvasNet(canvas){
+		const section = canvas.closest('section');
+		if (!section) return;
+		const ctx = canvas.getContext('2d');
+		let width = 0, height = 0, points = [], target = {x:0,y:0}, running = true;
+
+		function d2(a,b){const dx=a.x-b.x, dy=a.y-b.y; return dx*dx+dy*dy}
+		function rnd(min,max){return Math.random()*(max-min)+min}
+
+		function layout(){
+			const rect = section.getBoundingClientRect();
+			width = Math.max(300, Math.floor(rect.width));
+			height = Math.max(300, Math.floor(rect.height));
+			canvas.width = width; canvas.height = height;
+			points = [];
+			const cells = 20;
+			for (let x=0; x<width; x+= width/cells){
+				for (let y=0; y<height; y+= height/cells){
+					const px = x + Math.random()*(width/cells);
+					const py = y + Math.random()*(height/cells);
+					points.push({x:px,y:py,ox:px,oy:py,tx:px,ty:py,start:0,dur:0,r:1.5+Math.random()*1.5,closest:[],la:0,ca:0});
+				}
+			}
+			for (let i=0;i<points.length;i++){
+				const p1 = points[i]; const clos=[];
+				for (let j=0;j<points.length;j++){ if(i===j) continue; const p2=points[j];
+					if (clos.length<5){ clos.push(p2); clos.sort((a,b)=>d2(p1,a)-d2(p1,b)); }
+					else if (d2(p1,p2) < d2(p1,clos[4])){ clos[4]=p2; clos.sort((a,b)=>d2(p1,a)-d2(p1,b)); }
+				}
+				p1.closest = clos; assign(p1);
+			}
+		}
+		function assign(p){ p.tx=p.ox+rnd(-40,40); p.ty=p.oy+rnd(-40,40); p.start=performance.now(); p.dur=rnd(1200,2200); }
+		function step(p,now){ const t=Math.min(1,(now-p.start)/p.dur); const e=t<.5?2*t*t:-1+(4-2*t)*t; p.x+= (p.tx-p.x)*e; p.y+= (p.ty-p.y)*e; if(t>=1) assign(p); }
+		function draw(now){ if(!running) return; ctx.clearRect(0,0,width,height);
+			for (let i=0;i<points.length;i++){ const p=points[i]; step(p,now); const dis=d2(target,p);
+				if (dis<4000){p.la=.3; p.ca=.6} else if (dis<20000){p.la=.12; p.ca=.35} else if (dis<40000){p.la=.04; p.ca=.15} else {p.la=0; p.ca=0}
+				if (p.la>0){ for (let k=0;k<p.closest.length;k++){ const c=p.closest[k]; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(c.x,c.y); ctx.strokeStyle='rgba(95,205,255,'+p.la+')'; ctx.stroke(); }}
+				if (p.ca>0){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(95,205,255,'+p.ca+')'; ctx.fill(); }
+			}
+			requestAnimationFrame(draw);
+		}
+		function onMouse(e){ const r=section.getBoundingClientRect(); target.x=e.clientX-r.left; target.y=e.clientY-r.top; }
+		function onScroll(){ const r=section.getBoundingClientRect(); running = r.bottom>0 && r.top<window.innerHeight; if(running) requestAnimationFrame(draw); }
+		function onResize(){ layout(); }
+		layout(); target.x=width/2; target.y=height/2; requestAnimationFrame(draw);
+		if (!('ontouchstart' in window)) section.addEventListener('mousemove', onMouse, {passive:true});
+		window.addEventListener('scroll', onScroll, {passive:true});
+		window.addEventListener('resize', onResize);
+	}
+})();
+
+// Text-on-Media: simple intersection observer reveal
+(function(){
+	const els = document.querySelectorAll('.tom-block');
+	if(!els.length) return;
+	const io = new IntersectionObserver((entries)=>{
+		entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+	},{ threshold:.2 });
+	els.forEach(el=>io.observe(el));
+})();
+
+// TOM Slider controller
+(function(){
+	const sliders = document.querySelectorAll('.tom-slider');
+	if(!sliders.length) return;
+	sliders.forEach(slider=>{
+		const track = slider.querySelector('.tom-track');
+		const slides = slider.querySelectorAll('.tom-slide');
+		const prev = slider.querySelector('.tom-prev');
+		const next = slider.querySelector('.tom-next');
+		let idx = 0, startX = 0, dx = 0, dragging = false;
+		function go(i){ idx = (i+slides.length)%slides.length; track.style.transform = `translateX(-${idx*100}%)`; }
+		prev?.addEventListener('click', ()=>go(idx-1));
+		next?.addEventListener('click', ()=>go(idx+1));
+		track.addEventListener('touchstart', e=>{ dragging=true; startX = e.touches[0].clientX; dx=0; }, {passive:true});
+		track.addEventListener('touchmove', e=>{ if(!dragging) return; dx = e.touches[0].clientX - startX; }, {passive:true});
+		track.addEventListener('touchend', ()=>{ if(Math.abs(dx)>50){ go(idx + (dx>0?-1:1)); } dragging=false; dx=0; }, {passive:true});
+		go(0);
+	});
+})();

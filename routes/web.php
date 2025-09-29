@@ -49,9 +49,10 @@ Route::name('site.')->group(function () {
     Route::get('/about', [PageController::class, 'about'])->name('about');
     Route::get('/services', [PageController::class, 'services'])->name('services');
     Route::get('/industries', [PageController::class, 'industries'])->name('industries');
+    Route::get('/industries/oil-gas', [PageController::class, 'oilGas'])->name('industries.oil-gas');
     Route::get('/contact', [PageController::class, 'contact'])->name('contact');
-    Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
-    Route::get('/portfolio/{project}', [PortfolioController::class, 'show'])->name('portfolio.show');
+        Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
+        Route::get('/portfolio/{project}', [PortfolioController::class, 'show'])->name('portfolio.show');
     Route::get('/blog', [PageController::class, 'blog'])->name('blog');
     // Particles test page
     Route::view('/particles-test', 'site.pages.particles-test')->name('particles.test');
@@ -59,6 +60,22 @@ Route::name('site.')->group(function () {
     Route::view('/three-test', 'site.pages.three-test')->name('three.test');
     // Control Panel 3D test page
     Route::view('/control-panel-test', 'site.pages.control-panel-test')->name('controlpanel.test');
+
+    // Service detail pages (static views)
+    Route::view('/service/control', 'site.service.control')->name('service.control');
+    Route::view('/service/automation', 'site.service.automation')->name('service.automation');
+    Route::view('/service/system', 'site.service.system')->name('service.system');
+    Route::view('/service/engineering', 'site.service.engineering')->name('service.engineering');
+    Route::view('/service/safety', 'site.service.safety')->name('service.safety');
+    Route::view('/service/compliance', 'site.service.compliance')->name('service.compliance');
+
+    // Product detail pages (static views)
+    Route::view('/product/plc', 'site.product.plc')->name('product.plc');
+    Route::view('/product/power', 'site.product.power')->name('product.power');
+    Route::view('/product/motor', 'site.product.motor')->name('product.motor');
+    Route::view('/product/scada', 'site.product.scada')->name('product.scada');
+    Route::view('/product/safety', 'site.product.safety')->name('product.safety');
+    Route::view('/product/panels', 'site.product.panels')->name('product.panels');
 });
 
 // Default authenticated dashboard route: redirect to admin dashboard if admin
@@ -74,8 +91,8 @@ Route::get('/admin', function () {
     return redirect()->route('admin.dashboard');
 })->middleware(['auth', 'is_admin']);
 
-// Admin-only profile routes (no public users)
-Route::middleware(['auth', 'is_admin'])->group(function () {
+
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile/show', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
