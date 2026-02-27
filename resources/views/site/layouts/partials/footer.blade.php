@@ -5,26 +5,18 @@
             <div>
                 <h3 class="text-xl font-semibold text-white mb-4">
                     <a href="{{ route('site.home') }}" class="inline-flex items-center">
-                        <img src="{{ asset('img/logo2.png') }}" alt="EPBOX ENGINEERING" class="h-12 w-auto object-cover object-center" loading="lazy">
+                        <img src="{{ asset('img/logo2.png') }}" alt="Epbox Engineering Pte. Ltd." class="h-12 w-auto object-cover object-center" loading="lazy">
                     </a>
                 </h3>
-                <p class="mb-4">
-                    We provide end to end solutions in industrial 
-                    control, integrating advanced hardware design 
-                    and robust system architecture.
+                <p class="mb-4 text-lg sm:text-xl">
+                    "Beyond Boundaries,<br> We Command Control"
                 </p>
-                <div class="flex space-x-4">
-                    <a href="https://linkedin.com/company/epbox-engineering" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors">
-                        <i class="fab fa-linkedin text-xl"></i>
+                <div class="flex justify-start space-x-4">
+                    <a href="https://www.linkedin.com/company/epbox-engineering" target="_blank" aria-label="LinkedIn" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <i class="fab fa-linkedin text-3xl"></i>
                     </a>
-                    <a href="https://twitter.com/epbox_engineering" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="https://facebook.com/epboxengineering" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors">
-                        <i class="fab fa-facebook text-xl"></i>
-                    </a>
-                    <a href="https://youtube.com/@epboxengineering" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors">
-                        <i class="fab fa-youtube text-xl"></i>
+                    <a href="https://www.instagram.com/epboxengg/" target="_blank" aria-label="Instagram" class="text-gray-400 hover:text-pink-400 transition-colors">
+                        <i class="fab fa-instagram text-3xl"></i>
                     </a>
                 </div>
             </div>
@@ -45,7 +37,7 @@
                 <ul class="space-y-2">
                     <li><a href="{{ route('site.about') }}" class="hover:text-blue-400 transition-colors">About Us</a></li>
                     <li><a href="{{ route('site.portfolio.index') }}" class="hover:text-blue-400 transition-colors">Projects</a></li>
-                    <li><a href="{{ route('site.blog') }}" class="hover:text-blue-400 transition-colors">Blog</a></li>
+                    <li><a href="{{ route('blog.index') }}" class="hover:text-blue-400 transition-colors">Blog</a></li>
                     <li><a href="#downloads" class="hover:text-blue-400 transition-colors">Downloads</a></li>
                 </ul>
             </div>
@@ -82,11 +74,12 @@
         <div class="pt-6 border-t border-gray-800">
             <div class="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
                 <p class="text-center md:text-left text-sm">
-                    © {{ date('Y') }} Epbox Engineering. All rights reserved.
+                    © {{ date('Y') }} EPBOX ENGINEERING PTE. LTD. All rights reserved.
                 </p>
                 <div class="flex space-x-4 text-sm">
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">Terms of Service</a>
+                    <a href="{{ route('site.privacy') }}" class="text-gray-400 hover:text-blue-400 transition-colors">Privacy Policy</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="{{ route('site.terms') }}" class="text-gray-400 hover:text-blue-400 transition-colors">Terms of Service</a>
                 </div>
             </div>
         </div>

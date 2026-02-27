@@ -139,7 +139,7 @@
                     <div class="col-12 col-md-4">
                         <div class="feature-item h-100">
                             <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                            <div class="feature-title">Electrical Control</div>
+                            <div class="feature-title">Electrical Control Electrical </div>
                             <p class="feature-desc">Power distribution & protection systems</p>
                                         </div>
                                     </div>

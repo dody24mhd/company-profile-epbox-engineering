@@ -14,7 +14,7 @@
         <p class="text-gray-300" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">All Explosion Proof Panels are designed and fabricated using Aluminum or SS316 enclosures.</p>
       </div>
       <div class="relative">
-        <img src="{{ asset('img/epbox/gambar12.png') }}" alt="Compliance & Certifications" class="w-full h-80 object-cover rounded-lg shadow-2xl">
+        <img src="{{ asset('img/epbox2/gambar12.webp') }}" alt="Compliance & Certifications" class="w-full h-80 object-cover rounded-lg shadow-2xl">
         <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
       </div>
     </div>
@@ -65,7 +65,7 @@
         </div>
       </div>
       <div class="space-y-8">
-        <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6">
+        <div class="bg-gray-800/50 backdrop-blur-sm p-6">
           <h3 class="text-xl font-bold mb-4 text-blue-300" style="font-family: 'Roboto', sans-serif; font-weight: 600; letter-spacing: 0.3px;">Service Information</h3>
           <div class="space-y-4">
             <div class="border-b border-gray-600 pb-3">
@@ -81,7 +81,7 @@
             </div>
           </div>
         </div>
-        <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg p-6 text-center">
+        <div class="bg-gradient-to-br from-blue-600/20 to-blue-700/20 p-6 text-center">
           <h3 class="text-xl font-bold mb-3 text-white" style="font-family: 'Roboto', sans-serif; font-weight: 600; letter-spacing: 0.3px;">Need this Service?</h3>
           <p class="text-blue-100 mb-4" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Talk to our engineers for a tailored solution</p>
           <a href="{{ route('site.contact') }}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors" style="font-family: 'Roboto', sans-serif; font-weight: 600; letter-spacing: 0.3px;">Get Quote</a>

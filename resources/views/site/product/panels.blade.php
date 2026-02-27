@@ -18,7 +18,7 @@
           Designing and fabricating smart, durable, and fully customized control panels tailored to your specific operational requirements for industrial automation, process control, or safety monitoring, our panels are engineered to provide optimal performance and reliability.</p>
       </div>
       <div class="relative flex justify-center">
-        <img src="{{ asset('img/epbox/Picture6.png') }}" alt="PLC & HMI Programming"
+        <img src="{{ asset('img/epbox2/Picture6.webp') }}" alt="PLC & HMI Programming"
           class="w-80 h-50 object-cover rounded-lg shadow-2xl">
         <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
       </div>
@@ -71,7 +71,7 @@
       <!-- Sidebar -->
       <div class="space-y-8">
         <div class="bg-white backdrop-blur-sm rounded-lg p-6">
-          <img src="{{ asset('img/epbox/PLC.png') }}" alt="PLC Image" class="plc-img w-full h-auto rounded-lg shadow-lg object-cover">
+          <img src="{{ asset('img/epbox2/PLC.webp') }}" alt="PLC Image" class="plc-img w-full h-auto rounded-lg shadow-lg object-cover">
         </div>
         <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg p-6 text-center">
           <h3 class="text-xl font-bold mb-3 text-white"

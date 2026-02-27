@@ -6,7 +6,8 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-white">EPBOX ENGINEERING Dashboard</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 </div>
 
 <!-- Welcome User -->
@@ -22,7 +23,7 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 
 <!-- Recent Items Row -->
 <div class="row">
@@ -216,7 +217,8 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Testimonials</div>
-                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ \App\Models\Testimonial::count() }}</div>
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ \App\Models\Testimonial::count() }}
+                        </div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-comment-dots fa-2x text-gray-300"></i>
@@ -298,11 +300,13 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <span class="text-muted">Last 7 days</span>
-                        <span class="font-weight-bold">{{ \App\Models\Contact::where('created_at','>=',now()->subDays(7))->count() }}</span>
+                        <span class="font-weight-bold">{{
+                            \App\Models\Contact::where('created_at','>=',now()->subDays(7))->count() }}</span>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <span class="text-muted">Last 30 days</span>
-                        <span class="font-weight-bold">{{ \App\Models\Contact::where('created_at','>=',now()->subDays(30))->count() }}</span>
+                        <span class="font-weight-bold">{{
+                            \App\Models\Contact::where('created_at','>=',now()->subDays(30))->count() }}</span>
                     </div>
                 </div>
             </div>

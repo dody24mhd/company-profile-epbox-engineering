@@ -16,7 +16,7 @@
         <p class="text-gray-300" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">We provide end-to-end engineering support throughout the project lifecycle, ensuring that your system is designed, tested, commissioned, and optimized for peak performance.</p>
       </div>
       <div class="relative">
-        <img src="{{ asset('img/epbox/gambar8.png') }}" alt="Automation Integration" class="w-full h-80 object-cover rounded-lg shadow-2xl">
+        <img src="{{ asset('img/epbox2/gambar8.webp') }}" alt="Automation Integration" class="w-full h-80 object-cover rounded-lg shadow-2xl">
         <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
       </div>
     </div>
@@ -59,10 +59,10 @@
 
       <!-- Sidebar -->
       <div class="space-y-8">
-        <div class="bg-white backdrop-blur-sm rounded-lg p-6">
-          <img src="{{ asset('img/epbox/PLC.png') }}" alt="PLC Image" class="plc-img w-full h-auto rounded-lg shadow-lg object-cover">
+        <div class="bg-white backdrop-blur-sm p-6">
+          <img src="{{ asset('img/epbox2/PLC.webp') }}" alt="PLC Image" class="plc-img w-full h-auto rounded-lg shadow-lg object-cover">
         </div>
-        <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg p-6 text-center">
+        <div class="bg-gradient-to-br from-blue-600/20 to-blue-700/20 p-6 text-center">
           <h3 class="text-xl font-bold mb-3 text-white"
             style="font-family: 'Roboto', sans-serif; font-weight: 600; letter-spacing: 0.3px;">Interested in this
             service?</h3>

@@ -12,18 +12,13 @@ class Project extends Model
     protected $fillable = [
         'title',
         'description',
-        'img',
         'categories',
         'status',
-        'client',
-        'year',
-        'technologies',
         'is_featured'
     ];
 
     protected $casts = [
-        'is_featured' => 'boolean',
-        'technologies' => 'array'
+        'is_featured' => 'boolean'
     ];
 
     /**

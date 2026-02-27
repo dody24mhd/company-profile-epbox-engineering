@@ -20,7 +20,7 @@ class BlogController extends Controller
 
         // Start building the query
         $query = Blog::with('category')
-                    ->where('status', 'published')
+                    ->where('is_published', true)
                     ->orderBy('created_at', 'desc');
 
         // Apply category filter
@@ -42,21 +42,14 @@ class BlogController extends Controller
         // Get paginated results
         $blogs = $query->paginate(12);
 
-        // Get featured blog (most recent)
-        $featuredBlog = Blog::with('category')
-                           ->where('status', 'published')
-                           ->where('is_featured', true)
-                           ->orderBy('created_at', 'desc')
-                           ->first();
-
         // Get categories with blog count
         $categories = Category::withCount(['blogs' => function ($query) {
-            $query->where('status', 'published');
+            $query->where('is_published', true);
         }])->orderBy('name')->get();
 
         // Get recent blogs for sidebar
         $recentBlogs = Blog::with('category')
-                          ->where('status', 'published')
+                          ->where('is_published', true)
                           ->orderBy('created_at', 'desc')
                           ->limit(3)
                           ->get();
@@ -64,9 +57,8 @@ class BlogController extends Controller
         // Get popular tags
         $popularTags = $this->getPopularTags();
 
-        return view('site.blog', compact(
+        return view('site.pages.blog.index', compact(
             'blogs',
-            'featuredBlog',
             'categories',
             'recentBlogs',
             'popularTags'
@@ -79,19 +71,19 @@ class BlogController extends Controller
     public function show($id)
     {
         $blog = Blog::with('category')
-                    ->where('status', 'published')
+                    ->where('is_published', true)
                     ->findOrFail($id);
 
         // Get related blogs
         $relatedBlogs = Blog::with('category')
-                           ->where('status', 'published')
+                           ->where('is_published', true)
                            ->where('id', '!=', $id)
                            ->where('category_id', $blog->category_id)
                            ->orderBy('created_at', 'desc')
                            ->limit(3)
                            ->get();
 
-        return view('site.blog-detail', compact('blog', 'relatedBlogs'));
+        return view('site.pages.blog.show', compact('blog', 'relatedBlogs'));
     }
 
     /**
@@ -154,7 +146,7 @@ class BlogController extends Controller
     public function getBlogApi($id)
     {
         $blog = Blog::with('category')
-                    ->where('status', 'published')
+                    ->where('is_published', true)
                     ->findOrFail($id);
 
         return response()->json([
@@ -182,7 +174,7 @@ class BlogController extends Controller
         }
 
         $blogs = Blog::with('category')
-                    ->where('status', 'published')
+                    ->where('is_published', true)
                     ->where(function ($query) use ($search) {
                         $query->where('title', 'like', "%{$search}%")
                               ->orWhere('content', 'like', "%{$search}%")

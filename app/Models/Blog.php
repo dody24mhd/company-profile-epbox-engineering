@@ -21,7 +21,7 @@ class Blog extends Model
         'img', // Keep for backward compatibility
         'category_id',
         'author',
-        'status',
+        'is_published',
         'is_featured',
         'meta_title',
         'meta_description',
@@ -32,6 +32,7 @@ class Blog extends Model
     ];
 
     protected $casts = [
+        'is_published' => 'boolean',
         'is_featured' => 'boolean',
         'published_at' => 'datetime',
         'date_publish' => 'date',
@@ -50,7 +51,7 @@ class Blog extends Model
      */
     public function scopePublished($query)
     {
-        return $query->where('status', 'published');
+        return $query->where('is_published', true);
     }
 
     /**
@@ -69,7 +70,16 @@ class Blog extends Model
         // If image_url is set, use it
         if ($value) {
             if (!str_starts_with($value, 'http')) {
-                return asset('storage/' . $value);
+                // If it already has /storage/ prefix, use as is
+                if (str_starts_with($value, '/storage/')) {
+                    return asset($value);
+                }
+                // If it's a storage path without prefix, add it
+                if (str_starts_with($value, 'storage/')) {
+                    return asset('/' . $value);
+                }
+                // Otherwise treat as public path
+                return asset($value);
             }
             return $value;
         }
@@ -77,7 +87,16 @@ class Blog extends Model
         // Fallback to old 'img' field
         if ($this->img) {
             if (!str_starts_with($this->img, 'http')) {
-                return asset('storage/' . $this->img);
+                // If it already has /storage/ prefix, use as is
+                if (str_starts_with($this->img, '/storage/')) {
+                    return asset($this->img);
+                }
+                // If it's a storage path without prefix, add it
+                if (str_starts_with($this->img, 'storage/')) {
+                    return asset('/' . $this->img);
+                }
+                // Otherwise treat as public path
+                return asset($this->img);
             }
             return $this->img;
         }
@@ -123,7 +142,11 @@ class Blog extends Model
         }
 
         // Fallback to old 'date_publish' field
-        return $this->date_publish;
+        if ($this->date_publish) {
+            return \Carbon\Carbon::parse($this->date_publish);
+        }
+
+        return $this->created_at;
     }
 
     /**
@@ -138,8 +161,8 @@ class Blog extends Model
                 $blog->slug = Str::slug($blog->title);
             }
 
-            if (!$blog->status) {
-                $blog->status = 'draft';
+            if (!isset($blog->is_published)) {
+                $blog->is_published = false;
             }
         });
     }

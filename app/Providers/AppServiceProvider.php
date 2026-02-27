@@ -22,6 +22,35 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Register helper functions for optimized images with WebP support
+        if (!function_exists('webp_image')) {
+            /**
+             * Get WebP image path if exists, otherwise return original
+             * Usage: {!! webp_image('img/epbox/plc1.png', 'Alt text', 'class-name', 'lazy') !!}
+             */
+            function webp_image($originalPath, $alt = '', $class = '', $loading = 'lazy', $eager = false) {
+                $pathParts = pathinfo($originalPath);
+                $filename = $pathParts['filename'];
+                $extension = $pathParts['extension'] ?? 'png';
+                $directory = $pathParts['dirname'] ?? 'img/epbox';
+                
+                // Build paths
+                $webpPath = str_replace('epbox/', 'epbox2/', $directory) . '/' . $filename . '.webp';
+                $fallbackPath = $directory . '/' . $filename . '.' . $extension;
+                
+                $webpExists = file_exists(public_path($webpPath));
+                $loadingAttr = $eager ? 'eager' : $loading;
+                $fetchPriority = $eager ? ' fetchpriority="high"' : '';
+                
+                if ($webpExists) {
+                    return '<picture>
+                        <source srcset="' . asset($webpPath) . '" type="image/webp">
+                        <img src="' . asset($fallbackPath) . '" alt="' . e($alt) . '" class="' . e($class) . '" loading="' . $loadingAttr . '"' . $fetchPriority . '>
+                    </picture>';
+                }
+                return '<img src="' . asset($fallbackPath) . '" alt="' . e($alt) . '" class="' . e($class) . '" loading="' . $loadingAttr . '"' . $fetchPriority . '>';
+            }
+        }
         Gate::define('manage-admins', function ($user) {
             return (bool) ($user->is_super_admin ?? false);
         });

@@ -1,8 +1,35 @@
 @extends('site.layouts.app')
 
-@section('title', 'Epbox Engineering | Panel Manufacturer & Control System Solutions')
+@section('title', 'Panel Manufacturer & Control System Solutions | EPBOX ENGINEERING PTE. LTD')
+@section('meta_description', 'EPBOX ENGINEERING PTE LTD provides professional control panel manufacturing and industrial automation solutions for diverse industries.')
+@section('meta_keywords', 'control panel manufacturer, industrial automation, electrical control panels, PLC programming, SCADA systems, control system solutions, Singapore, panel manufacturing')
+@section('og_type', 'website')
+
+@push('head')
+<!-- Structured Data - Website -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "EPBOX ENGINEERING PTE. LTD",
+    "url": "{{ url('/') }}",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ url('/blog') }}?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+@endpush
 
 @section('content')
+<!-- Announcement Banner Section -->
+{{-- <section class="py-0 bg-gradient-to-r from-blue-900 to-blue-800 relative overflow-hidden">
+    <div class="relative">
+        <img src="{{ asset('img/epbox2/event2.webp') }}" alt="Event Announcement" class="w-full h-auto" loading="eager" fetchpriority="high">
+    </div>
+</section> --}}
+
 <!-- Home Section -->
 <section id="home" class="hero pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 flex items-center relative fade-section">
     <!-- Hero Slider -->
@@ -71,21 +98,86 @@
 					<div class="container">
 						<div class="map-container">
 							<div class="map-inner">
-								<img src="http://res.cloudinary.com/slzr/image/upload/v1500321012/world-map-1500_vvekl5.png" alt="World map" class="w-full h-[19rem] object-cover">
+								<img src="http://res.cloudinary.com/slzr/image/upload/v1500321012/world-map-1500_vvekl5.png" alt="World map" class="w-full h-auto object-contain">
+								<div class="point singapore tippy" title="Singapore Office"></div>
 								<div class="point batam tippy" title="Batam, Indonesia"></div>
                             </div>
                             </div>
                         </div>
 					<style>
-						.map-container{padding:1.2rem .8rem;position:relative;display:inline-block;width:100%}
-						.map-container .map-inner{position:relative;margin:0 auto;transform:scale(1.0);transform-origin:74% 62%;}
-						@media(min-width:1024px){.map-container .map-inner{transform:scale(1.1);transform-origin:74% 62%;}}
-						.map-container img{width:100%}
-						.map-container .point{cursor:pointer;position:absolute;width:12px;height:12px;background-color:#ffffff;border-radius:50%;transition:all .3s ease;will-change:transform,box-shadow;transform:translate(-50%,-50%);box-shadow:0 0 0 rgba(255,255,255,.4);animation:pulse 3s infinite}
-						.map-container .point:hover{animation:none;transform:translate(-50%,-50%) scale(1.35);box-shadow:0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)}
-						/* Focus: ASEAN (zoomed). Single point for Batam */
-						.map-container .batam{top:59.0%;left:78.0%}
-						@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.5)}70%{box-shadow:0 0 0 25px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+						.map-container{
+							padding: 1rem;
+							position: relative;
+							display: block;
+							width: 100%;
+							max-width: 100%;
+							overflow: visible;
+						}
+						
+						.map-container .map-inner{
+							position: relative;
+							margin: 0 auto;
+							width: 100%;
+							max-width: 100%;
+						}
+						
+						.map-container img{
+							width: 100%;
+							height: auto;
+							max-width: 100%;
+							object-fit: contain;
+							display: block;
+						}
+						
+						.map-container .point{
+							cursor: pointer;
+							position: absolute;
+							width: 12px;
+							height: 12px;
+							background-color: #ffffff;
+							border-radius: 50%;
+							transition: all .3s ease;
+							will-change: transform, box-shadow;
+							transform: translate(-50%, -50%);
+							box-shadow: 0 0 0 rgba(255, 255, 255, .4);
+							animation: pulse 3s infinite;
+						}
+						
+						.map-container .point:hover{
+							animation: none;
+							transform: translate(-50%, -50%) scale(1.35);
+							box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+						}
+						
+						/* Mobile coordinates - smaller screens */
+						.map-container .singapore{
+							top: 58.0%;
+							left: 76.0%;
+						}
+						
+						.map-container .batam{
+							top: 60.5%;
+							left: 77.8%;
+						}
+						
+						/* Desktop coordinates - larger screens */
+						@media (min-width: 768px) {
+							.map-container .singapore{
+								top: 58.0%;
+								left: 76.0%;
+							}
+							
+							.map-container .batam{
+								top: 60.5%;
+								left: 77.8%;
+							}
+						}
+						
+						@keyframes pulse{
+							0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, .5); }
+							70% { box-shadow: 0 0 0 25px rgba(255, 255, 255, 0); }
+							100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+						}
 					</style>
                 </div>
             </div>
@@ -94,7 +186,7 @@
                 <!-- Short About preview (no Read More) -->
                 <div class="mission-content">
                     <p class="text-gray-300 mb-6 text-lg leading-relaxed" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">
-                        EPBOX ENGINEERING Pte. Ltd. is a trusted innovator in the design and manufacturing of intelligent control panels
+                        EPBOX ENGINEERING PTE. LTD. is a trusted innovator in the design and manufacturing of intelligent control panels
                         and industrial automation solutions. We deliver systems that empower our clients with reliability, precision,
                         and adaptability in the most demanding environments true to our motto
                         <span class="italic">"Beyond Boundaries, We Command Control".</span>
@@ -191,7 +283,7 @@
                 <!-- Control Panel Engineering -->
                 <li class="capability-item control-panel">
                     <h3 class="capability-title">CONTROL PANEL ENGINEERING</h3>
-                    <p class="capability-description">We design and manufacture a wide range of Low Voltage control panels, tailored to operational and environmental</p>
+                    <p class="capability-description">We design and manufacture a wide range of Low Voltage control panels.</p>
                     <a href="{{ route('site.service.control') }}" class="capability-link">Learn More</a>
                 </li>
 
@@ -336,16 +428,13 @@
 </section>
 
 <!-- Project Highlights Section -->
-<section id="project-highlights" class="py-20 px-6 relative overflow-hidden fade-section">
+<section id="project-highlights" class="py-20 px-6 gradient-bg relative overflow-hidden fade-section">
 	<canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
-	<!-- Background Image -->
-	<div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ asset('img/epbox/gambar34.png') }}'); background-size: 120%;"></div>
-	<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.7), rgba(15,28,63,0.9));"></div>
-	<!-- Decorative Shapes Overlay -->
-	<div class="absolute inset-0 opacity-70 pointer-events-none">
-		<div class="absolute -top-10 left-8 w-48 h-48 bg-blue-500/30 rounded-full blur-3xl"></div>
-		<div class="absolute top-1/3 right-12 w-64 h-64 bg-indigo-500/25 rounded-full blur-3xl"></div>
-		<div class="absolute bottom-10 left-1/4 w-56 h-56 bg-blue-400/20 rounded-full blur-3xl"></div>
+	<!-- Decorative Gradient Overlays -->
+	<div class="absolute inset-0 opacity-10 pointer-events-none">
+		<div class="absolute -top-10 left-8 w-48 h-48 bg-blue-500 rounded-full blur-3xl"></div>
+		<div class="absolute top-1/3 right-12 w-64 h-64 bg-indigo-500 rounded-full blur-3xl"></div>
+		<div class="absolute bottom-10 left-1/4 w-56 h-56 bg-blue-400 rounded-full blur-3xl"></div>
 	</div>
 	<div class="max-w-7xl mx-auto relative z-10">
 		<div class="mb-8">
@@ -452,32 +541,32 @@
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<!-- Image area -->
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/oilgas.png') }}" alt="Oil & Gas" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/oilgas2.webp') }}" alt="Oil & Gas" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-oil-can"></i></div>
 					<!-- Text overlay on image -->
 					<div class="absolute inset-0 z-10 p-5 flex flex-col gap-2 items-center justify-center text-center">
 						<h3 class="text-xl font-semibold text-white">Oil & Gas</h3>
-						<p class="text-gray-200 text-sm">End‑to‑end controls for upstream to downstream — SCADA, shutdown systems, and ATEX/IECEx‑compliant solutions for FPSO, refinery, and onshore operations.</p>
+						<p class="text-gray-200 text-sm">End‑to‑end controls for upstream to downstream SCADA, shutdown systems, and ATEX/IECEx‑compliant solutions for FPSO, refinery, and onshore operations.</p>
 					</div>
 				</div>
 			</div>
 
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/automat.png') }}" alt="Power Generation & Clean Energy" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/automat.webp') }}" alt="Power Generation & Clean Energy" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-bolt"></i></div>
 					<div class="absolute inset-0 z-10 p-5 flex flex-col gap-2 items-center justify-center text-center">
 						<h3 class="text-xl font-semibold text-white">Power Generation & Clean Energy</h3>
-						<p class="text-gray-200 text-sm">Substation controls, switchgear, and solar/wind integration with telemetry — designed for energy efficiency and supply reliability.</p>
+						<p class="text-gray-200 text-sm">Substation controls, switchgear, and solar/wind integration with telemetry designed for energy efficiency and supply reliability.</p>
 					</div>
 				</div>
 			</div>
 
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/center.png') }}" alt="Data Centres & Industrial Automation" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/center.webp') }}" alt="Data Centres & Industrial Automation" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-database"></i></div>
 					<div class="absolute inset-0 z-10 p-5 flex flex-col gap-2 items-center justify-center text-center">
@@ -489,7 +578,7 @@
 
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/building.png') }}" alt="Building Infrastructure" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/building.webp') }}" alt="Building Infrastructure" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-building"></i></div>
 					<div class="absolute inset-0 z-10 p-5 flex flex-col gap-2 items-center justify-center text-center">
@@ -501,7 +590,7 @@
 
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/water.png') }}" alt="Water Treatment" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/water.webp') }}" alt="Water Treatment" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-tint"></i></div>
 					<div class="absolute inset-0 z-10 p-5 flex flex-col gap-2 items-center justify-center text-center">
@@ -513,7 +602,7 @@
 
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/marine.png') }}" alt="Marine & Offshore Systems" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/marine.webp') }}" alt="Marine & Offshore Systems" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-ship"></i></div>
 					<div class="absolute inset-0 z-10 p-5 flex flex-col gap-2 items-center justify-center text-center">
@@ -528,9 +617,69 @@
         <div class="text-center mt-12">
             <a href="{{ route('site.industries') }}" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25">
                 <i class="fas fa-industry"></i>
-                <span>Explore Show Case Industries</span>
+                <span>Explore Our Showcase</span>
                 <i class="fas fa-arrow-right"></i>
             </a>
+        </div>
+    </div>
+</section>
+
+<!-- Client Testimonials Section -->
+<section id="testimonials" class="py-20 px-6 relative overflow-hidden fade-section">
+    <!-- Canvas Background -->
+    <canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
+    <!-- Interactive Background Elements -->
+    <div class="interactive-bg">
+        <div class="w-16 h-16 top-20 left-10 animate-pulse"></div>
+        <div class="w-24 h-24 top-1/2 right-20 animate-pulse delay-1000"></div>
+        <div class="w-12 h-12 bottom-20 left-1/4 animate-pulse delay-500"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold section-title mb-4" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">WHAT OUR CLIENTS SAY</h2>
+            <div class="w-28 h-1 bg-blue-500 mx-auto mb-3"></div>
+            <p class="text-gray-300 max-w-3xl mx-auto" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Hear from our satisfied clients about their experience working with EPBOX ENGINEERING and the quality of our control panel solutions.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @forelse($testimonials as $testimonial)
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                        @php
+                            $iconMap = [
+                                'LinkedIn Review' => 'fab fa-linkedin',
+                                'Industry Review' => 'fas fa-industry',
+                                'Instagram Review' => 'fab fa-instagram',
+                                'Interview On Site' => 'fas fa-handshake',
+                                'Client Feedback' => 'fas fa-comment-dots',
+                                'Project Review' => 'fas fa-project-diagram'
+                            ];
+                            $icon = $iconMap[$testimonial->categories] ?? 'fas fa-user';
+                        @endphp
+                        <i class="{{ $icon }} text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-semibold">{{ $testimonial->name }}</h4>
+                        <p class="text-gray-400 text-sm">{{ $testimonial->position }}</p>
+                        <p class="text-gray-500 text-sm">{{ $testimonial->company }}</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-gray-500 text-xs">{{ $testimonial->categories }}</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-300 italic">"{{ $testimonial->description }}"</p>
+            </div>
+            @empty
+            <div class="col-span-full text-center py-12">
+                <div class="bg-gradient-to-r from-blue-900/20 to-blue-800/10 border border-blue-500/20 rounded-lg p-8">
+                    <i class="fas fa-comment-dots text-6xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2">No Testimonials Available</h3>
+                    <p class="text-gray-300">Check back later for client testimonials and reviews.</p>
+                </div>
+            </div>
+            @endforelse
         </div>
     </div>
 </section>
@@ -589,27 +738,23 @@
     <div class="sr-only" aria-live="polite"></div>
 </div>
 
-<!-- Chat Box -->
-<div class="chat-box" onclick="toggleChat()">
-    <i class="fas fa-comments"></i>
-</div>
-
-<div class="chat-popup" id="chatPopup">
-    <div class="chat-header">
-        <h3>Chat with Epy-Ai Assistant</h3>
-        <button class="close-chat" onclick="toggleChat()">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    <div class="chat-body">
-        <input type="text" id="chatMessage" class="chat-input" placeholder="Type your message...">
-        <div class="chat-actions">
-            <button class="chat-btn primary" onclick="sendMessage()">Send</button>
-            <button class="chat-btn secondary" onclick="scrollToContact()">Contact Form</button>
+<!-- Announcement Modal -->
+{{-- <div id="announcementModal" class="fixed inset-0 z-[9999] flex items-center justify-center p-2 sm:p-4 hidden">
+    <div class="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300" onclick="closeAnnouncement()"></div>
+    <div class="relative z-10 bg-white rounded-lg shadow-2xl max-w-3xl w-full transform transition-all duration-300 opacity-0 scale-95" id="announcementContent">
+        <div class="relative">
+            <button onclick="closeAnnouncement()" class="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition-colors shadow-lg">
+                <i class="fas fa-times text-lg sm:text-xl"></i>
+            </button>
+            <img src="{{ asset('img/epbox2/event.webp') }}" alt="Announcement" class="w-full h-auto rounded-lg" loading="lazy">
         </div>
     </div>
-</div>
+</div> --}}
+
+<!-- Chat Box -->
 @endsection
+
+@include('site.components.chatbot')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/site.css') }}">
@@ -624,5 +769,66 @@
 
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="{{ asset('js/site.js') }}"></script>
+<script>
+// Announcement Modal Functionality
+function showAnnouncement() {
+    const modal = document.getElementById('announcementModal');
+    const content = document.getElementById('announcementContent');
+    
+    if (!modal || !content) return;
+    
+    modal.classList.remove('hidden');
+    
+    // Animate modal appearance
+    setTimeout(() => {
+        content.classList.remove('opacity-0', 'scale-95');
+        content.classList.add('opacity-100', 'scale-100');
+    }, 50);
+}
+
+function closeAnnouncement() {
+    const modal = document.getElementById('announcementModal');
+    const content = document.getElementById('announcementContent');
+    
+    if (!modal || !content) return;
+    
+    // Animate modal disappearance
+    content.classList.remove('opacity-100', 'scale-100');
+    content.classList.add('opacity-0', 'scale-95');
+    
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 300);
+}
+
+// Show announcement when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // TEMPORARY: For testing - always show popup
+    setTimeout(() => {
+        showAnnouncement();
+    }, 800);
+    
+    // PRODUCTION: Uncomment below and comment above for production use
+    /*
+    // Check if announcement was already shown today
+    const lastShown = localStorage.getItem('announcementShown');
+    const today = new Date().toDateString();
+    
+    if (lastShown !== today) {
+        // Show after a small delay for better UX
+        setTimeout(() => {
+            showAnnouncement();
+            localStorage.setItem('announcementShown', today);
+        }, 800);
+    }
+    */
+});
+
+// Close on ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeAnnouncement();
+    }
+});
+</script>
 @endpush

@@ -47,5 +47,15 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
         ]);
 
+        // Seed blogs
+        $this->call([
+            BlogSeeder::class,
+        ]);
+
+        // Seed testimonials
+        $this->call([
+            TestimonialSeeder::class,
+        ]);
+
     }
 }

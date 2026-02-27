@@ -51,7 +51,8 @@ class BlogController extends Controller
         }
 
         // Set defaults
-        $validated['status'] = $validated['status'] ?? 'draft';
+        $validated['status'] = $validated['status'] ?? 'published'; // Default to published
+        $validated['is_published'] = isset($validated['status']) && $validated['status'] === 'published' ? true : false;
         $validated['is_featured'] = $validated['is_featured'] ?? false;
         $validated['published_at'] = $validated['published_at'] ?? $validated['date_publish'] ?? now();
 
@@ -116,7 +117,8 @@ class BlogController extends Controller
         }
 
         // Set defaults
-        $validated['status'] = $validated['status'] ?? 'draft';
+        $validated['status'] = $validated['status'] ?? 'published'; // Default to published
+        $validated['is_published'] = isset($validated['status']) && $validated['status'] === 'published' ? true : false;
         $validated['is_featured'] = $validated['is_featured'] ?? false;
         $validated['published_at'] = $validated['published_at'] ?? $validated['date_publish'] ?? $blog->published_at;
 
@@ -152,7 +154,7 @@ class BlogController extends Controller
         $sourcePath = $file->getPathname();
         if (!extension_loaded('gd')) {
             $path = $file->store($directory, 'public');
-            return Storage::disk('public')->url($path);
+            return '/storage/' . $path;
         }
         switch ($mime) {
             case 'image/jpeg':
@@ -170,7 +172,7 @@ class BlogController extends Controller
                 break;
             default:
                 $path = $file->store($directory, 'public');
-                return Storage::disk('public')->url($path);
+                return '/storage/' . $path;
         }
 
         $sourceWidth = imagesx($source);
@@ -178,7 +180,7 @@ class BlogController extends Controller
 
         if ($sourceWidth <= $maxWidth) {
             $path = $file->store($directory, 'public');
-            return Storage::disk('public')->url($path);
+            return '/storage/' . $path;
         }
 
         $ratio = $maxWidth / $sourceWidth;
@@ -219,6 +221,6 @@ class BlogController extends Controller
         imagedestroy($source);
         imagedestroy($resized);
 
-        return Storage::disk('public')->url($path);
+        return '/storage/' . $path;
     }
 }

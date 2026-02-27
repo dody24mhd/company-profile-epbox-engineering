@@ -56,6 +56,42 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Company Information
+    |--------------------------------------------------------------------------
+    |
+    | Social media URLs and company contact information for SEO and structured data
+    |
+    */
+
+    'company_phone' => env('COMPANY_PHONE', '+65 8282 9835'),
+    'company_phone_alt' => env('COMPANY_PHONE_ALT', '+62 811 7008 8989'),
+    'company_email' => env('COMPANY_EMAIL', 'sales@epbox-engg.com'),
+    'company_address' => env('COMPANY_ADDRESS', 'Singapore'),
+    'company_street' => env('COMPANY_STREET', '1 Sunview Road Eco-Tech@Sunview'),
+    'company_postal' => env('COMPANY_POSTAL', '627615'),
+    'company_address_batam' => env('COMPANY_ADDRESS_BATAM', 'Warna Jaya Business Park blok A1-06, Batam, Kepulauan Riau'),
+
+    'facebook_url' => env('FACEBOOK_URL', ''),
+    'linkedin_url' => env('LINKEDIN_URL', 'https://www.linkedin.com/company/epbox-engineering'),
+    'twitter_url' => env('TWITTER_URL', ''),
+    'instagram_url' => env('INSTAGRAM_URL', ''),
+    'youtube_url' => env('YOUTUBE_URL', ''),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Google Search Console Verification
+    |--------------------------------------------------------------------------
+    |
+    | This value is used for Google Search Console website verification.
+    | Get the verification code from Google Search Console and add it to .env:
+    | GOOGLE_SEARCH_CONSOLE_VERIFICATION=your_verification_code_here
+    |
+    */
+
+    'google_search_console_verification' => env('GOOGLE_SEARCH_CONSOLE_VERIFICATION', ''),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |

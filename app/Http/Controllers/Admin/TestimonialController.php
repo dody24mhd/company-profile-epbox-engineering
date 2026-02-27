@@ -31,6 +31,7 @@ class TestimonialController extends Controller
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'company' => 'required|string|max:255',
+            'categories' => 'required|string|max:255',
             'description' => 'required|string',
         ]);
 
@@ -52,6 +53,7 @@ class TestimonialController extends Controller
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'company' => 'required|string|max:255',
+            'categories' => 'required|string|max:255',
             'description' => 'required|string',
         ]);
 

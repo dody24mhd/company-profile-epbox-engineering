@@ -10,6 +10,7 @@ class Testimonial extends Model
         'name',
         'company',
         'position',
+        'categories',
         'description',
     ];
 }

@@ -19,8 +19,7 @@
                         <th>Email</th>
                         <th>Message</th>
                         <th>Received</th>
-                        <th style="width: 120px;">Actions</th>
-                        <th style="width: 120px;">Actions</th>
+                        <th style="width: 160px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +30,7 @@
                             <td class="text-truncate" style="max-width: 320px;">{{ $contact->message }}</td>
                             <td>{{ $contact->created_at->diffForHumans() }}</td>
                             <td>
-                                <a href="{{ route('admin.contacts.edit', $contact) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('admin.contacts.show', $contact) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
                                 <form action="{{ route('admin.contacts.destroy', $contact) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this contact?')">
                                     @csrf
                                     @method('DELETE')

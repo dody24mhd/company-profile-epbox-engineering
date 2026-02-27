@@ -1,13 +1,102 @@
-// Hide page loader on full load
+// Hide page loader on full load - ensure minimum display time
+let loaderStartTime = Date.now();
+const MIN_LOADER_TIME = 1000; // Minimum 1 second
+
 window.addEventListener('load', function () {
     const loader = document.getElementById('page-loader');
-    if (loader) {
-        loader.classList.add('hidden');
-        setTimeout(() => {
-            if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
-        }, 350);
+    if (!loader) return;
+    
+    const elapsed = Date.now() - loaderStartTime;
+    const remaining = Math.max(0, MIN_LOADER_TIME - elapsed);
+    
+    // Wait for CSS to be fully loaded (check computed styles)
+    // Only do this check if we're on industries page (has inline hiding styles)
+    const isIndustriesPage = document.querySelector('.industries-hero') !== null;
+    const hasInlineHiding = document.querySelector('style[id*="industries"]') !== null || 
+                           (document.body && Array.from(document.body.children).some(el => 
+                               el.id !== 'page-loader' && el.style.display === 'none'));
+    
+    function waitForCSS() {
+        // For industries page, wait for CSS. For other pages, proceed normally
+        if (isIndustriesPage || hasInlineHiding) {
+            const body = document.body;
+            const styles = window.getComputedStyle(body);
+            const bgColor = styles.backgroundColor;
+            
+            // Check if CSS is loaded (body should have dark background)
+            const cssLoaded = bgColor && (
+                bgColor.includes('rgb(10, 17, 40)') || 
+                bgColor.includes('#0a1128') ||
+                (bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent' && bgColor !== 'rgb(0, 0, 0)')
+            );
+            
+            // Check fade-section style exists
+            const testSection = document.querySelector('.fade-section');
+            const sectionStyles = testSection ? window.getComputedStyle(testSection) : null;
+            const hasStyle = sectionStyles && sectionStyles.opacity !== '';
+            
+            if (cssLoaded && hasStyle) {
+                // CSS loaded! Wait minimum time then show content
+                setTimeout(function() {
+                    // Show content by removing inline styles
+                    var children = document.body.children;
+                    for (var i = 0; i < children.length; i++) {
+                        if (children[i].id !== 'page-loader') {
+                            children[i].removeAttribute('style');
+                        }
+                    }
+                    
+                    // Remove loading class from body
+                    document.body.classList.remove('page-loading');
+                    
+                    // Hide loader
+                    loader.classList.add('hidden');
+                    setTimeout(() => {
+                        if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+                    }, 350);
+                }, remaining);
+            } else {
+                // CSS not loaded yet, check again (max 5 seconds)
+                if (Date.now() - loaderStartTime < 5000) {
+                    setTimeout(waitForCSS, 50);
+                } else {
+                    // Timeout: proceed anyway
+                    setTimeout(function() {
+                        var children = document.body.children;
+                        for (var i = 0; i < children.length; i++) {
+                            if (children[i].id !== 'page-loader') {
+                                children[i].removeAttribute('style');
+                            }
+                        }
+                        document.body.classList.remove('page-loading');
+                        loader.classList.add('hidden');
+                        setTimeout(() => {
+                            if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+                        }, 350);
+                    }, remaining);
+                }
+            }
+        } else {
+            // Normal page: just wait minimum time
+            setTimeout(function() {
+                document.body.classList.remove('page-loading');
+                loader.classList.add('hidden');
+                setTimeout(() => {
+                    if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+                }, 350);
+            }, remaining);
+        }
     }
+    
+    waitForCSS();
 });
+
+// Fallback: if page is already loaded, start timer
+if (document.readyState === 'complete') {
+    loaderStartTime = Date.now() - MIN_LOADER_TIME;
+} else {
+    loaderStartTime = Date.now();
+}
 
 // Navbar scroll effect
 window.addEventListener('scroll', function () {
@@ -20,19 +109,27 @@ window.addEventListener('scroll', function () {
 });
 
 // Mobile menu toggle with animation
-document.getElementById('menu-toggle').addEventListener('click', function () {
-    const menu = document.getElementById('mobile-menu');
-    const button = this;
+const menuToggleBtn = document.getElementById('menu-toggle');
+if (menuToggleBtn) {
+    menuToggleBtn.addEventListener('click', function () {
+        const menu = document.getElementById('mobile-menu');
+        const button = this;
 
-    menu.classList.toggle('hidden');
-    button.classList.toggle('active');
+        if (!menu) return;
 
-    if (!menu.classList.contains('hidden')) {
-        setTimeout(() => menu.classList.add('show'), 10);
-    } else {
-        menu.classList.remove('show');
-    }
-});
+        menu.classList.toggle('hidden');
+        button.classList.toggle('active');
+
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+
+        if (!menu.classList.contains('hidden')) {
+            setTimeout(() => menu.classList.add('show'), 10);
+        } else {
+            menu.classList.remove('show');
+        }
+    });
+}
 
 // Active link highlighting
 const navLinks = document.querySelectorAll('.nav-link');
@@ -40,6 +137,7 @@ const sections = document.querySelectorAll('section[id]');
 
 function highlightActiveSection() {
     const scrollPos = window.scrollY + 100;
+    let foundActiveSection = false;
 
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -47,14 +145,28 @@ function highlightActiveSection() {
         const sectionId = section.getAttribute('id');
 
         if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            foundActiveSection = true;
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.classList.add('active');
+                // Only remove active from section-based links, not route-based links
+                if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
                 }
             });
         }
     });
+
+    // If no section is active, keep route-based active states
+    if (!foundActiveSection) {
+        // Don't remove active states from route-based links
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+                link.classList.remove('active');
+            }
+        });
+    }
 }
 
 window.addEventListener('scroll', highlightActiveSection);
@@ -77,8 +189,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
             // Close mobile menu if open
             const mobileMenu = document.getElementById('mobile-menu');
-            if (!mobileMenu.classList.contains('hidden')) {
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
+                if (menuToggleBtn) menuToggleBtn.setAttribute('aria-expanded', 'false');
             }
         }
     });
@@ -95,20 +208,21 @@ function scrollToContact() {
     }
 }
 
-// Toggle chat popup
-function toggleChat() {
-    const popup = document.getElementById('chatPopup');
-    popup.classList.toggle('show');
-}
+// Toggle chat popup (disabled - using epToggleChat instead)
+// function toggleChat() {
+//     const popup = document.getElementById('chatPopup');
+//     popup.classList.toggle('show');
+// }
 
-// Send message function
+// Send message function (for static HTML files only)
 function sendMessage() {
-    const message = document.getElementById('chatMessage').value;
-    if (message.trim()) {
+    const message = document.getElementById('chatMessage');
+    if (message && message.value.trim()) {
         // Here you can add actual chat functionality
         alert('Thank you for your message! We will get back to you soon.');
-        document.getElementById('chatMessage').value = '';
-        toggleChat();
+        message.value = '';
+        // Note: toggleChat function is not available in Blade components
+        // This function is only for static HTML files
     }
 }
 
@@ -553,14 +667,14 @@ function addInteractiveAnimations() {
     void heroTitle.offsetWidth;
     void heroDescription.offsetWidth;
     void heroButtons.offsetWidth;
-
+    
     // Random animation selection for variety
     const animations = ['slideInFromLeft', 'slideInFromRight', 'slideInFromBottom', 'fadeInScale'];
     const titleAnim = animations[Math.floor(Math.random() * animations.length)];
     const descAnim = animations[Math.floor(Math.random() * animations.length)];
     const buttonAnim = animations[Math.floor(Math.random() * animations.length)];
-
-    // Add staggered animations with variety
+    
+    // Add staggered animations with variety+
     heroTitle.style.animation = `${titleAnim} 0.8s ease-out forwards`;
     heroDescription.style.animation = `${descAnim} 0.8s ease-out 0.2s forwards`;
     heroButtons.style.animation = `${buttonAnim} 0.8s ease-out 0.4s forwards`;
@@ -615,9 +729,9 @@ function startAutoSlide() {
     if (slideInterval) {
         clearInterval(slideInterval);
     }
-    // Start automatic sliding every 6 seconds
+    // Start automatic sliding every 10 seconds
     if (totalSlides > 0) {
-        slideInterval = setInterval(nextSlide, 6000);
+        slideInterval = setInterval(nextSlide, 10000);
     }
 }
 
@@ -718,27 +832,7 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
-// Navbar Downloads dropdown - Hover functions
-function showNavDownloadsMenu() {
-    const menu = document.getElementById('navDownloadsMenu');
-    if (!menu) return;
-    menu.classList.remove('hidden');
-}
-
-function hideNavDownloadsMenu() {
-    const menu = document.getElementById('navDownloadsMenu');
-    if (!menu) return;
-    menu.classList.add('hidden');
-}
-
-// Navbar Downloads dropdown - Click function (for mobile compatibility)
-function toggleNavDownloadsMenu(event) {
-    event.stopPropagation();
-    const menu = document.getElementById('navDownloadsMenu');
-    if (!menu) return;
-
-    menu.classList.toggle('hidden');
-}
+// Navbar Downloads dropdown functions removed - now direct link
 
 // Navbar Industries dropdown - Hover functions
 function showNavIndustriesMenu() {
@@ -800,9 +894,9 @@ const sliderIndicators = document.querySelectorAll('.slider-indicator');
 
 // Image array for auto-slider
 const images = [
-    '/img/epbox/gambar18.png',
-    '/img/epbox/gambar33.png',
-    '/img/epbox/gambar26.png'
+    '/img/epbox2/gambar18.webp',
+    '/img/epbox2/gambar33.webp',
+    '/img/epbox2/gambar26.webp'
 ];
 
 let currentImageIndex = 0;
@@ -956,17 +1050,19 @@ const observer = new IntersectionObserver(function (entries) {
     });
 }, observerOptions);
 
-// Observe all fade sections
-document.querySelectorAll('.fade-section').forEach(section => {
-    observer.observe(section);
-});
-
 // Initialize fade sections on page load
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.fade-section').forEach(section => {
         if (section.getBoundingClientRect().top < window.innerHeight) {
             section.classList.add('visible');
         }
+    });
+});
+
+// Observe all fade sections for scroll-triggered animations
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.fade-section').forEach(section => {
+        observer.observe(section);
     });
 });
 
@@ -1069,11 +1165,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const ctx = canvas.getContext('2d');
     let W, H;
     let balls = [];
-    const BALL_NUM = 30;
+    const BALL_NUM = 24;
     const R = 2;
     const alphaF = 0.03;
     const linkWidth = 0.8;
-    const distLimit = 260;
+    const distLimit = 220;
     const mouseBall = { x: 0, y: 0, vx: 0, vy: 0, r: 0, type: 'mouse' };
     const hero = document.getElementById('home');
 
@@ -1276,7 +1372,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ctx = canvas.getContext('2d');
     let W, H;
     let balls = [];
-    const BALL_NUM = 26;
+    const BALL_NUM = 24;
     const R = 2;
     const alphaF = 0.03;
     const linkWidth = 0.8;
@@ -1370,11 +1466,465 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Industries section canvas background (vanilla, no GSAP)
+// Industries hero particles
+function initIndustriesParticles() {
+    const canvas = document.getElementById('industriesParticles');
+    if (!canvas) return;
+
+    const hero = document.querySelector('.industries-hero');
+    if (!hero) return;
+    
+    // Wait for hero section to be visible
+    const checkVisibility = setInterval(() => {
+        const styles = window.getComputedStyle(hero);
+        if (styles.display !== 'none' && styles.visibility !== 'hidden' && styles.opacity !== '0') {
+            clearInterval(checkVisibility);
+            startParticles();
+        }
+    }, 100);
+    
+    // Timeout after 3 seconds
+    setTimeout(() => {
+        clearInterval(checkVisibility);
+        startParticles();
+    }, 3000);
+    
+    function startParticles() {
+        const ctx = canvas.getContext('2d', { desynchronized: true });
+        let W, H;
+        let balls = [];
+        const BALL_NUM = 24;
+        const R = 2;
+        const alphaF = 0.03;
+        const linkWidth = 0.8;
+        const distLimit = 220;
+        const mouseBall = { x: 0, y: 0, vx: 0, vy: 0, r: 0, type: 'mouse' };
+        
+        // Ensure canvas is visible
+        canvas.style.display = 'block';
+        canvas.style.opacity = '1';
+        canvas.style.visibility = 'visible';
+        canvas.style.position = 'absolute';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.zIndex = '1';
+
+        function setSize() {
+            W = canvas.width = canvas.clientWidth || hero.clientWidth || window.innerWidth;
+            H = canvas.height = canvas.clientHeight || hero.clientHeight || window.innerHeight;
+        }
+        setSize();
+        window.addEventListener('resize', setSize);
+
+        const rand = (min, max) => Math.random() * (max - min) + min;
+        const item = arr => arr[Math.floor(Math.random() * arr.length)];
+        const side = len => Math.ceil(Math.random() * len);
+        function speed(pos) {
+            const min = -1, max = 1;
+            if (pos === 'top') return [rand(min, max), rand(0.1, max)];
+            if (pos === 'right') return [rand(min, -0.1), rand(min, max)];
+            if (pos === 'bottom') return [rand(min, max), rand(min, -0.1)];
+            return [rand(0.1, max), rand(min, max)];
+        }
+        function randomBall() {
+            const pos = item(['top', 'right', 'bottom', 'left']);
+            const s = speed(pos);
+            if (pos === 'top') return { x: side(W), y: -R, vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+            if (pos === 'right') return { x: W + R, y: side(H), vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+            if (pos === 'bottom') return { x: side(W), y: H + R, vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+            return { x: -R, y: side(H), vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+        }
+        function renderBalls() {
+            balls.forEach(b => {
+                if (b.type) return;
+                ctx.fillStyle = `rgba(80,180,255,${b.alpha})`;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, R, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            });
+        }
+        function updateBalls() {
+            const next = [];
+            balls.forEach(b => {
+                b.x += b.vx; b.y += b.vy;
+                if (b.x > -50 && b.x < W + 50 && b.y > -50 && b.y < H + 50) next.push(b);
+                b.phase += alphaF; b.alpha = Math.abs(Math.cos(b.phase));
+            });
+            balls = next;
+        }
+        const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+        function renderLines() {
+            for (let i = 0; i < balls.length; i++) {
+                for (let j = i + 1; j < balls.length; j++) {
+                    const f = dist(balls[i], balls[j]) / distLimit;
+                    if (f < 1) {
+                        ctx.strokeStyle = `rgba(80,180,255,${(1 - f) * 0.8})`;
+                        ctx.lineWidth = linkWidth;
+                        ctx.beginPath();
+                        ctx.moveTo(balls[i].x, balls[i].y);
+                        ctx.lineTo(balls[j].x, balls[j].y);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
+        function addIfFew() { if (balls.length < BALL_NUM) balls.push(randomBall()); }
+        function render() {
+            ctx.clearRect(0, 0, W, H);
+            renderBalls();
+            renderLines();
+            updateBalls();
+            addIfFew();
+            requestAnimationFrame(render);
+        }
+        function initBalls(n) {
+            balls = []; for (let i = 0; i < n; i++) balls.push({ x: side(W), y: side(H), vx: speed('top')[0], vy: speed('top')[1], r: R, alpha: 1, phase: rand(0, 10) });
+        }
+        initBalls(BALL_NUM); render();
+
+        if (hero) {
+            hero.addEventListener('mouseenter', () => { if (!balls.includes(mouseBall)) balls.push(mouseBall); });
+            hero.addEventListener('mouseleave', () => { balls = balls.filter(b => !b.type); });
+            hero.addEventListener('mousemove', e => {
+                const rect = canvas.getBoundingClientRect();
+                mouseBall.x = e.clientX - rect.left;
+                mouseBall.y = e.clientY - rect.top;
+            });
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initIndustriesParticles);
+// Also try immediately in case DOMContentLoaded already fired
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initIndustriesParticles);
+} else {
+    initIndustriesParticles();
+}
+
+// Portfolio hero particles
+document.addEventListener('DOMContentLoaded', function () {
+    const canvas = document.getElementById('portfolioParticles');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    let balls = [];
+    const BALL_NUM = 24;
+    const R = 2;
+    const alphaF = 0.03;
+    const linkWidth = 0.8;
+    const distLimit = 220;
+    const mouseBall = { x: 0, y: 0, vx: 0, vy: 0, r: 0, type: 'mouse' };
+    const hero = document.querySelector('.portfolio-hero');
+
+    function setSize() {
+        W = canvas.width = canvas.clientWidth;
+        H = canvas.height = canvas.clientHeight;
+    }
+    setSize();
+    window.addEventListener('resize', setSize);
+
+    const rand = (min, max) => Math.random() * (max - min) + min;
+    const item = arr => arr[Math.floor(Math.random() * arr.length)];
+    const side = len => Math.ceil(Math.random() * len);
+    function speed(pos) {
+        const min = -1, max = 1;
+        if (pos === 'top') return [rand(min, max), rand(0.1, max)];
+        if (pos === 'right') return [rand(min, -0.1), rand(min, max)];
+        if (pos === 'bottom') return [rand(min, max), rand(min, -0.1)];
+        return [rand(0.1, max), rand(min, max)];
+    }
+    function randomBall() {
+        const pos = item(['top', 'right', 'bottom', 'left']);
+        const s = speed(pos);
+        if (pos === 'top') return { x: side(W), y: -R, vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+        if (pos === 'right') return { x: W + R, y: side(H), vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+        if (pos === 'bottom') return { x: side(W), y: H + R, vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+        return { x: -R, y: side(H), vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+    }
+    function renderBalls() {
+        balls.forEach(b => {
+            if (b.type) return;
+            ctx.fillStyle = `rgba(80,180,255,${b.alpha})`;
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, R, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fill();
+        });
+    }
+    function updateBalls() {
+        const next = [];
+        balls.forEach(b => {
+            b.x += b.vx; b.y += b.vy;
+            if (b.x > -50 && b.x < W + 50 && b.y > -50 && b.y < H + 50) next.push(b);
+            b.phase += alphaF; b.alpha = Math.abs(Math.cos(b.phase));
+        });
+        balls = next;
+    }
+    const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+    function renderLines() {
+        for (let i = 0; i < balls.length; i++) {
+            for (let j = i + 1; j < balls.length; j++) {
+                const f = dist(balls[i], balls[j]) / distLimit;
+                if (f < 1) {
+                    ctx.strokeStyle = `rgba(80,180,255,${(1 - f) * 0.8})`;
+                    ctx.lineWidth = linkWidth;
+                    ctx.beginPath();
+                    ctx.moveTo(balls[i].x, balls[i].y);
+                    ctx.lineTo(balls[j].x, balls[j].y);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+            }
+        }
+    }
+    function addIfFew() { if (balls.length < BALL_NUM) balls.push(randomBall()); }
+    function render() {
+        ctx.clearRect(0, 0, W, H);
+        renderBalls();
+        renderLines();
+        updateBalls();
+        addIfFew();
+        requestAnimationFrame(render);
+    }
+    function initBalls(n) {
+        balls = []; for (let i = 0; i < n; i++) balls.push({ x: side(W), y: side(H), vx: speed('top')[0], vy: speed('top')[1], r: R, alpha: 1, phase: rand(0, 10) });
+    }
+    initBalls(BALL_NUM); render();
+
+    if (hero) {
+        hero.addEventListener('mouseenter', () => { if (!balls.includes(mouseBall)) balls.push(mouseBall); });
+        hero.addEventListener('mouseleave', () => { balls = balls.filter(b => !b.type); });
+        hero.addEventListener('mousemove', e => {
+            const rect = canvas.getBoundingClientRect();
+            mouseBall.x = e.clientX - rect.left;
+            mouseBall.y = e.clientY - rect.top;
+        });
+    }
+});
+
+// Blog hero particles
+document.addEventListener('DOMContentLoaded', function () {
+    const canvas = document.getElementById('blogParticles');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    let balls = [];
+    const BALL_NUM = 24;
+    const R = 2;
+    const alphaF = 0.03;
+    const linkWidth = 0.8;
+    const distLimit = 220;
+    const mouseBall = { x: 0, y: 0, vx: 0, vy: 0, r: 0, type: 'mouse' };
+    const hero = document.querySelector('.blog-hero');
+
+    function setSize() {
+        W = canvas.width = canvas.clientWidth;
+        H = canvas.height = canvas.clientHeight;
+    }
+    setSize();
+    window.addEventListener('resize', setSize);
+
+    const rand = (min, max) => Math.random() * (max - min) + min;
+    const item = arr => arr[Math.floor(Math.random() * arr.length)];
+    const side = len => Math.ceil(Math.random() * len);
+    function speed(pos) {
+        const min = -1, max = 1;
+        if (pos === 'top') return [rand(min, max), rand(0.1, max)];
+        if (pos === 'right') return [rand(min, -0.1), rand(min, max)];
+        if (pos === 'bottom') return [rand(min, max), rand(min, -0.1)];
+        return [rand(0.1, max), rand(min, max)];
+    }
+    function randomBall() {
+        const pos = item(['top', 'right', 'bottom', 'left']);
+        const s = speed(pos);
+        if (pos === 'top') return { x: side(W), y: -R, vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+        if (pos === 'right') return { x: W + R, y: side(H), vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+        if (pos === 'bottom') return { x: side(W), y: H + R, vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+        return { x: -R, y: side(H), vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+    }
+    function renderBalls() {
+        balls.forEach(b => {
+            if (b.type) return;
+            ctx.fillStyle = `rgba(80,180,255,${b.alpha})`;
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, R, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fill();
+        });
+    }
+    function updateBalls() {
+        const next = [];
+        balls.forEach(b => {
+            b.x += b.vx; b.y += b.vy;
+            if (b.x > -50 && b.x < W + 50 && b.y > -50 && b.y < H + 50) next.push(b);
+            b.phase += alphaF; b.alpha = Math.abs(Math.cos(b.phase));
+        });
+        balls = next;
+    }
+    const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+    function renderLines() {
+        for (let i = 0; i < balls.length; i++) {
+            for (let j = i + 1; j < balls.length; j++) {
+                const f = dist(balls[i], balls[j]) / distLimit;
+                if (f < 1) {
+                    ctx.strokeStyle = `rgba(80,180,255,${(1 - f) * 0.8})`;
+                    ctx.lineWidth = linkWidth;
+                    ctx.beginPath();
+                    ctx.moveTo(balls[i].x, balls[i].y);
+                    ctx.lineTo(balls[j].x, balls[j].y);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+            }
+        }
+    }
+    function addIfFew() { if (balls.length < BALL_NUM) balls.push(randomBall()); }
+    function render() {
+        ctx.clearRect(0, 0, W, H);
+        renderBalls();
+        renderLines();
+        updateBalls();
+        addIfFew();
+        requestAnimationFrame(render);
+    }
+    function initBalls(n) {
+        balls = []; for (let i = 0; i < n; i++) balls.push({ x: side(W), y: side(H), vx: speed('top')[0], vy: speed('top')[1], r: R, alpha: 1, phase: rand(0, 10) });
+    }
+    initBalls(BALL_NUM); render();
+
+    if (hero) {
+        hero.addEventListener('mouseenter', () => { if (!balls.includes(mouseBall)) balls.push(mouseBall); });
+        hero.addEventListener('mouseleave', () => { balls = balls.filter(b => !b.type); });
+        hero.addEventListener('mousemove', e => {
+            const rect = canvas.getBoundingClientRect();
+            mouseBall.x = e.clientX - rect.left;
+            mouseBall.y = e.clientY - rect.top;
+        });
+    }
+});
+
+// Contact hero particles
+document.addEventListener('DOMContentLoaded', function () {
+    const canvas = document.getElementById('contactParticles');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    let balls = [];
+    const BALL_NUM = 24;
+    const R = 2;
+    const alphaF = 0.03;
+    const linkWidth = 0.8;
+    const distLimit = 220;
+    const mouseBall = { x: 0, y: 0, vx: 0, vy: 0, r: 0, type: 'mouse' };
+    const hero = document.querySelector('.contact-hero');
+
+    function setSize() {
+        W = canvas.width = canvas.clientWidth;
+        H = canvas.height = canvas.clientHeight;
+    }
+    setSize();
+    window.addEventListener('resize', setSize);
+
+    const rand = (min, max) => Math.random() * (max - min) + min;
+    const item = arr => arr[Math.floor(Math.random() * arr.length)];
+    const side = len => Math.ceil(Math.random() * len);
+    function speed(pos) {
+        const min = -1, max = 1;
+        if (pos === 'top') return [rand(min, max), rand(0.1, max)];
+        if (pos === 'right') return [rand(min, -0.1), rand(min, max)];
+        if (pos === 'bottom') return [rand(min, max), rand(min, -0.1)];
+        return [rand(0.1, max), rand(min, max)];
+    }
+    function randomBall() {
+        const pos = item(['top', 'right', 'bottom', 'left']);
+        const s = speed(pos);
+        if (pos === 'top') return { x: side(W), y: -R, vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+        if (pos === 'right') return { x: W + R, y: side(H), vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+        if (pos === 'bottom') return { x: side(W), y: H + R, vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+        return { x: -R, y: side(H), vx: s[0], vy: s[1], r: R, alpha: 1, phase: rand(0, 10) };
+    }
+    function renderBalls() {
+        balls.forEach(b => {
+            if (b.type) return;
+            ctx.fillStyle = `rgba(80,180,255,${b.alpha})`;
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, R, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fill();
+        });
+    }
+    function updateBalls() {
+        const next = [];
+        balls.forEach(b => {
+            b.x += b.vx; b.y += b.vy;
+            if (b.x > -50 && b.x < W + 50 && b.y > -50 && b.y < H + 50) next.push(b);
+            b.phase += alphaF; b.alpha = Math.abs(Math.cos(b.phase));
+        });
+        balls = next;
+    }
+    const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+    function renderLines() {
+        for (let i = 0; i < balls.length; i++) {
+            for (let j = i + 1; j < balls.length; j++) {
+                const f = dist(balls[i], balls[j]) / distLimit;
+                if (f < 1) {
+                    ctx.strokeStyle = `rgba(80,180,255,${(1 - f) * 0.8})`;
+                    ctx.lineWidth = linkWidth;
+                    ctx.beginPath();
+                    ctx.moveTo(balls[i].x, balls[i].y);
+                    ctx.lineTo(balls[j].x, balls[j].y);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+            }
+        }
+    }
+    function addIfFew() { if (balls.length < BALL_NUM) balls.push(randomBall()); }
+    function render() {
+        ctx.clearRect(0, 0, W, H);
+        renderBalls();
+        renderLines();
+        updateBalls();
+        addIfFew();
+        requestAnimationFrame(render);
+    }
+    function initBalls(n) {
+        balls = []; for (let i = 0; i < n; i++) balls.push({ x: side(W), y: side(H), vx: speed('top')[0], vy: speed('top')[1], r: R, alpha: 1, phase: rand(0, 10) });
+    }
+    initBalls(BALL_NUM); render();
+
+    if (hero) {
+        hero.addEventListener('mouseenter', () => { if (!balls.includes(mouseBall)) balls.push(mouseBall); });
+        hero.addEventListener('mouseleave', () => { balls = balls.filter(b => !b.type); });
+        hero.addEventListener('mousemove', e => {
+            const rect = canvas.getBoundingClientRect();
+            mouseBall.x = e.clientX - rect.left;
+            mouseBall.y = e.clientY - rect.top;
+        });
+    }
+});
+
+// Industries section canvas background (OPTIMIZED) - ONLY for home page section
 (function () {
 	const section = document.getElementById('industries');
 	const canvas = document.getElementById('x-canvas');
+	// Only run if both elements exist (home page), not industries page
 	if (!section || !canvas) return;
+	// Make sure we're on home page, not industries page
+	// Industries page has .industries-hero but no #industries section with #x-canvas
+	// Home page has #industries section with #x-canvas inside it
+	if (canvas.closest('#industries') !== section) {
+		// Canvas is not inside #industries section, skip
+		return;
+	}
 
 	const ctx = canvas.getContext('2d');
 	let width = 0;
@@ -1382,6 +1932,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	let points = [];
 	let target = { x: 0, y: 0 };
 	let animate = true;
+	let sectionRect = null; // Cache rect
+	let pendingMouseUpdate = false;
+	let mouseX = 0, mouseY = 0;
 
 	function rand(min, max) {
 		return Math.random() * (max - min) + min;
@@ -1393,16 +1946,20 @@ document.addEventListener('DOMContentLoaded', function () {
 		return dx * dx + dy * dy;
 	}
 
+	function updateSectionRect(){
+		sectionRect = section.getBoundingClientRect();
+	}
+
 	function layout() {
-		const rect = section.getBoundingClientRect();
-		width = Math.max(300, Math.floor(rect.width));
-		height = Math.max(300, Math.floor(rect.height));
+		updateSectionRect();
+		width = Math.max(300, Math.floor(sectionRect.width));
+		height = Math.max(300, Math.floor(sectionRect.height));
 		canvas.width = width;
 		canvas.height = height;
 
-		// Build points grid
+		// Build points grid - REDUCED DENSITY
 		points = [];
-		const cells = 20; // density
+		const cells = 8; // Reduced from 20 to 8 (64 points instead of 400)
 		for (let x = 0; x < width; x += width / cells) {
 			for (let y = 0; y < height; y += height / cells) {
 				const px = x + Math.random() * (width / cells);
@@ -1424,18 +1981,18 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		}
 
-		// Find 5 closest neighbors
+		// Find 3 closest neighbors (reduced from 5)
 		for (let i = 0; i < points.length; i++) {
 			const p1 = points[i];
 			const clos = [];
 			for (let j = 0; j < points.length; j++) {
 				if (i === j) continue;
 				const p2 = points[j];
-				if (clos.length < 5) {
+				if (clos.length < 3) {
 					clos.push(p2);
 					clos.sort((a, b) => distance2(p1, a) - distance2(p1, b));
-				} else if (distance2(p1, p2) < distance2(p1, clos[4])) {
-					clos[4] = p2;
+				} else if (distance2(p1, p2) < distance2(p1, clos[2])) {
+					clos[2] = p2;
 					clos.sort((a, b) => distance2(p1, a) - distance2(p1, b));
 				}
 			}
@@ -1460,8 +2017,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (t >= 1) assignNewTarget(p);
 	}
 
+	function updateTargetFromMouse(){
+		if (pendingMouseUpdate && sectionRect) {
+			target.x = mouseX - sectionRect.left;
+			target.y = mouseY - sectionRect.top;
+			pendingMouseUpdate = false;
+		}
+	}
+
 	function draw(now) {
 		if (!animate) return;
+		updateTargetFromMouse(); // Update target in RAF
 		ctx.clearRect(0, 0, width, height);
 
 		for (let i = 0; i < points.length; i++) {
@@ -1470,6 +2036,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			// activity based on cursor distance
 			const d2 = distance2(target, p);
+			// Early exit optimization
+			if (d2 > 40000) { p.active = 0; p.car = 0; continue; }
+			
 			if (d2 < 4000) {
 				p.active = 0.3; // line alpha
 				p.car = 0.6; // circle alpha
@@ -1507,20 +2076,30 @@ document.addEventListener('DOMContentLoaded', function () {
 		requestAnimationFrame(draw);
 	}
 
+	// Throttled mouse handler
+	let lastMouseTime = 0;
 	function onMouseMove(e) {
-		const rect = section.getBoundingClientRect();
-		target.x = e.clientX - rect.left;
-		target.y = e.clientY - rect.top;
+		mouseX = e.clientX;
+		mouseY = e.clientY;
+		pendingMouseUpdate = true;
+		
+		// Throttle: only update rect cache every 100ms
+		const now = performance.now();
+		if (now - lastMouseTime > 100) {
+			updateSectionRect();
+			lastMouseTime = now;
+		}
 	}
 
 	function onScroll() {
-		const rect = section.getBoundingClientRect();
+		updateSectionRect();
 		// pause when off-screen
-		animate = rect.bottom > 0 && rect.top < window.innerHeight;
+		animate = sectionRect.bottom > 0 && sectionRect.top < window.innerHeight;
 		if (animate) requestAnimationFrame(draw);
 	}
 
 	function onResize() {
+		updateSectionRect();
 		layout();
 	}
 
@@ -1537,7 +2116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	window.addEventListener('resize', onResize);
 })();
 
-// Generic canvas network for any .x-canvas-net inside a section
+// Generic canvas network for any .x-canvas-net inside a section (OPTIMIZED)
 (function () {
 	const canvases = Array.from(document.querySelectorAll('section .x-canvas-net'));
 	if (!canvases.length) return;
@@ -1549,17 +2128,24 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (!section) return;
 		const ctx = canvas.getContext('2d');
 		let width = 0, height = 0, points = [], target = {x:0,y:0}, running = true;
+		let sectionRect = null; // Cache rect to avoid repeated getBoundingClientRect calls
+		let pendingMouseUpdate = false; // Flag for RAF-based mouse updates
+		let mouseX = 0, mouseY = 0; // Store mouse position
 
 		function d2(a,b){const dx=a.x-b.x, dy=a.y-b.y; return dx*dx+dy*dy}
 		function rnd(min,max){return Math.random()*(max-min)+min}
 
+		function updateSectionRect(){
+			sectionRect = section.getBoundingClientRect();
+		}
+
 		function layout(){
-			const rect = section.getBoundingClientRect();
-			width = Math.max(300, Math.floor(rect.width));
-			height = Math.max(300, Math.floor(rect.height));
+			updateSectionRect();
+			width = Math.max(300, Math.floor(sectionRect.width));
+			height = Math.max(300, Math.floor(sectionRect.height));
 			canvas.width = width; canvas.height = height;
 			points = [];
-			const cells = 20;
+			const cells = 8; // Reduced from 20 to 8 (64 points instead of 400) - lighter performance
 			for (let x=0; x<width; x+= width/cells){
 				for (let y=0; y<height; y+= height/cells){
 					const px = x + Math.random()*(width/cells);
@@ -1570,27 +2156,93 @@ document.addEventListener('DOMContentLoaded', function () {
 			for (let i=0;i<points.length;i++){
 				const p1 = points[i]; const clos=[];
 				for (let j=0;j<points.length;j++){ if(i===j) continue; const p2=points[j];
-					if (clos.length<5){ clos.push(p2); clos.sort((a,b)=>d2(p1,a)-d2(p1,b)); }
-					else if (d2(p1,p2) < d2(p1,clos[4])){ clos[4]=p2; clos.sort((a,b)=>d2(p1,a)-d2(p1,b)); }
+					if (clos.length<3){ clos.push(p2); clos.sort((a,b)=>d2(p1,a)-d2(p1,b)); } // Reduced from 5 to 3 closest neighbors
+					else if (d2(p1,p2) < d2(p1,clos[2])){ clos[2]=p2; clos.sort((a,b)=>d2(p1,a)-d2(p1,b)); }
 				}
 				p1.closest = clos; assign(p1);
 			}
 		}
 		function assign(p){ p.tx=p.ox+rnd(-40,40); p.ty=p.oy+rnd(-40,40); p.start=performance.now(); p.dur=rnd(1200,2200); }
 		function step(p,now){ const t=Math.min(1,(now-p.start)/p.dur); const e=t<.5?2*t*t:-1+(4-2*t)*t; p.x+= (p.tx-p.x)*e; p.y+= (p.ty-p.y)*e; if(t>=1) assign(p); }
-		function draw(now){ if(!running) return; ctx.clearRect(0,0,width,height);
-			for (let i=0;i<points.length;i++){ const p=points[i]; step(p,now); const dis=d2(target,p);
-				if (dis<4000){p.la=.3; p.ca=.6} else if (dis<20000){p.la=.12; p.ca=.35} else if (dis<40000){p.la=.04; p.ca=.15} else {p.la=0; p.ca=0}
-				if (p.la>0){ for (let k=0;k<p.closest.length;k++){ const c=p.closest[k]; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(c.x,c.y); ctx.strokeStyle='rgba(95,205,255,'+p.la+')'; ctx.stroke(); }}
-				if (p.ca>0){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(95,205,255,'+p.ca+')'; ctx.fill(); }
+		
+		// Update target position from cached mouse position (called in RAF)
+		function updateTargetFromMouse(){
+			if (pendingMouseUpdate && sectionRect) {
+				target.x = mouseX - sectionRect.left;
+				target.y = mouseY - sectionRect.top;
+				pendingMouseUpdate = false;
+			}
+		}
+		
+		function draw(now){ 
+			if(!running) return; 
+			updateTargetFromMouse(); // Update target in RAF instead of mousemove
+			ctx.clearRect(0,0,width,height);
+			for (let i=0;i<points.length;i++){ 
+				const p=points[i]; 
+				step(p,now); 
+				const dis=d2(target,p);
+				// Early exit optimization - skip drawing if too far
+				if (dis > 40000) { p.la=0; p.ca=0; continue; }
+				
+				if (dis<4000){p.la=.3; p.ca=.6} 
+				else if (dis<20000){p.la=.12; p.ca=.35} 
+				else if (dis<40000){p.la=.04; p.ca=.15} 
+				else {p.la=0; p.ca=0}
+				
+				if (p.la>0){ 
+					for (let k=0;k<p.closest.length;k++){ 
+						const c=p.closest[k]; 
+						ctx.beginPath(); 
+						ctx.moveTo(p.x,p.y); 
+						ctx.lineTo(c.x,c.y); 
+						ctx.strokeStyle='rgba(95,205,255,'+p.la+')'; 
+						ctx.stroke(); 
+					}
+				}
+				if (p.ca>0){ 
+					ctx.beginPath(); 
+					ctx.arc(p.x,p.y,p.r,0,Math.PI*2); 
+					ctx.fillStyle='rgba(95,205,255,'+p.ca+')'; 
+					ctx.fill(); 
+				}
 			}
 			requestAnimationFrame(draw);
 		}
-		function onMouse(e){ const r=section.getBoundingClientRect(); target.x=e.clientX-r.left; target.y=e.clientY-r.top; }
-		function onScroll(){ const r=section.getBoundingClientRect(); running = r.bottom>0 && r.top<window.innerHeight; if(running) requestAnimationFrame(draw); }
-		function onResize(){ layout(); }
-		layout(); target.x=width/2; target.y=height/2; requestAnimationFrame(draw);
-		if (!('ontouchstart' in window)) section.addEventListener('mousemove', onMouse, {passive:true});
+		
+		// Throttled mouse handler - only stores position, actual update in RAF
+		let lastMouseTime = 0;
+		function onMouse(e){ 
+			mouseX = e.clientX;
+			mouseY = e.clientY;
+			pendingMouseUpdate = true;
+			
+			// Throttle: only update rect cache every 100ms
+			const now = performance.now();
+			if (now - lastMouseTime > 100) {
+				updateSectionRect();
+				lastMouseTime = now;
+			}
+		}
+		
+		function onScroll(){ 
+			updateSectionRect();
+			running = sectionRect.bottom>0 && sectionRect.top<window.innerHeight; 
+			if(running) requestAnimationFrame(draw); 
+		}
+		function onResize(){ 
+			updateSectionRect();
+			layout(); 
+		}
+		
+		layout(); 
+		target.x=width/2; 
+		target.y=height/2; 
+		requestAnimationFrame(draw);
+		
+		if (!('ontouchstart' in window)) {
+			section.addEventListener('mousemove', onMouse, {passive:true});
+		}
 		window.addEventListener('scroll', onScroll, {passive:true});
 		window.addEventListener('resize', onResize);
 	}

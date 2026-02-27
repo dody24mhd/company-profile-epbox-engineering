@@ -27,6 +27,20 @@
             </div>
 
             <div class="form-group">
+                <label>Categories</label>
+                <select name="categories" class="form-control" required>
+                    <option value="">-- Select Category --</option>
+                    <option value="LinkedIn Review" {{ old('categories') === 'LinkedIn Review' ? 'selected' : '' }}>LinkedIn Review</option>
+                    <option value="Industry Review" {{ old('categories') === 'Industry Review' ? 'selected' : '' }}>Industry Review</option>
+                    <option value="Instagram Review" {{ old('categories') === 'Instagram Review' ? 'selected' : '' }}>Instagram Review</option>
+                    <option value="Interview On Site" {{ old('categories') === 'Interview On Site' ? 'selected' : '' }}>Interview On Site</option>
+                    <option value="Client Feedback" {{ old('categories') === 'Client Feedback' ? 'selected' : '' }}>Client Feedback</option>
+                    <option value="Project Review" {{ old('categories') === 'Project Review' ? 'selected' : '' }}>Project Review</option>
+                </select>
+                <x-input-error :messages="$errors->get('categories')" />
+            </div>
+
+            <div class="form-group">
                 <label>Description</label>
                 <textarea name="description" class="form-control" rows="4" required>{{ old('description') }}</textarea>
             </div>

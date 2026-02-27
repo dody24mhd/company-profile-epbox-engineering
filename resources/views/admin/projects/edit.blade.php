@@ -7,7 +7,7 @@
 
 <div class="card shadow">
     <div class="card-body">
-        <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.projects.update', $project) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -23,24 +23,32 @@
                 <x-input-error :messages="$errors->get('description')" />
             </div>
 
+            <div class="form-group">
+                <label>Categories</label>
+                <select name="categories" class="form-control" required>
+                    @php($cats = config('categories.list'))
+                    <option value="">-- Select Category --</option>
+                    @foreach($cats as $c)
+                        <option value="{{ $c }}" {{ old('categories', $project->categories) === $c ? 'selected' : '' }}>{{ $c }}</option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('categories')" />
+            </div>
+
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label>Categories</label>
-                    <select name="categories" class="form-control">
-                        @php($cats = config('categories.list'))
-                        <option value="">-- Select Category --</option>
-                        @foreach($cats as $c)
-                            <option value="{{ $c }}" {{ old('categories', $project->categories) === $c ? 'selected' : '' }}>{{ $c }}</option>
-                        @endforeach
+                    <label>Status</label>
+                    <select name="status" class="form-control" required>
+                        <option value="published" {{ old('status', $project->status) === 'published' ? 'selected' : '' }}>Published</option>
+                        <option value="draft" {{ old('status', $project->status) === 'draft' ? 'selected' : '' }}>Draft</option>
                     </select>
+                    <x-input-error :messages="$errors->get('status')" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Image</label>
-                    <input type="file" name="img" class="form-control-file" accept="image/*">
-                    @if($project->img)
-                        <div class="mt-2"><img src="{{ asset(ltrim($project->img, '/')) }}" alt="preview" style="max-height:60px"></div>
-                    @endif
-                    <x-input-error :messages="$errors->get('img')" />
+                    <div class="form-check mt-4">
+                        <input type="checkbox" name="is_featured" value="1" class="form-check-input" {{ old('is_featured', $project->is_featured) ? 'checked' : '' }}>
+                        <label class="form-check-label">Featured Project</label>
+                    </div>
                 </div>
             </div>
 

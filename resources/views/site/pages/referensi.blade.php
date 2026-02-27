@@ -1,6 +1,6 @@
 @extends('site.layouts.app')
 
-@section('title', 'Capabilities Reference | EPBOX Engineering')
+@section('title', 'Capabilities Reference | EPBOX ENGINEERING PTE. LTD')
 
 @section('content')
 <!-- Reference Section -->
@@ -343,12 +343,12 @@
         </div>
         <div id="wcTrack" class="relative overflow-x-auto" style="scroll-snap-type: x mandatory;">
             <div class="flex gap-4 w-max">
-                <img src="{{ asset('img/epbox/gambar4.png') }}" alt="Work 1" class="w-[320px] h-56 object-cover rounded snap-start">
-                <img src="{{ asset('img/epbox/gambar27.png') }}" alt="Work 2" class="w-[320px] h-56 object-cover rounded snap-start">
-                <img src="{{ asset('img/epbox/gambar34.png') }}" alt="Work 3" class="w-[320px] h-56 object-cover rounded snap-start">
-                <img src="{{ asset('img/epbox/gambar7.png') }}" alt="Work 4" class="w-[320px] h-56 object-cover rounded snap-start">
-                <img src="{{ asset('img/epbox/panel.png') }}" alt="Work 5" class="w-[320px] h-56 object-cover rounded snap-start">
-                <img src="{{ asset('img/epbox/gambar1.png') }}" alt="Work 6" class="w-[320px] h-56 object-cover rounded snap-start">
+                <img src="{{ asset('img/epbox2/gambar4.webp') }}" alt="Work 1" class="w-[320px] h-56 object-cover rounded snap-start" loading="lazy">
+                <img src="{{ asset('img/epbox2/gambar27.webp') }}" alt="Work 2" class="w-[320px] h-56 object-cover rounded snap-start" loading="lazy">
+                <img src="{{ asset('img/epbox2/gambar34.webp') }}" alt="Work 3" class="w-[320px] h-56 object-cover rounded snap-start" loading="lazy">
+                <img src="{{ asset('img/epbox2/gambar7.webp') }}" alt="Work 4" class="w-[320px] h-56 object-cover rounded snap-start" loading="lazy">
+                <img src="{{ asset('img/epbox2/panel.webp') }}" alt="Work 5" class="w-[320px] h-56 object-cover rounded snap-start" loading="lazy">
+                <img src="{{ asset('img/epbox2/gambar1.webp') }}" alt="Work 6" class="w-[320px] h-56 object-cover rounded snap-start" loading="lazy">
             </div>
         </div>
         <script>
@@ -369,30 +369,43 @@
             <h2 class="text-3xl md:text-4xl font-bold section-title mb-2" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">OUR WORK – SWIPER</h2>
             <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
         </div>
-        <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css">
+        <!-- Load Swiper CSS asynchronously -->
+        <link rel="preload" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css"></noscript>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="{{ asset('img/epbox/gambar4.png') }}" class="w-full h-72 object-cover rounded" alt="w1"></div>
-                <div class="swiper-slide"><img src="{{ asset('img/epbox/gambar27.png') }}" class="w-full h-72 object-cover rounded" alt="w2"></div>
-                <div class="swiper-slide"><img src="{{ asset('img/epbox/gambar34.png') }}" class="w-full h-72 object-cover rounded" alt="w3"></div>
-                <div class="swiper-slide"><img src="{{ asset('img/epbox/gambar7.png') }}" class="w-full h-72 object-cover rounded" alt="w4"></div>
-                <div class="swiper-slide"><img src="{{ asset('img/epbox/panel.png') }}" class="w-full h-72 object-cover rounded" alt="w5"></div>
-                <div class="swiper-slide"><img src="{{ asset('img/epbox/gambar1.png') }}" class="w-full h-72 object-cover rounded" alt="w6"></div>
+                <div class="swiper-slide"><img src="{{ asset('img/epbox2/gambar4.webp') }}" class="w-full h-72 object-cover rounded" alt="w1" loading="lazy"></div>
+                <div class="swiper-slide"><img src="{{ asset('img/epbox2/gambar27.webp') }}" class="w-full h-72 object-cover rounded" alt="w2" loading="lazy"></div>
+                <div class="swiper-slide"><img src="{{ asset('img/epbox2/gambar34.webp') }}" class="w-full h-72 object-cover rounded" alt="w3" loading="lazy"></div>
+                <div class="swiper-slide"><img src="{{ asset('img/epbox2/gambar7.webp') }}" class="w-full h-72 object-cover rounded" alt="w4" loading="lazy"></div>
+                <div class="swiper-slide"><img src="{{ asset('img/epbox2/panel.webp') }}" class="w-full h-72 object-cover rounded" alt="w5" loading="lazy"></div>
+                <div class="swiper-slide"><img src="{{ asset('img/epbox2/gambar1.webp') }}" class="w-full h-72 object-cover rounded" alt="w6" loading="lazy"></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
-        <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+        <!-- Load Swiper JS asynchronously -->
         <script>
             (function(){
-                new Swiper('.mySwiper',{
-                    slidesPerView: 1.2,
-                    spaceBetween: 16,
-                    centeredSlides: true,
-                    loop: true,
-                    autoplay: { delay: 2500, disableOnInteraction: false },
-                    pagination: { el: '.swiper-pagination', clickable: true },
-                    breakpoints: { 768:{ slidesPerView:2.2 }, 1024:{ slidesPerView:3 } }
-                });
+                // Load Swiper.js asynchronously
+                var script = document.createElement('script');
+                script.src = 'https://unpkg.com/swiper@9/swiper-bundle.min.js';
+                script.async = true;
+                script.defer = true;
+                script.onload = function() {
+                    // Initialize Swiper after library loads
+                    if (typeof Swiper !== 'undefined') {
+                        new Swiper('.mySwiper',{
+                            slidesPerView: 1.2,
+                            spaceBetween: 16,
+                            centeredSlides: true,
+                            loop: true,
+                            autoplay: { delay: 2500, disableOnInteraction: false },
+                            pagination: { el: '.swiper-pagination', clickable: true },
+                            breakpoints: { 768:{ slidesPerView:2.2 }, 1024:{ slidesPerView:3 } }
+                        });
+                    }
+                };
+                document.head.appendChild(script);
             })();
         </script>
     </div>
@@ -415,12 +428,12 @@
             #lightboxOverlay img{ max-width:90vw; max-height:85vh; border-radius:8px; }
         </style>
         <div class="masonry">
-            <img src="{{ asset('img/epbox/gambar4.png') }}" alt="m1" class="lb-src">
-            <img src="{{ asset('img/epbox/gambar27.png') }}" alt="m2" class="lb-src">
-            <img src="{{ asset('img/epbox/gambar34.png') }}" alt="m3" class="lb-src">
-            <img src="{{ asset('img/epbox/gambar7.png') }}" alt="m4" class="lb-src">
-            <img src="{{ asset('img/epbox/panel.png') }}" alt="m5" class="lb-src">
-            <img src="{{ asset('img/epbox/gambar1.png') }}" alt="m6" class="lb-src">
+            <img src="{{ asset('img/epbox2/gambar4.webp') }}" alt="m1" class="lb-src" loading="lazy">
+            <img src="{{ asset('img/epbox2/gambar27.webp') }}" alt="m2" class="lb-src" loading="lazy">
+            <img src="{{ asset('img/epbox2/gambar34.webp') }}" alt="m3" class="lb-src" loading="lazy">
+            <img src="{{ asset('img/epbox2/gambar7.webp') }}" alt="m4" class="lb-src" loading="lazy">
+            <img src="{{ asset('img/epbox2/panel.webp') }}" alt="m5" class="lb-src" loading="lazy">
+            <img src="{{ asset('img/epbox2/gambar1.webp') }}" alt="m6" class="lb-src" loading="lazy">
         </div>
         <div id="lightboxOverlay" class="flex"><img src="" alt="Preview"></div>
         <script>
@@ -446,12 +459,12 @@
         </div>
         <div id="filmstrip" class="overflow-x-auto select-none">
             <div class="flex gap-4 w-max">
-                <img src="{{ asset('img/epbox/gambar4.png') }}" class="h-40 w-auto rounded" alt="f1">
-                <img src="{{ asset('img/epbox/gambar27.png') }}" class="h-40 w-auto rounded" alt="f2">
-                <img src="{{ asset('img/epbox/gambar34.png') }}" class="h-40 w-auto rounded" alt="f3">
-                <img src="{{ asset('img/epbox/gambar7.png') }}" class="h-40 w-auto rounded" alt="f4">
-                <img src="{{ asset('img/epbox/panel.png') }}" class="h-40 w-auto rounded" alt="f5">
-                <img src="{{ asset('img/epbox/gambar1.png') }}" class="h-40 w-auto rounded" alt="f6">
+                <img src="{{ asset('img/epbox2/gambar4.webp') }}" class="h-40 w-auto rounded" alt="f1" loading="lazy">
+                <img src="{{ asset('img/epbox2/gambar27.webp') }}" class="h-40 w-auto rounded" alt="f2" loading="lazy">
+                <img src="{{ asset('img/epbox2/gambar34.webp') }}" class="h-40 w-auto rounded" alt="f3" loading="lazy">
+                <img src="{{ asset('img/epbox2/gambar7.webp') }}" class="h-40 w-auto rounded" alt="f4" loading="lazy">
+                <img src="{{ asset('img/epbox2/panel.webp') }}" class="h-40 w-auto rounded" alt="f5" loading="lazy">
+                <img src="{{ asset('img/epbox2/gambar1.webp') }}" class="h-40 w-auto rounded" alt="f6" loading="lazy">
             </div>
         </div>
         <script>
@@ -482,9 +495,9 @@
             <!-- Slider 1 -->
             <div class="ba-card bg-white/5 border border-white/10 rounded-sm p-4">
                 <div class="ba-container relative overflow-hidden rounded-sm" style="height: 260px;">
-                    <img src="{{ asset('img/epbox/gambar4.png') }}" alt="Before" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none">
+                    <img src="{{ asset('img/epbox2/gambar4.webp') }}" alt="Before" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" loading="lazy">
                     <div class="ba-overlay absolute inset-0 overflow-hidden" style="width: 50%;">
-                        <img src="{{ asset('img/epbox/panel.png') }}" alt="After" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none">
+                        <img src="{{ asset('img/epbox2/panel.webp') }}" alt="After" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" loading="lazy">
                     </div>
                     <div class="ba-handle absolute top-1/2 -translate-y-1/2 bg-blue-500 h-8 w-8 rounded-full shadow flex items-center justify-center text-white" style="left: calc(50% - 16px); z-index: 2;">
                         <i class="fas fa-arrows-alt-h text-sm"></i>
@@ -497,9 +510,9 @@
             <!-- Slider 2 -->
             <div class="ba-card bg-white/5 border border-white/10 rounded-sm p-4">
                 <div class="ba-container relative overflow-hidden rounded-sm" style="height: 260px;">
-                    <img src="{{ asset('img/epbox/gambar27.png') }}" alt="Before" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none">
+                    <img src="{{ asset('img/epbox2/gambar27.webp') }}" alt="Before" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" loading="lazy">
                     <div class="ba-overlay absolute inset-0 overflow-hidden" style="width: 50%;">
-                        <img src="{{ asset('img/epbox/gambar34.png') }}" alt="After" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none">
+                        <img src="{{ asset('img/epbox2/gambar34.webp') }}" alt="After" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" loading="lazy">
                     </div>
                     <div class="ba-handle absolute top-1/2 -translate-y-1/2 bg-blue-500 h-8 w-8 rounded-full shadow flex items-center justify-center text-white" style="left: calc(50% - 16px); z-index: 2;">
                         <i class="fas fa-arrows-alt-h text-sm"></i>
@@ -512,9 +525,9 @@
             <!-- Slider 3 -->
             <div class="ba-card bg-white/5 border border-white/10 rounded-sm p-4">
                 <div class="ba-container relative overflow-hidden rounded-sm" style="height: 260px;">
-                    <img src="{{ asset('img/epbox/gambar1.png') }}" alt="Before" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none">
+                    <img src="{{ asset('img/epbox2/gambar1.webp') }}" alt="Before" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" loading="lazy">
                     <div class="ba-overlay absolute inset-0 overflow-hidden" style="width: 50%;">
-                        <img src="{{ asset('img/epbox/gambar7.png') }}" alt="After" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none">
+                        <img src="{{ asset('img/epbox2/gambar7.webp') }}" alt="After" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" loading="lazy">
                     </div>
                     <div class="ba-handle absolute top-1/2 -translate-y-1/2 bg-blue-500 h-8 w-8 rounded-full shadow flex items-center justify-center text-white" style="left: calc(50% - 16px); z-index: 2;">
                         <i class="fas fa-arrows-alt-h text-sm"></i>
@@ -559,27 +572,27 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="group rounded-sm overflow-hidden relative">
-                <img src="{{ asset('img/epbox/gambar4.png') }}" alt="Workshop Panel Assembly" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
+                <img src="{{ asset('img/epbox2/gambar4.webp') }}" alt="Workshop Panel Assembly" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
             </div>
             <div class="group rounded-sm overflow-hidden relative">
-                <img src="{{ asset('img/epbox/gambar27.png') }}" alt="Field Installation" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
+                <img src="{{ asset('img/epbox2/gambar27.webp') }}" alt="Field Installation" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
             </div>
             <div class="group rounded-sm overflow-hidden relative">
-                <img src="{{ asset('img/epbox/gambar34.png') }}" alt="Testing & Commissioning" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
+                <img src="{{ asset('img/epbox2/gambar34.webp') }}" alt="Testing & Commissioning" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
             </div>
             <div class="group rounded-sm overflow-hidden relative">
-                <img src="{{ asset('img/epbox/gambar7.png') }}" alt="Control Room Integration" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
+                <img src="{{ asset('img/epbox2/gambar7.webp') }}" alt="Control Room Integration" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
             </div>
             <div class="group rounded-sm overflow-hidden relative">
-                <img src="{{ asset('img/epbox/panel.png') }}" alt="Panel Fabrication" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
+                <img src="{{ asset('img/epbox2/panel.webp') }}" alt="Panel Fabrication" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
             </div>
             <div class="group rounded-sm overflow-hidden relative">
-                <img src="{{ asset('img/epbox/gambar1.png') }}" alt="On-site Work" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
+                <img src="{{ asset('img/epbox2/gambar1.webp') }}" alt="On-site Work" loading="lazy" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
             </div>
         </div>
@@ -604,5 +617,4 @@
 
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="{{ asset('js/site.js') }}"></script>
 @endpush

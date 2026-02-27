@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('img/logotab.svg') }}?v={{ filemtime(public_path('img/logotab.svg')) }}">
+    <link rel="alternate icon" type="image/png" href="{{ asset('img/logo2.png') }}?v={{ filemtime(public_path('img/logo2.png')) }}">
+    <link rel="apple-touch-icon" href="{{ asset('img/logo2.png') }}?v={{ filemtime(public_path('img/logo2.png')) }}">
     <title>@yield('title', 'EPBOX ENGINEERING - Admin Dashboard')</title>
     <!-- Linking the CSS files -->
     <link href="{{ asset('vendor/fontawesome-free/css/svg-with-js.min.css') }}" rel="stylesheet">

@@ -65,6 +65,14 @@
         </a>
     </li>
 
+    <!-- Nav Item - Live Chat -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.live-chat.index') }}">
+            <i class="fas fa-fw fa-comments"></i>
+            <span>Live Chat</span>
+        </a>
+    </li>
+
     <!-- Nav Item - Audits (Super Admin only) -->
     @can('manage-admins')
     <li class="nav-item">

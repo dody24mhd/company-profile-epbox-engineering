@@ -1,26 +1,22 @@
 @extends('site.layouts.app')
-@section('title','Industries Served | Epbox Engineering | Industrial Automation Solutions')
+@section('title','Industries Served | EPBOX ENGINEERING PTE. LTD')
 @section('content')
-<!-- Hero Section -->
-<section class="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 gradient-bg relative overflow-hidden fade-section">
-	<!-- Canvas Background -->
-	<canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
-	<div class="interactive-bg">
-		<div class="w-16 h-16 top-20 left-10 animate-pulse"></div>
-		<div class="w-24 h-24 top-1/2 right-20 animate-pulse delay-1000"></div>
-		<div class="w-12 h-12 bottom-20 left-1/4 animate-pulse delay-500"></div>
-	</div>
-	<div class="max-w-7xl mx-auto relative z-10 text-center">
-		<h1 class="text-4xl md:text-6xl font-bold mb-6" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">INDUSTRIES <span class="text-blue-300">WE SERVE</span></h1>
-		<div class="w-32 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mb-6"></div>
-		<p class="text-xl text-gray-300 max-w-3xl mx-auto" style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Epbox Engineering delivers cutting-edge control panel solutions across diverse industrial sectors, ensuring operational excellence and safety compliance for businesses worldwide.</p>
-	</div>
+<!-- Hero/Intro Section -->
+<section class="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 gradient-bg fade-section relative industries-hero">
+  <!-- Particles Canvas Layer -->
+  <canvas id="industriesParticles" class="absolute inset-0 w-full h-full pointer-events-none" style="z-index:1">Your
+    browser doesn't support Canvas.</canvas>
+  <div class="max-w-7xl mx-auto text-center relative z-10">
+    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+      style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">INDUSTRIES <span class="text-blue-300">WE SERVE</span></h1>
+    <div class="w-32 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mb-6"></div>
+    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+      style="font-family: 'Roboto', sans-serif; font-weight: 300; letter-spacing: 0.3px;">Epbox Engineering delivers cutting-edge control panel solutions across diverse industrial sectors, ensuring operational excellence and safety compliance for businesses worldwide.</p>
+  </div>
 </section>
 
 <!-- Key Industries Grid -->
 <section id="key-industries" class="py-16 px-8 bg-[#0A1128] relative overflow-hidden fade-section">
-	<!-- Canvas Background -->
-	<canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
 	<div class="floating-orb orb1"></div>
 	<div class="floating-orb orb2"></div>
 	<div class="floating-orb orb3"></div>
@@ -35,7 +31,7 @@
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<!-- Image area -->
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/oilgas.png') }}" alt="Oil & Gas" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/oilgas2.webp') }}" alt="Oil & Gas" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-oil-can"></i></div>
 					<!-- Text overlay on image -->
@@ -48,7 +44,7 @@
 
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/automat.png') }}" alt="Power Generation & Clean Energy" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/automat.webp') }}" alt="Power Generation & Clean Energy" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-bolt"></i></div>
 					<div class="absolute inset-0 z-10 p-5 flex flex-col gap-2 items-center justify-center text-center">
@@ -60,7 +56,7 @@
 
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/center.png') }}" alt="Data Centres & Industrial Automation" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/center.webp') }}" alt="Data Centres & Industrial Automation" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-database"></i></div>
 					<div class="absolute inset-0 z-10 p-5 flex flex-col gap-2 items-center justify-center text-center">
@@ -72,7 +68,7 @@
 
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/building.png') }}" alt="Building Infrastructure" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/building.webp') }}" alt="Building Infrastructure" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-building"></i></div>
 					<div class="absolute inset-0 z-10 p-5 flex flex-col gap-2 items-center justify-center text-center">
@@ -84,7 +80,7 @@
 
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/water.png') }}" alt="Water Treatment" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/water.webp') }}" alt="Water Treatment" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-tint"></i></div>
 					<div class="absolute inset-0 z-10 p-5 flex flex-col gap-2 items-center justify-center text-center">
@@ -96,7 +92,7 @@
 
 			<div class="group relative rounded-sm border border-white/10 bg-white/5 overflow-hidden hover:border-blue-400/40 transition">
 				<div class="relative h-80 md:h-96">
-					<img src="{{ asset('img/epbox/marine.png') }}" alt="Marine & Offshore Systems" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+					<img src="{{ asset('img/epbox2/marine.webp') }}" alt="Marine & Offshore Systems" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
 					<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.35), rgba(15,28,63,0.7));"></div>
 					<div class="absolute top-3 left-3 w-10 h-10 rounded-sm bg-blue-600 text-white flex items-center justify-center shadow"><i class="fas fa-ship"></i></div>
 					<div class="absolute inset-0 z-10 p-5 flex flex-col gap-2 items-center justify-center text-center">
@@ -110,8 +106,7 @@
 </section>
 
 <!-- Industry Case Sections (TOM Slider) -->
-<section class="py-10 relative overflow-hidden fade-section">
-	<canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.25;"></canvas>
+<section class="py-10 relative overflow-hidden fade-section visible" style="opacity: 1 !important; transform: none !important;">
 	<div class="relative z-10">
 		<div class="tom-slider">
 			<button class="tom-control tom-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
@@ -122,7 +117,7 @@
 					<article class="tom-block is-visible">
 						<div class="tom-media tom-grad">
 							<picture>
-								<img src="{{ asset('img/epbox/oilgas.png') }}" alt="Oil & Gas – FPSO & Refinery" loading="lazy">
+								<img src="{{ asset('img/epbox2/oilgas.webp') }}" alt="Oil & Gas – FPSO & Refinery" loading="lazy">
 							</picture>
 							<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.5), rgba(15,28,63,0.65));"></div>
 						</div>
@@ -141,7 +136,7 @@
 					<article class="tom-block is-visible">
 						<div class="tom-media tom-grad">
 							<picture>
-								<img src="{{ asset('img/epbox/automat.png') }}" alt="Power & Clean Energy" loading="lazy">
+								<img src="{{ asset('img/epbox2/automat.webp') }}" alt="Power & Clean Energy" loading="lazy">
 							</picture>
 							<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.5), rgba(15,28,63,0.65));"></div>
 						</div>
@@ -160,7 +155,7 @@
 					<article class="tom-block is-visible">
 						<div class="tom-media tom-grad">
 							<picture>
-								<img src="{{ asset('img/epbox/center.png') }}" alt="Data Centres & Industrial Automation" loading="lazy">
+								<img src="{{ asset('img/epbox2/center.webp') }}" alt="Data Centres & Industrial Automation" loading="lazy">
 							</picture>
 							<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.5), rgba(15,28,63,0.65));"></div>
 						</div>
@@ -179,7 +174,7 @@
 					<article class="tom-block is-visible">
 						<div class="tom-media tom-grad">
 							<picture>
-								<img src="{{ asset('img/epbox/marine.png') }}" alt="Marine & Offshore" loading="lazy">
+								<img src="{{ asset('img/epbox2/marine.webp') }}" alt="Marine & Offshore" loading="lazy">
 							</picture>
 							<div class="absolute inset-0" style="background: linear-gradient(rgba(15,28,63,0.5), rgba(15,28,63,0.65));"></div>
 						</div>
@@ -199,9 +194,7 @@
 </section>
 
 <!-- Compliance & Certifications Section2 -->
-<section id="why-choose" class="py-20 px-6 relative overflow-hidden fade-section">
-    <!-- Canvas Background -->
-    <canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
+<section id="why-choose" class="py-20 px-6 relative overflow-hidden fade-section visible" style="opacity: 1 !important; transform: none !important;">
     <!-- Interactive Background Elements -->
     <div class="interactive-bg">
         <div class="w-16 h-16 top-20 left-10 animate-pulse"></div>
@@ -301,9 +294,7 @@
 </section>
 
 <!-- Ready to Transform Your Industry Section -->
-<section class="py-20 px-6 gradient-bg relative overflow-hidden fade-section">
-	<!-- Canvas Background -->
-	<canvas class="x-canvas-net absolute inset-0 w-full h-full pointer-events-none" style="z-index:0; opacity:0.5;"></canvas>
+<section class="py-20 px-6 gradient-bg relative overflow-hidden fade-section visible" style="opacity: 1 !important; transform: none !important;">
 	<div class="max-w-7xl mx-auto relative z-10 text-center">
 		<h2 class="text-3xl md:text-4xl lg:text-4xl font-bold mb-6" style="font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: 0.5px;">READY TO START YOUR <span class="text-blue-300">PROJECT?</span></h2>
 		<div class="w-32 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mb-8"></div>
@@ -319,24 +310,7 @@
 	</div>
 </section>
 
-<!-- Chat Components (reuse global JS) -->
-<div class="chat-box" onclick="toggleChat()">
-	<i class="fas fa-comments"></i>
-</div>
-<div class="chat-popup" id="chatPopup">
-	<div class="chat-header">
-		<h3><i class="fas fa-headset mr-2"></i>Chat with EPBox Engineering</h3>
-		<button class="close-chat" onclick="toggleChat()"><i class="fas fa-times"></i></button>
-	</div>
-	<div class="chat-body">
-		<p class="text-gray-300 text-sm mb-4">How can we help you today?</p>
-		<input type="text" class="chat-input" placeholder="Type your message here..." id="chatMessage">
-		<div class="chat-actions">
-			<button class="chat-btn primary" onclick="sendMessage()"><i class="fas fa-paper-plane mr-2"></i>Send</button>
-			<button class="chat-btn secondary" onclick="scrollToContact()"><i class="fas fa-phone mr-2"></i>Call Us</button>
-		</div>
-	</div>
-</div>
+@include('site.components.chatbot')
 
 <!-- Demo Modals -->
 <!-- Oil & Gas Demo Modal -->
@@ -350,8 +324,8 @@
 		</div>
 		<div class="grid md:grid-cols-2 gap-6">
 			<div>
-				<h4 class="text-lg font-semibold text-white mb-3">Project Overview</h4>
-				<p class="text-gray-300 mb-4">MODEC FPSO project requiring explosion-proof control panels for hazardous environments with ATEX/IECEx certification.</p>
+				<h4 class="text-lg font-semibold text-white mb-3">Case Study: MODEC FPSO Project</h4>
+				<p class="text-gray-300 mb-4">A complex offshore floating production storage and offloading (FPSO) facility requiring specialized explosion-proof control panels designed for hazardous Zone 1 environments with strict ATEX/IECEx certification requirements.</p>
 				
 				<h4 class="text-lg font-semibold text-white mb-3">Technology Used</h4>
 				<ul class="text-gray-300 space-y-2">
@@ -372,8 +346,8 @@
 					<li>• 24/7 technical support</li>
 				</ul>
 				
-				<h4 class="text-lg font-semibold text-white mb-3 mt-6">Results</h4>
-				<p class="text-gray-300">Zero safety incidents, 99.9% uptime, full compliance with international safety standards.</p>
+				<h4 class="text-lg font-semibold text-white mb-3 mt-6">Success Story</h4>
+				<p class="text-gray-300">Successfully delivered a mission-critical FPSO project with zero safety incidents and complete compliance with international safety standards, ensuring uninterrupted offshore operations.</p>
 			</div>
 		</div>
 	</div>
@@ -390,8 +364,8 @@
 		</div>
 		<div class="grid md:grid-cols-2 gap-6">
 			<div>
-				<h4 class="text-lg font-semibold text-white mb-3">Project Overview</h4>
-				<p class="text-gray-300 mb-4">Smart grid integration project combining solar/wind energy with traditional power distribution systems.</p>
+				<h4 class="text-lg font-semibold text-white mb-3">Case Study: Smart Grid Integration</h4>
+				<p class="text-gray-300 mb-4">A pioneering smart grid project that seamlessly integrated renewable energy sources (solar and wind) with existing traditional power distribution infrastructure, creating a hybrid energy management system.</p>
 				
 				<h4 class="text-lg font-semibold text-white mb-3">Technology Used</h4>
 				<ul class="text-gray-300 space-y-2">
@@ -412,8 +386,8 @@
 					<li>• Remote diagnostics & maintenance</li>
 				</ul>
 				
-				<h4 class="text-lg font-semibold text-white mb-3 mt-6">Results</h4>
-				<p class="text-gray-300">30% energy efficiency improvement, 40% reduction in maintenance costs, enhanced grid reliability.</p>
+				<h4 class="text-lg font-semibold text-white mb-3 mt-6">Success Story</h4>
+				<p class="text-gray-300">Transformed a traditional power grid into a smart, renewable-integrated system that significantly improved energy efficiency and reduced operational costs while maintaining grid stability and reliability.</p>
 			</div>
 		</div>
 	</div>
@@ -430,8 +404,8 @@
 		</div>
 		<div class="grid md:grid-cols-2 gap-6">
 			<div>
-				<h4 class="text-lg font-semibold text-white mb-3">Project Overview</h4>
-				<p class="text-gray-300 mb-4">Mission-critical data center requiring 99.99% uptime with redundant power and cooling systems.</p>
+				<h4 class="text-lg font-semibold text-white mb-3">Case Study: Mission-Critical Data Center</h4>
+				<p class="text-gray-300 mb-4">A high-availability data center facility serving financial services clients, requiring absolute reliability with redundant power and cooling systems to ensure continuous operations.</p>
 				
 				<h4 class="text-lg font-semibold text-white mb-3">Technology Used</h4>
 				<ul class="text-gray-300 space-y-2">
@@ -452,8 +426,8 @@
 					<li>• Predictive maintenance systems</li>
 				</ul>
 				
-				<h4 class="text-lg font-semibold text-white mb-3 mt-6">Results</h4>
-				<p class="text-gray-300">99.99% uptime achieved, 50% reduction in downtime, enhanced security and reliability.</p>
+				<h4 class="text-lg font-semibold text-white mb-3 mt-6">Success Story</h4>
+				<p class="text-gray-300">Delivered a mission-critical data center solution that achieved exceptional uptime performance with robust security measures and predictive maintenance capabilities, ensuring business continuity for our client.</p>
 			</div>
 		</div>
 	</div>
@@ -470,8 +444,8 @@
 		</div>
 		<div class="grid md:grid-cols-2 gap-6">
 			<div>
-				<h4 class="text-lg font-semibold text-white mb-3">Project Overview</h4>
-				<p class="text-gray-300 mb-4">Offshore platform requiring explosion-proof electrical panels with ABS/DNV compliance for harsh marine environment.</p>
+				<h4 class="text-lg font-semibold text-white mb-3">Case Study: Offshore Platform Electrical Systems</h4>
+				<p class="text-gray-300 mb-4">A challenging offshore drilling platform project requiring explosion-proof electrical panels that meet stringent ABS/DNV marine classification standards while withstanding the corrosive effects of saltwater and extreme weather conditions.</p>
 				
 				<h4 class="text-lg font-semibold text-white mb-3">Technology Used</h4>
 				<ul class="text-gray-300 space-y-2">
@@ -492,8 +466,8 @@
 					<li>• Offshore installation support</li>
 				</ul>
 				
-				<h4 class="text-lg font-semibold text-white mb-3 mt-6">Results</h4>
-				<p class="text-gray-300">Full compliance achieved, 25-year service life, zero corrosion issues in harsh marine environment.</p>
+				<h4 class="text-lg font-semibold text-white mb-3 mt-6">Success Story</h4>
+				<p class="text-gray-300">Successfully engineered and deployed explosion-proof electrical panels for offshore operations, achieving full regulatory compliance and demonstrating exceptional durability in the most challenging marine environments.</p>
 			</div>
 		</div>
 	</div>
