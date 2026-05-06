@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Riyan;Septiandi;;;
+FN:Riyan Septiandi
+NICKNAME:A.K Riyan
+ORG:Engineer
+EMAIL;type=INTERNET;type=HOME;type=pref:Riyan@epbox-engg.com
+TEL;type=CELL;type=VOICE;type=pref:+62 881-0819-50449
+URL;type=pref:https://epbox-engg.com
+END:VCARD

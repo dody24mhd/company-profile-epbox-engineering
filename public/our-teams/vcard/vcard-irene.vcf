@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Irene;Tesalonika;;;
+FN:Irene Tesalonika
+NICKNAME:A.K Irene
+ORG:Sales & Marketing
+EMAIL;type=INTERNET;type=HOME;type=pref:irene@epbox-engg.com
+TEL;type=CELL;type=VOICE;type=pref:+62 851-7505-2607
+URL;type=pref:https://epbox-engg.com
+END:VCARD

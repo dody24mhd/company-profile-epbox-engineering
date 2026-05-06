@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Hafiz;Alparizi;;;
+FN:Hafiz Alparizi
+NICKNAME:A.K Hafiz
+ORG:Production
+EMAIL;type=INTERNET;type=HOME;type=pref:hafiz@epbox-engg.com
+TEL;type=CELL;type=VOICE;type=pref:+62 857-6316-0103
+URL;type=pref:https://epbox-engg.com
+END:VCARD

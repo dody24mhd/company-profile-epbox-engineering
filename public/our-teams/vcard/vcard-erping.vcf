@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Erping;Lee;;;
+FN:Erping Lee
+NICKNAME:A.K Erping
+ORG:Director 
+EMAIL;type=INTERNET;type=HOME;type=pref:erping@epbox-engg.com
+TEL;type=CELL;type=VOICE;type=pref:+65 8282 9835
+URL;type=pref:https://epbox-engg.com
+END:VCARD

@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Dhimas;Arista;;;
+FN:Dhimas Arista
+NICKNAME:A.K Dhimas
+ORG: IT Specialist
+EMAIL;type=INTERNET;type=HOME;type=pref:dhimas@epbox-engg.com
+TEL;type=CELL;type=VOICE;type=pref:+62 851-5724-8841
+URL;type=pref:https://epbox-engg.com
+END:VCARD

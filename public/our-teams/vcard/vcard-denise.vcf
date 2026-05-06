@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Denise;boey;;;
+FN:Denise Boey
+NICKNAME:A.K Denise
+ORG:Executive Finance 
+EMAIL;type=INTERNET;type=HOME;type=pref:denise_boey@epbox-engg.com
+TEL;type=CELL;type=VOICE;type=pref:+65 9067 5645
+URL;type=pref:https://epbox-engg.com
+END:VCARD

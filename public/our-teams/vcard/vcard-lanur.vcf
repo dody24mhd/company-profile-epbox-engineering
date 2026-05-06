@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:La Nur;Ma’rija ;;;
+FN:La Nur Ma’rija 
+NICKNAME:A.K La Nur
+ORG:Production
+EMAIL;type=INTERNET;type=HOME;type=pref:lanur@epbox-engg.com
+TEL;type=CELL;type=VOICE;type=pref:+62 878-7698-6057
+URL;type=pref:https://epbox-engg.com
+END:VCARD

@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Yuda;Pratama;;;
+FN:Yuda Pratama
+NICKNAME:A.K Yuda
+ORG:Production 
+EMAIL;type=INTERNET;type=HOME;type=pref:yudha@epbox-engg.com
+TEL;type=CELL;type=VOICE;type=pref:+62 895-3852-16218
+URL;type=pref:https://epbox-engg.com
+END:VCARD

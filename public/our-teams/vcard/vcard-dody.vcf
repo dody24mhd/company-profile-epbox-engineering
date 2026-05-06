@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Muhammad;Dody;;;
+FN:Muhammad Dody
+NICKNAME:A.K Dody
+ORG:IT Specialist
+EMAIL;type=INTERNET;type=HOME;type=pref:dody@epbox-engg.com
+TEL;type=CELL;type=VOICE;type=pref:+62 813-7709-5318
+URL;type=pref:https:epbox-engg.com
+END:VCARD
